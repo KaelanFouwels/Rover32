@@ -85,6 +85,7 @@ namespace Comms
             //we will request the status of the LEDs on a regular basis
             myClient.SendData(CommandID.GetLEDandSwitchStatus); //this type needs no payload
             myClient.SendData(CommandID.MotorPosition);
+            myClient.SendData(CommandID.GetAccelValue);
 
             lblPosLeft.Text = leftPos.ToString();
             lblPosRight.Text = rightPos.ToString();
@@ -174,6 +175,12 @@ namespace Comms
                 myClient.SendData(CommandID.SetMotorsSpeed, new byte[] { 0,0 });
                 robotIsMoving = false;
             }
+        }
+ 
+
+        private void txtIP_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void txtIP_KeyPress(object sender, KeyPressEventArgs e)

@@ -38,10 +38,13 @@
             this.btnToggleRed = new System.Windows.Forms.Button();
             this.btnToggleGreen = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.lblPosLeft = new System.Windows.Forms.Label();
             this.lblPosRight = new System.Windows.Forms.Label();
+            this.lblPosLeft = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.accelX = new System.Windows.Forms.TextBox();
+            this.accelY = new System.Windows.Forms.TextBox();
+            this.accelZ = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -75,7 +78,8 @@
             this.txtIP.Name = "txtIP";
             this.txtIP.Size = new System.Drawing.Size(98, 20);
             this.txtIP.TabIndex = 1;
-            this.txtIP.Text = "10.215.2.36";
+            this.txtIP.Text = "10.215.2.35";
+            this.txtIP.TextChanged += new System.EventHandler(this.txtIP_TextChanged);
             this.txtIP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtIP_KeyPress);
             // 
             // label1
@@ -153,15 +157,6 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Tracks";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(49, 33);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Port:";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -170,15 +165,6 @@
             this.label3.Size = new System.Drawing.Size(56, 13);
             this.label3.TabIndex = 1;
             this.label3.Text = "Starboard:";
-            // 
-            // lblPosLeft
-            // 
-            this.lblPosLeft.AutoSize = true;
-            this.lblPosLeft.Location = new System.Drawing.Point(84, 33);
-            this.lblPosLeft.Name = "lblPosLeft";
-            this.lblPosLeft.Size = new System.Drawing.Size(13, 13);
-            this.lblPosLeft.TabIndex = 0;
-            this.lblPosLeft.Text = "0";
             // 
             // lblPosRight
             // 
@@ -189,11 +175,53 @@
             this.lblPosRight.TabIndex = 0;
             this.lblPosRight.Text = "0";
             // 
+            // lblPosLeft
+            // 
+            this.lblPosLeft.AutoSize = true;
+            this.lblPosLeft.Location = new System.Drawing.Point(84, 33);
+            this.lblPosLeft.Name = "lblPosLeft";
+            this.lblPosLeft.Size = new System.Drawing.Size(13, 13);
+            this.lblPosLeft.TabIndex = 0;
+            this.lblPosLeft.Text = "0";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(49, 33);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(29, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Port:";
+            // 
+            // accelX
+            // 
+            this.accelX.Location = new System.Drawing.Point(35, 145);
+            this.accelX.Name = "accelX";
+            this.accelX.Size = new System.Drawing.Size(100, 20);
+            this.accelX.TabIndex = 3;
+            // 
+            // accelY
+            // 
+            this.accelY.Location = new System.Drawing.Point(35, 171);
+            this.accelY.Name = "accelY";
+            this.accelY.Size = new System.Drawing.Size(100, 20);
+            this.accelY.TabIndex = 4;
+            // 
+            // accelZ
+            // 
+            this.accelZ.Location = new System.Drawing.Point(35, 197);
+            this.accelZ.Name = "accelZ";
+            this.accelZ.Size = new System.Drawing.Size(100, 20);
+            this.accelZ.TabIndex = 5;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(698, 154);
+            this.ClientSize = new System.Drawing.Size(712, 388);
+            this.Controls.Add(this.accelZ);
+            this.Controls.Add(this.accelY);
+            this.Controls.Add(this.accelX);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -210,6 +238,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -229,6 +258,9 @@
         private System.Windows.Forms.Label lblPosRight;
         private System.Windows.Forms.Label lblPosLeft;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox accelX;
+        private System.Windows.Forms.TextBox accelY;
+        private System.Windows.Forms.TextBox accelZ;
     }
 }
 
