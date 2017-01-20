@@ -18,7 +18,7 @@ namespace Comms
             myClient.OnMessageReceived += new ClientBase.ClientMessageReceivedEvent(myClient_OnMessageReceived);
 
             myRequestTimer = new Timer();
-            myRequestTimer.Interval = 500; //every half a second
+            myRequestTimer.Interval = 50; //every half a second
             myRequestTimer.Tick += new EventHandler(myRequestTimer_Tick);
         }
 
@@ -53,6 +53,8 @@ namespace Comms
         }
 
         short leftPos, rightPos;
+        short accelXVal, accelYVal, accelZVal;
+        double accelPitch, accelTilt;
         void myClient_OnMessageReceived(Client_Message_EventArgs e)
         {
             //we shall process the message here, e.RawMessage contains all bytes
@@ -73,6 +75,19 @@ namespace Comms
                 rightPos = (short)((uint)e.RawMessage[9] | ((uint)e.RawMessage[8] << 8));
 
             }
+
+            if (e.RawMessage[3] == (byte)CommandID.GetAccelValue)
+            {
+                short messageLength = (short)(e.RawMessage[1]);
+                if( messageLength == 0x8)
+                {
+                    accelYVal = (short)((uint)e.RawMessage[5] | ((uint)e.RawMessage[4] << 8));
+                    accelXVal = (short)((uint)e.RawMessage[7] | ((uint)e.RawMessage[6] << 8));
+                    accelZVal = (short)((uint)e.RawMessage[9] | ((uint)e.RawMessage[8] << 8));
+                    accelPitch = Math.Atan2((double)accelXVal, ((double)accelYVal));
+                    accelTilt = Math.Atan2((double)accelXVal, ((double)accelYVal));
+                }
+            }
         }
 
 
@@ -89,6 +104,10 @@ namespace Comms
 
             lblPosLeft.Text = leftPos.ToString();
             lblPosRight.Text = rightPos.ToString();
+            accelX.Text = accelXVal.ToString();
+            accelY.Text = accelYVal.ToString();
+            accelZ.Text = accelZVal.ToString();
+            acclAngle.Text = accelPitch.ToString();
         }
 
 

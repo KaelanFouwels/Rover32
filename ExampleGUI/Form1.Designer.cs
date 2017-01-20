@@ -45,6 +45,7 @@
             this.accelX = new System.Windows.Forms.TextBox();
             this.accelY = new System.Windows.Forms.TextBox();
             this.accelZ = new System.Windows.Forms.TextBox();
+            this.acclAngle = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -199,6 +200,7 @@
             this.accelX.Name = "accelX";
             this.accelX.Size = new System.Drawing.Size(100, 20);
             this.accelX.TabIndex = 3;
+            this.accelX.Text = "v";
             // 
             // accelY
             // 
@@ -214,11 +216,20 @@
             this.accelZ.Size = new System.Drawing.Size(100, 20);
             this.accelZ.TabIndex = 5;
             // 
+            // acclAngle
+            // 
+            this.acclAngle.Location = new System.Drawing.Point(35, 245);
+            this.acclAngle.Name = "acclAngle";
+            this.acclAngle.Size = new System.Drawing.Size(100, 20);
+            this.acclAngle.TabIndex = 6;
+            this.acclAngle.Text = "v";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(712, 388);
+            this.Controls.Add(this.acclAngle);
             this.Controls.Add(this.accelZ);
             this.Controls.Add(this.accelY);
             this.Controls.Add(this.accelX);
@@ -261,6 +272,7 @@
         private System.Windows.Forms.TextBox accelX;
         private System.Windows.Forms.TextBox accelY;
         private System.Windows.Forms.TextBox accelZ;
+        private System.Windows.Forms.TextBox acclAngle;
     }
 }
 
