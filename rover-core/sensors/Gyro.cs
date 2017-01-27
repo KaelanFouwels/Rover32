@@ -8,8 +8,11 @@ using rover_core.models;
 
 namespace rover_core.sensors
 {
-	public class Magnetometer
+	public class Gyro
 	{
-
+		public double getBearing()
+		{
+			throw new NotImplementedException();	
+		}
 	}
 }

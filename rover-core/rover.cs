@@ -57,6 +57,7 @@ namespace rover_core
 			myClient.SendData(CommandID.MotorPosition);
 			myClient.SendData(CommandID.GetAccelValue);
 			myClient.SendData(CommandID.GetMagnetValue);
+			myClient.SendData(CommandID.GetGyroValue);
 		}
 
 		void myClient_OnMessageReceived(Client_Message_EventArgs e)

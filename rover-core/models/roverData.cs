@@ -24,5 +24,11 @@ namespace rover_core.models
 		public short magnetX { get; internal set; } = 0;
 		public short magnetY { get; internal set; } = 0;
 		public short magnetZ { get; internal set; } = 0;
+
+		public short accellTemp { get; internal set; } = 0;
+		public short accellStatus { get; internal set; } = 0;
+		public short accellX { get; internal set; } = 0;
+		public short accellY { get; internal set; } = 0;
+		public short accellZ { get; internal set; } = 0;
 	}
 }

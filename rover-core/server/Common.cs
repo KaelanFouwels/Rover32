@@ -23,6 +23,7 @@ namespace CommsLib
 		SetServoPosition = 0x16,
 		GetTermData = 0x1B,
 		GetCrashedRoverData = 0x1C,
+		GetGyroValue = 0x2B, 
 		GetMagnetValue = 0x2D,
 		GetAccelValue = 0x28,
 		DriveSteps = 0x80,
