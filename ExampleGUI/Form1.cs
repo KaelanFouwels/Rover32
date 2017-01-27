@@ -17,14 +17,15 @@ namespace Comms
 	{
 		Rover rover;
 		Timer myInterfaceUpdateTimer;
+
 		public Form1()
 		{
 			InitializeComponent();
 
 			rover = new Rover();
 
-			myInterfaceUpdateTimer = new Timer();
-			myInterfaceUpdateTimer.Interval = 1/60; //60 times a second
+			myInterfaceUpdateTimer = new System.Windows.Forms.Timer();
+			myInterfaceUpdateTimer.Interval = 1; //60 times a second
 			myInterfaceUpdateTimer.Tick += new EventHandler(myInterfaceUpdateTimer_Tick);
 		}
 
@@ -60,8 +61,13 @@ namespace Comms
 		void drawInterface()
 		{
 
-			//- Draw values
+			//- Draw statuses
+			status_accelerometer.Text = roverStatus.Instance.accelerometer.ToString();
+			status_conn.Text = roverStatus.Instance.connection.ToString();
+			status_leds.Text = roverStatus.Instance.leds.ToString();
+			status_position.Text = roverStatus.Instance.position.ToString();
 
+			//- Draw values
 			if (roverStatus.Instance.position == sensorStatus.ok)
 			{
 				lblPosLeft.Text = roverData.Instance.positionLeft.ToString();
@@ -81,33 +87,28 @@ namespace Comms
 				lblGreenStatus.BackColor = ((roverData.Instance.ledGreen) ? Color.LimeGreen : SystemColors.ButtonFace);
 				lblRedStatus.BackColor = ((roverData.Instance.ledRed) ? Color.Red : SystemColors.ButtonFace);
 			}
-
-
-			//- Draw statuses
-			status_accelerometer.Text = roverStatus.Instance.accelerometer.ToString();
 		}
 
 		private void btnToggleGreen_Click(object sender, EventArgs e)
 		{
 			if (roverStatus.Instance.connection != connectionStatus.connected) return;
 
-
-			rover.Leds.toggleGreen()
+			rover.Leds.toggleGreen();
 		}
 
 		private void btnToggleRed_Click(object sender, EventArgs e)
 		{
-			if (!myClient.isConnected) return;
+			if (roverStatus.Instance.connection != connectionStatus.connected) return;
 
-			rover.leds.toggleRed()
+			rover.Leds.toggleRed();
 		}
 
 
 		//Clean up our mess if user clicks the X button, hits AltF4 etc
 		private void Form1_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			myRequestTimer.Stop(); //just in case ;-)
-			if (myClient.isConnected) myClient.Disconnect();
+			myInterfaceUpdateTimer.Stop(); //just in case ;-)
+			if (roverStatus.Instance.connection == connectionStatus.connected) rover.disconnect();
 		}
 
 		private void Form1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -122,25 +123,21 @@ namespace Comms
 			switch (e.KeyCode)
 			{
 				case Keys.Up:
-					myClient.SendData(CommandID.SetMotorsSpeed, new byte[] { 60, 60 });
-					robotIsMoving = true;
-					e.Handled=true;
+					rover.Movement.moveUp();
+					e.Handled = true;
 					break;
 
 				case Keys.Down:
-					myClient.SendData(CommandID.SetMotorsSpeed, new byte[] { 200, 200 });
-					robotIsMoving = true;
+					rover.Movement.moveDown();
 					e.Handled=true;
 					break;
 
 				case Keys.Left:
-					myClient.SendData(CommandID.SetMotorsSpeed, new byte[] { 190, 60 });
-					robotIsMoving = true;
+					rover.Movement.moveLeft();
 					e.Handled=true;
 					break;
 				case Keys.Right:
-					myClient.SendData(CommandID.SetMotorsSpeed, new byte[] { 60, 190 });
-					robotIsMoving = true;
+					rover.Movement.moveRight();
 					e.Handled=true;
 					break;
 
@@ -154,7 +151,7 @@ namespace Comms
 		{
 			if (robotIsMoving)
 			{
-				myClient.SendData(CommandID.SetMotorsSpeed, new byte[] { 0,0 });
+				rover.Movement.moveStop();
 				robotIsMoving = false;
 			}
 		}
@@ -172,6 +169,11 @@ namespace Comms
 				btnCon_Click(sender, null);
 				btnToggleGreen.Focus();
 			}
+		}
+
+		private void label_sensors_Click(object sender, EventArgs e)
+		{
+
 		}
 	}
 }

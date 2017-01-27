@@ -49,6 +49,13 @@
 			this.label_sensors = new System.Windows.Forms.Label();
 			this.label_accelerometer = new System.Windows.Forms.Label();
 			this.status_accelerometer = new System.Windows.Forms.Label();
+			this.status_connection = new System.Windows.Forms.Label();
+			this.label4 = new System.Windows.Forms.Label();
+			this.label5 = new System.Windows.Forms.Label();
+			this.label6 = new System.Windows.Forms.Label();
+			this.status_conn = new System.Windows.Forms.Label();
+			this.status_position = new System.Windows.Forms.Label();
+			this.status_leds = new System.Windows.Forms.Label();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.groupBox3.SuspendLayout();
@@ -253,9 +260,10 @@
 			this.label_sensors.AutoSize = true;
 			this.label_sensors.Location = new System.Drawing.Point(1166, 282);
 			this.label_sensors.Name = "label_sensors";
-			this.label_sensors.Size = new System.Drawing.Size(91, 25);
+			this.label_sensors.Size = new System.Drawing.Size(73, 25);
 			this.label_sensors.TabIndex = 7;
-			this.label_sensors.Text = "Sensors";
+			this.label_sensors.Text = "Status";
+			this.label_sensors.Click += new System.EventHandler(this.label_sensors_Click);
 			// 
 			// label_accelerometer
 			// 
@@ -275,11 +283,80 @@
 			this.status_accelerometer.TabIndex = 9;
 			this.status_accelerometer.Text = "-";
 			// 
+			// status_connection
+			// 
+			this.status_connection.AutoSize = true;
+			this.status_connection.Location = new System.Drawing.Point(1078, 379);
+			this.status_connection.Name = "status_connection";
+			this.status_connection.Size = new System.Drawing.Size(0, 25);
+			this.status_connection.TabIndex = 10;
+			// 
+			// label4
+			// 
+			this.label4.AutoSize = true;
+			this.label4.Location = new System.Drawing.Point(1078, 379);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(121, 25);
+			this.label4.TabIndex = 11;
+			this.label4.Text = "Connection";
+			// 
+			// label5
+			// 
+			this.label5.AutoSize = true;
+			this.label5.Location = new System.Drawing.Point(1078, 423);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(89, 25);
+			this.label5.TabIndex = 12;
+			this.label5.Text = "Position";
+			// 
+			// label6
+			// 
+			this.label6.AutoSize = true;
+			this.label6.Location = new System.Drawing.Point(1078, 471);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(64, 25);
+			this.label6.TabIndex = 13;
+			this.label6.Text = "LEDs";
+			// 
+			// status_conn
+			// 
+			this.status_conn.AutoSize = true;
+			this.status_conn.Location = new System.Drawing.Point(1259, 379);
+			this.status_conn.Name = "status_conn";
+			this.status_conn.Size = new System.Drawing.Size(19, 25);
+			this.status_conn.TabIndex = 14;
+			this.status_conn.Text = "-";
+			// 
+			// status_position
+			// 
+			this.status_position.AutoSize = true;
+			this.status_position.Location = new System.Drawing.Point(1259, 423);
+			this.status_position.Name = "status_position";
+			this.status_position.Size = new System.Drawing.Size(19, 25);
+			this.status_position.TabIndex = 15;
+			this.status_position.Text = "-";
+			// 
+			// status_leds
+			// 
+			this.status_leds.AutoSize = true;
+			this.status_leds.Location = new System.Drawing.Point(1259, 471);
+			this.status_leds.Name = "status_leds";
+			this.status_leds.Size = new System.Drawing.Size(19, 25);
+			this.status_leds.TabIndex = 16;
+			this.status_leds.Text = "-";
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1424, 746);
+			this.Controls.Add(this.status_leds);
+			this.Controls.Add(this.status_position);
+			this.Controls.Add(this.status_conn);
+			this.Controls.Add(this.label6);
+			this.Controls.Add(this.label5);
+			this.Controls.Add(this.label4);
+			this.Controls.Add(this.status_connection);
 			this.Controls.Add(this.status_accelerometer);
 			this.Controls.Add(this.label_accelerometer);
 			this.Controls.Add(this.label_sensors);
@@ -331,6 +408,13 @@
 		private System.Windows.Forms.Label label_sensors;
 		private System.Windows.Forms.Label label_accelerometer;
 		private System.Windows.Forms.Label status_accelerometer;
+		private System.Windows.Forms.Label status_connection;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.Label label6;
+		private System.Windows.Forms.Label status_conn;
+		private System.Windows.Forms.Label status_position;
+		private System.Windows.Forms.Label status_leds;
 	}
 }
 
