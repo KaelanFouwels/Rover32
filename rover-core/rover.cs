@@ -33,6 +33,7 @@ namespace rover_core
 			myRequestTimer = new Timer();
 			myRequestTimer.Interval = 50; //every half a second
 			myRequestTimer.Elapsed += new ElapsedEventHandler(myRequestTimer_Tick);
+			myRequestTimer.Start();
 		}
 
 		public void connect(string ip, int port)
@@ -86,8 +87,8 @@ namespace rover_core
 				short messageLength = (short)(e.RawMessage[1]);
 				if (messageLength == 0x8)
 				{
-					roverData.Instance.accelerationX = (short)((uint)e.RawMessage[5] | ((uint)e.RawMessage[4] << 8));
-					roverData.Instance.accelerationY = (short)((uint)e.RawMessage[7] | ((uint)e.RawMessage[6] << 8));
+					roverData.Instance.accelerationY = (short)((uint)e.RawMessage[5] | ((uint)e.RawMessage[4] << 8));
+					roverData.Instance.accelerationX = (short)((uint)e.RawMessage[7] | ((uint)e.RawMessage[6] << 8));
 					roverData.Instance.accelerationZ = (short)((uint)e.RawMessage[9] | ((uint)e.RawMessage[8] << 8));
 
 					roverStatus.Instance.accelerometer = sensorStatus.ok;

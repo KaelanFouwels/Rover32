@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using rover_core.models;
 
 namespace rover_core.sensors
@@ -12,10 +13,10 @@ namespace rover_core.sensors
 
 		public double getTilt()
 		{
-			var accelXVal = roverData.Instance.accelerationX;
 			var accelYVal = roverData.Instance.accelerationY;
+			var accelZVal = roverData.Instance.accelerationZ;
 
-			return Math.Atan2(accelXVal, accelYVal);
+			return Math.Atan2(accelYVal, accelZVal) * (360/(2 * Math.PI));
 		}
 
 		public double getPitch()
@@ -23,7 +24,7 @@ namespace rover_core.sensors
 			var accelXVal = roverData.Instance.accelerationX;
 			var accelYVal = roverData.Instance.accelerationY;
 
-			return Math.Atan2(accelXVal, accelYVal);
+			return Math.Atan2(accelXVal, accelYVal) * (360 / (2 * Math.PI));
 		}
 	}
 }
