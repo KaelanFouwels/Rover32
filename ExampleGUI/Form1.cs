@@ -6,209 +6,172 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using CommsLib;
+using rover_core.models;
+using rover_core.sensors;
+using rover_core.drivers;
+using rover_core;
 
 namespace Comms
 {
-    public partial class Form1 : Form
-    {
-        public Form1()
-        {
-            InitializeComponent();
-            myClient = new TCPClient();
-            myClient.OnMessageReceived += new ClientBase.ClientMessageReceivedEvent(myClient_OnMessageReceived);
+	public partial class Form1 : Form
+	{
+		Rover rover;
+		Timer myInterfaceUpdateTimer;
+		public Form1()
+		{
+			InitializeComponent();
 
-            myRequestTimer = new Timer();
-            myRequestTimer.Interval = 50; //every half a second
-            myRequestTimer.Tick += new EventHandler(myRequestTimer_Tick);
-        }
+			rover = new Rover();
 
-        TCPClient myClient;
-        private void btnCon_Click(object sender, EventArgs e)
-        {
-            if ("Connect" == btnCon.Text)
-            {
-                try
-                {
-                    myClient.ConnectToServer(txtIP.Text,9760);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message+"\r\n"+ex.StackTrace);
-                    return;
-                }
+			myInterfaceUpdateTimer = new Timer();
+			myInterfaceUpdateTimer.Interval = 1/60; //60 times a second
+			myInterfaceUpdateTimer.Tick += new EventHandler(myInterfaceUpdateTimer_Tick);
+		}
 
-                //if we get here, then we are connected
-                btnCon.Text="Disconnect";
-                
-                myRequestTimer.Start();
-            }
-            else
-            {
-                myRequestTimer.Stop();
-                myClient.Disconnect();
-                if (!myClient.isConnected) btnCon.Text="Connect";
-                
+		private void btnCon_Click(object sender, EventArgs e)
+		{
+			if ("Connect" == btnCon.Text)
+			{
+				try
+				{
+					rover.connect(txtIP.Text,9760);
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.Message+"\r\n"+ex.StackTrace);
+					return;
+				}
 
-            }
-        }
+				//if we get here, then we are connected
+				btnCon.Text="Disconnect";
+			}
+			else
+			{
+				rover.disconnect();
+				if (roverStatus.Instance.connection != connectionStatus.connected) btnCon.Text="Connect";
+			}
+		}
 
-        short leftPos, rightPos;
-        short accelXVal, accelYVal, accelZVal;
-        double accelPitch, accelTilt;
-        void myClient_OnMessageReceived(Client_Message_EventArgs e)
-        {
-            //we shall process the message here, e.RawMessage contains all bytes
-            // [0] is 255, [1] is length, [2] 255, [3] is cmd, [4-] are payload
-            if (e.RawMessage[3] == (byte)CommandID.GetLEDandSwitchStatus)
-            {
-                //we have received an LED status, so let's change labels accordingly
-                bool bGreenOn = (((e.RawMessage[4] & 0x10) ==0 ) ? true : false);
-                bool bRedOn =   (((e.RawMessage[4] & 0x20) ==0 ) ? true : false);
+		void myInterfaceUpdateTimer_Tick(object sender, EventArgs e)
+		{
+			drawInterface();
+		}
 
-                lblGreenStatus.BackColor = ((bGreenOn) ? Color.LimeGreen : SystemColors.ButtonFace);
-                lblRedStatus.BackColor = ((bRedOn) ? Color.Red : SystemColors.ButtonFace);
-            }
+		void drawInterface()
+		{
 
-            if (e.RawMessage[3] == (byte)CommandID.MotorPosition)
-            {
-                leftPos = (short)((uint)e.RawMessage[6] | ((uint)e.RawMessage[5] << 8));
-                rightPos = (short)((uint)e.RawMessage[9] | ((uint)e.RawMessage[8] << 8));
+			//- Draw values
 
-            }
+			if (roverStatus.Instance.position == sensorStatus.ok)
+			{
+				lblPosLeft.Text = roverData.Instance.positionLeft.ToString();
+				lblPosRight.Text = roverData.Instance.positionRight.ToString();
+			}
 
-            if (e.RawMessage[3] == (byte)CommandID.GetAccelValue)
-            {
-                short messageLength = (short)(e.RawMessage[1]);
-                if( messageLength == 0x8)
-                {
-                    accelYVal = (short)((uint)e.RawMessage[5] | ((uint)e.RawMessage[4] << 8));
-                    accelXVal = (short)((uint)e.RawMessage[7] | ((uint)e.RawMessage[6] << 8));
-                    accelZVal = (short)((uint)e.RawMessage[9] | ((uint)e.RawMessage[8] << 8));
-                    accelPitch = Math.Atan2((double)accelXVal, ((double)accelYVal));
-                    accelTilt = Math.Atan2((double)accelXVal, ((double)accelYVal));
-                }
-            }
-        }
+			if (roverStatus.Instance.accelerometer == sensorStatus.ok)
+			{
+				accelX.Text = roverData.Instance.accelerationX.ToString();
+				accelY.Text = roverData.Instance.accelerationY.ToString();
+				accelZ.Text = roverData.Instance.accelerationZ.ToString();
+				acclAngle.Text = rover.Accelerometer.getPitch().ToString();
+			}
+
+			if (roverStatus.Instance.leds == sensorStatus.ok)
+			{
+				lblGreenStatus.BackColor = ((roverData.Instance.ledGreen) ? Color.LimeGreen : SystemColors.ButtonFace);
+				lblRedStatus.BackColor = ((roverData.Instance.ledRed) ? Color.Red : SystemColors.ButtonFace);
+			}
 
 
+			//- Draw statuses
+			status_accelerometer.Text = roverStatus.Instance.accelerometer.ToString();
+		}
 
-        Timer myRequestTimer;
-        void myRequestTimer_Tick(object sender, EventArgs e)
-        {
-            if (!myClient.isConnected) return; //if no connection, don't do anything
-
-            //we will request the status of the LEDs on a regular basis
-            myClient.SendData(CommandID.GetLEDandSwitchStatus); //this type needs no payload
-            myClient.SendData(CommandID.MotorPosition);
-            myClient.SendData(CommandID.GetAccelValue);
-
-            lblPosLeft.Text = leftPos.ToString();
-            lblPosRight.Text = rightPos.ToString();
-            accelX.Text = accelXVal.ToString();
-            accelY.Text = accelYVal.ToString();
-            accelZ.Text = accelZVal.ToString();
-            acclAngle.Text = accelPitch.ToString();
-        }
+		private void btnToggleGreen_Click(object sender, EventArgs e)
+		{
+			if (roverStatus.Instance.connection != connectionStatus.connected) return;
 
 
-        Boolean bGreenRequestOn = true;
-        Boolean bRedRequestOn = true;
+			rover.Leds.toggleGreen()
+		}
 
-        private void btnToggleGreen_Click(object sender, EventArgs e)
-        {
-            if (!myClient.isConnected) return;
+		private void btnToggleRed_Click(object sender, EventArgs e)
+		{
+			if (!myClient.isConnected) return;
 
-            bGreenRequestOn = !bGreenRequestOn; //change from last time
-
-            int value = 0;
-            if (bGreenRequestOn) value |= 0x01;
-            if (bRedRequestOn) value |= 0x02;
-
-            myClient.SendData(CommandID.SetLEDs, new byte[] { (byte)value });
-        }
-
-        private void btnToggleRed_Click(object sender, EventArgs e)
-        {
-            if (!myClient.isConnected) return;
-
-            bRedRequestOn = !bRedRequestOn; //change from last time
-
-            int value = 0;
-            if (bGreenRequestOn) value |= 0x01;
-            if (bRedRequestOn) value |= 0x02;
-
-            myClient.SendData(CommandID.SetLEDs, new byte[] { (byte)value });
-        }
+			rover.leds.toggleRed()
+		}
 
 
-        //Clean up our mess if user clicks the X button, hits AltF4 etc
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            myRequestTimer.Stop(); //just in case ;-)
-            if (myClient.isConnected) myClient.Disconnect();
-        }
+		//Clean up our mess if user clicks the X button, hits AltF4 etc
+		private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			myRequestTimer.Stop(); //just in case ;-)
+			if (myClient.isConnected) myClient.Disconnect();
+		}
 
-        private void Form1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
+		private void Form1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+		{
 
-        }
+		}
 
-        bool robotIsMoving = false;
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
-        {
-            switch (e.KeyCode)
-            {
-                case Keys.Up:
-                    myClient.SendData(CommandID.SetMotorsSpeed, new byte[] { 60, 60 });
-                    robotIsMoving = true;
-                    e.Handled=true;
-                    break;
+		bool robotIsMoving = false;
 
-                case Keys.Down:
-                    myClient.SendData(CommandID.SetMotorsSpeed, new byte[] { 200, 200 });
-                    robotIsMoving = true;
-                    e.Handled=true;
-                    break;
+		private void Form1_KeyDown(object sender, KeyEventArgs e)
+		{
+			switch (e.KeyCode)
+			{
+				case Keys.Up:
+					myClient.SendData(CommandID.SetMotorsSpeed, new byte[] { 60, 60 });
+					robotIsMoving = true;
+					e.Handled=true;
+					break;
 
-                case Keys.Left:
-                    myClient.SendData(CommandID.SetMotorsSpeed, new byte[] { 190, 60 });
-                    robotIsMoving = true;
-                    e.Handled=true;
-                    break;
-                case Keys.Right:
-                    myClient.SendData(CommandID.SetMotorsSpeed, new byte[] { 60, 190 });
-                    robotIsMoving = true;
-                    e.Handled=true;
-                    break;
+				case Keys.Down:
+					myClient.SendData(CommandID.SetMotorsSpeed, new byte[] { 200, 200 });
+					robotIsMoving = true;
+					e.Handled=true;
+					break;
 
-                default: e.Handled=false;
-                    break;
+				case Keys.Left:
+					myClient.SendData(CommandID.SetMotorsSpeed, new byte[] { 190, 60 });
+					robotIsMoving = true;
+					e.Handled=true;
+					break;
+				case Keys.Right:
+					myClient.SendData(CommandID.SetMotorsSpeed, new byte[] { 60, 190 });
+					robotIsMoving = true;
+					e.Handled=true;
+					break;
 
-            }
-        }
+				default: e.Handled=false;
+					break;
 
-        private void Form1_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (robotIsMoving)
-            {
-                myClient.SendData(CommandID.SetMotorsSpeed, new byte[] { 0,0 });
-                robotIsMoving = false;
-            }
-        }
+			}
+		}
+
+		private void Form1_KeyUp(object sender, KeyEventArgs e)
+		{
+			if (robotIsMoving)
+			{
+				myClient.SendData(CommandID.SetMotorsSpeed, new byte[] { 0,0 });
+				robotIsMoving = false;
+			}
+		}
  
 
-        private void txtIP_TextChanged(object sender, EventArgs e)
-        {
+		private void txtIP_TextChanged(object sender, EventArgs e)
+		{
 
-        }
+		}
 
-        private void txtIP_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)Keys.Enter)
-            {
-                btnCon_Click(sender, null);
-                btnToggleGreen.Focus();
-            }
-        }
-    }
+		private void txtIP_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			if (e.KeyChar == (char)Keys.Enter)
+			{
+				btnCon_Click(sender, null);
+				btnToggleGreen.Focus();
+			}
+		}
+	}
 }

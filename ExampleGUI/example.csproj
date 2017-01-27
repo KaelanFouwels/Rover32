@@ -62,8 +62,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClientBase.cs" />
-    <Compile Include="Common.cs" />
+    <Compile Include="models\roverData.cs" />
+    <Compile Include="models\roverStatus.cs" />
+    <Compile Include="server\ClientBase.cs" />
+    <Compile Include="server\Common.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,10 +74,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="sensors\Tilt.cs" />
-    <Compile Include="ServerBase.cs" />
-    <Compile Include="TCPClient.cs" />
-    <Compile Include="TCPServer.cs" />
+    <Compile Include="sensors\Accelerometer.cs" />
+    <Compile Include="server\ServerBase.cs" />
+    <Compile Include="server\TCPClient.cs" />
+    <Compile Include="server\TCPServer.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -105,6 +107,10 @@
       <Project>{48015788-74F4-4FEA-9E7E-1E97EBE6214A}</Project>
       <Name>CommsLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\rover-core\rover-core.csproj">
+      <Project>{f0e63143-a900-45c6-b593-aca78386ea48}</Project>
+      <Name>rover-core</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -118,6 +124,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
