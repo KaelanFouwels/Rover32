@@ -27,6 +27,8 @@ namespace Comms
 			myInterfaceUpdateTimer = new System.Windows.Forms.Timer();
 			myInterfaceUpdateTimer.Interval = 1; //60 times a second
 			myInterfaceUpdateTimer.Tick += new EventHandler(myInterfaceUpdateTimer_Tick);
+			myInterfaceUpdateTimer.Start();
+
 		}
 
 		private void btnCon_Click(object sender, EventArgs e)
@@ -76,10 +78,11 @@ namespace Comms
 
 			if (roverStatus.Instance.accelerometer == sensorStatus.ok)
 			{
-				accelX.Text = roverData.Instance.accelerationX.ToString();
-				accelY.Text = roverData.Instance.accelerationY.ToString();
-				accelZ.Text = roverData.Instance.accelerationZ.ToString();
-				acclAngle.Text = rover.Accelerometer.getPitch().ToString();
+				reading_accelX.Text = roverData.Instance.accelerationX.ToString();
+				reading_accelY.Text = roverData.Instance.accelerationY.ToString();
+				reading_accelZ.Text = roverData.Instance.accelerationZ.ToString();
+				reading_tilt.Text = rover.Accelerometer.getTilt().ToString();
+				reading_pitch.Text = rover.Accelerometer.getPitch().ToString();
 			}
 
 			if (roverStatus.Instance.leds == sensorStatus.ok)
@@ -107,7 +110,6 @@ namespace Comms
 		//Clean up our mess if user clicks the X button, hits AltF4 etc
 		private void Form1_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			myInterfaceUpdateTimer.Stop(); //just in case ;-)
 			if (roverStatus.Instance.connection == connectionStatus.connected) rover.disconnect();
 		}
 
@@ -123,20 +125,24 @@ namespace Comms
 			switch (e.KeyCode)
 			{
 				case Keys.Up:
+					robotIsMoving = true;
 					rover.Movement.moveUp();
 					e.Handled = true;
 					break;
 
 				case Keys.Down:
+					robotIsMoving = true;
 					rover.Movement.moveDown();
 					e.Handled=true;
 					break;
 
 				case Keys.Left:
+					robotIsMoving = true;
 					rover.Movement.moveLeft();
 					e.Handled=true;
 					break;
 				case Keys.Right:
+					robotIsMoving = true;
 					rover.Movement.moveRight();
 					e.Handled=true;
 					break;
@@ -172,6 +178,11 @@ namespace Comms
 		}
 
 		private void label_sensors_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void Form1_Load(object sender, EventArgs e)
 		{
 
 		}

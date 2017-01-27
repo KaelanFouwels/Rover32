@@ -11,7 +11,7 @@ namespace rover_core.models
 		public static roverStatus Instance
 		{
 			get; private set;
-		}
+		} = new roverStatus();
 
 		public sensorStatus accelerometer { get; internal set; } = sensorStatus.waiting;
 		public sensorStatus position { get; internal set; } = sensorStatus.waiting;

@@ -13,7 +13,7 @@ namespace rover_core.models
 		public static roverData Instance
 		{
 			get; private set;
-		}
+		} = new roverData();
 		public short accelerationX { get; internal set; } = 0;
 		public short accelerationY { get; internal set; } = 0;
 		public short accelerationZ { get; internal set; } = 0;
