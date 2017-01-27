@@ -38,8 +38,8 @@
 			this.btnToggleRed = new System.Windows.Forms.Button();
 			this.btnToggleGreen = new System.Windows.Forms.Button();
 			this.label3 = new System.Windows.Forms.Label();
-			this.lblPosRight = new System.Windows.Forms.Label();
-			this.lblPosLeft = new System.Windows.Forms.Label();
+			this.readingPositionRight = new System.Windows.Forms.Label();
+			this.reading_positionLeft = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.reading_accelX = new System.Windows.Forms.TextBox();
 			this.reading_accelY = new System.Windows.Forms.TextBox();
@@ -183,25 +183,25 @@
 			this.label3.TabIndex = 1;
 			this.label3.Text = "Starboard Track:";
 			// 
-			// lblPosRight
+			// readingPositionRight
 			// 
-			this.lblPosRight.AutoSize = true;
-			this.lblPosRight.Location = new System.Drawing.Point(600, 82);
-			this.lblPosRight.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-			this.lblPosRight.Name = "lblPosRight";
-			this.lblPosRight.Size = new System.Drawing.Size(24, 25);
-			this.lblPosRight.TabIndex = 0;
-			this.lblPosRight.Text = "0";
+			this.readingPositionRight.AutoSize = true;
+			this.readingPositionRight.Location = new System.Drawing.Point(600, 82);
+			this.readingPositionRight.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+			this.readingPositionRight.Name = "readingPositionRight";
+			this.readingPositionRight.Size = new System.Drawing.Size(24, 25);
+			this.readingPositionRight.TabIndex = 0;
+			this.readingPositionRight.Text = "0";
 			// 
-			// lblPosLeft
+			// reading_positionLeft
 			// 
-			this.lblPosLeft.AutoSize = true;
-			this.lblPosLeft.Location = new System.Drawing.Point(601, 47);
-			this.lblPosLeft.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-			this.lblPosLeft.Name = "lblPosLeft";
-			this.lblPosLeft.Size = new System.Drawing.Size(24, 25);
-			this.lblPosLeft.TabIndex = 0;
-			this.lblPosLeft.Text = "0";
+			this.reading_positionLeft.AutoSize = true;
+			this.reading_positionLeft.Location = new System.Drawing.Point(601, 47);
+			this.reading_positionLeft.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+			this.reading_positionLeft.Name = "reading_positionLeft";
+			this.reading_positionLeft.Size = new System.Drawing.Size(24, 25);
+			this.reading_positionLeft.TabIndex = 0;
+			this.reading_positionLeft.Text = "0";
 			// 
 			// label2
 			// 
@@ -409,11 +409,11 @@
 			this.groupBox4.Controls.Add(this.reading_accelZ);
 			this.groupBox4.Controls.Add(this.reading_pitch);
 			this.groupBox4.Controls.Add(this.reading_tilt);
-			this.groupBox4.Controls.Add(this.lblPosRight);
+			this.groupBox4.Controls.Add(this.readingPositionRight);
 			this.groupBox4.Controls.Add(this.label7);
 			this.groupBox4.Controls.Add(this.label11);
 			this.groupBox4.Controls.Add(this.label8);
-			this.groupBox4.Controls.Add(this.lblPosLeft);
+			this.groupBox4.Controls.Add(this.reading_positionLeft);
 			this.groupBox4.Controls.Add(this.label9);
 			this.groupBox4.Controls.Add(this.label10);
 			this.groupBox4.Controls.Add(this.label2);
@@ -465,8 +465,8 @@
         private System.Windows.Forms.Button btnToggleRed;
         private System.Windows.Forms.Button btnToggleGreen;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label lblPosRight;
-        private System.Windows.Forms.Label lblPosLeft;
+        private System.Windows.Forms.Label readingPositionRight;
+        private System.Windows.Forms.Label reading_positionLeft;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox reading_accelX;
         private System.Windows.Forms.TextBox reading_accelY;

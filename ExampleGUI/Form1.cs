@@ -72,8 +72,8 @@ namespace Comms
 			//- Draw values
 			if (roverStatus.Instance.position == sensorStatus.ok)
 			{
-				lblPosLeft.Text = roverData.Instance.positionLeft.ToString();
-				lblPosRight.Text = roverData.Instance.positionRight.ToString();
+				reading_positionLeft.Text = roverData.Instance.positionLeft.ToString();
+				readingPositionRight.Text = roverData.Instance.positionRight.ToString();
 			}
 
 			if (roverStatus.Instance.accelerometer == sensorStatus.ok)
