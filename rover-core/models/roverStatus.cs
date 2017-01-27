@@ -16,6 +16,7 @@ namespace rover_core.models
 		public sensorStatus accelerometer { get; internal set; } = sensorStatus.waiting;
 		public sensorStatus position { get; internal set; } = sensorStatus.waiting;
 		public sensorStatus leds { get; internal set; } = sensorStatus.waiting;
+		public sensorStatus magnetometer { get; internal set; } = sensorStatus.waiting;
 		public connectionStatus connection { get; internal set; } = connectionStatus.disconnected;
 	}
 

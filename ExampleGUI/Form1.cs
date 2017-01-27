@@ -68,6 +68,7 @@ namespace Comms
 			status_conn.Text = roverStatus.Instance.connection.ToString();
 			status_leds.Text = roverStatus.Instance.leds.ToString();
 			status_position.Text = roverStatus.Instance.position.ToString();
+			status_magnetometer.Text = roverStatus.Instance.magnetometer.ToString();
 
 			//- Draw values
 			if (roverStatus.Instance.position == sensorStatus.ok)
@@ -89,6 +90,13 @@ namespace Comms
 			{
 				lblGreenStatus.BackColor = ((roverData.Instance.ledGreen) ? Color.LimeGreen : SystemColors.ButtonFace);
 				lblRedStatus.BackColor = ((roverData.Instance.ledRed) ? Color.Red : SystemColors.ButtonFace);
+			}
+
+			if (roverStatus.Instance.magnetometer == sensorStatus.ok)
+			{
+				reading_magnetX.Text = roverData.Instance.magnetX.ToString();
+				reading_magnetY.Text = roverData.Instance.magnetY.ToString();
+				reading_magnetZ.Text = roverData.Instance.magnetZ.ToString();
 			}
 		}
 

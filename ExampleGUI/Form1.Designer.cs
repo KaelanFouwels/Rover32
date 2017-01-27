@@ -62,6 +62,14 @@
 			this.reading_pitch = new System.Windows.Forms.TextBox();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
 			this.groupBox4 = new System.Windows.Forms.GroupBox();
+			this.reading_magnetY = new System.Windows.Forms.TextBox();
+			this.reading_magnetX = new System.Windows.Forms.TextBox();
+			this.reading_magnetZ = new System.Windows.Forms.TextBox();
+			this.MagnetometerX = new System.Windows.Forms.Label();
+			this.label13 = new System.Windows.Forms.Label();
+			this.label14 = new System.Windows.Forms.Label();
+			this.status_magnetometer = new System.Windows.Forms.Label();
+			this.label12 = new System.Windows.Forms.Label();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.groupBox3.SuspendLayout();
@@ -176,7 +184,7 @@
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(416, 82);
+			this.label3.Location = new System.Drawing.Point(427, 82);
 			this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(172, 25);
@@ -206,7 +214,7 @@
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(472, 47);
+			this.label2.Location = new System.Drawing.Point(481, 47);
 			this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(117, 25);
@@ -215,7 +223,7 @@
 			// 
 			// reading_accelX
 			// 
-			this.reading_accelX.Location = new System.Drawing.Point(174, 41);
+			this.reading_accelX.Location = new System.Drawing.Point(185, 41);
 			this.reading_accelX.Margin = new System.Windows.Forms.Padding(6);
 			this.reading_accelX.Name = "reading_accelX";
 			this.reading_accelX.Size = new System.Drawing.Size(196, 31);
@@ -224,7 +232,7 @@
 			// 
 			// reading_accelY
 			// 
-			this.reading_accelY.Location = new System.Drawing.Point(174, 91);
+			this.reading_accelY.Location = new System.Drawing.Point(185, 91);
 			this.reading_accelY.Margin = new System.Windows.Forms.Padding(6);
 			this.reading_accelY.Name = "reading_accelY";
 			this.reading_accelY.Size = new System.Drawing.Size(196, 31);
@@ -233,7 +241,7 @@
 			// 
 			// reading_accelZ
 			// 
-			this.reading_accelZ.Location = new System.Drawing.Point(174, 141);
+			this.reading_accelZ.Location = new System.Drawing.Point(185, 141);
 			this.reading_accelZ.Margin = new System.Windows.Forms.Padding(6);
 			this.reading_accelZ.Name = "reading_accelZ";
 			this.reading_accelZ.Size = new System.Drawing.Size(196, 31);
@@ -242,7 +250,7 @@
 			// 
 			// reading_tilt
 			// 
-			this.reading_tilt.Location = new System.Drawing.Point(174, 187);
+			this.reading_tilt.Location = new System.Drawing.Point(185, 187);
 			this.reading_tilt.Margin = new System.Windows.Forms.Padding(6);
 			this.reading_tilt.Name = "reading_tilt";
 			this.reading_tilt.Size = new System.Drawing.Size(196, 31);
@@ -332,7 +340,7 @@
 			// label7
 			// 
 			this.label7.AutoSize = true;
-			this.label7.Location = new System.Drawing.Point(20, 44);
+			this.label7.Location = new System.Drawing.Point(31, 44);
 			this.label7.Name = "label7";
 			this.label7.Size = new System.Drawing.Size(145, 25);
 			this.label7.TabIndex = 17;
@@ -341,7 +349,7 @@
 			// label8
 			// 
 			this.label8.AutoSize = true;
-			this.label8.Location = new System.Drawing.Point(20, 141);
+			this.label8.Location = new System.Drawing.Point(31, 141);
 			this.label8.Name = "label8";
 			this.label8.Size = new System.Drawing.Size(144, 25);
 			this.label8.TabIndex = 18;
@@ -350,7 +358,7 @@
 			// label9
 			// 
 			this.label9.AutoSize = true;
-			this.label9.Location = new System.Drawing.Point(20, 91);
+			this.label9.Location = new System.Drawing.Point(31, 91);
 			this.label9.Name = "label9";
 			this.label9.Size = new System.Drawing.Size(146, 25);
 			this.label9.TabIndex = 19;
@@ -359,7 +367,7 @@
 			// label10
 			// 
 			this.label10.AutoSize = true;
-			this.label10.Location = new System.Drawing.Point(123, 187);
+			this.label10.Location = new System.Drawing.Point(134, 187);
 			this.label10.Name = "label10";
 			this.label10.Size = new System.Drawing.Size(41, 25);
 			this.label10.TabIndex = 20;
@@ -368,7 +376,7 @@
 			// label11
 			// 
 			this.label11.AutoSize = true;
-			this.label11.Location = new System.Drawing.Point(104, 231);
+			this.label11.Location = new System.Drawing.Point(115, 231);
 			this.label11.Name = "label11";
 			this.label11.Size = new System.Drawing.Size(60, 25);
 			this.label11.TabIndex = 21;
@@ -376,7 +384,7 @@
 			// 
 			// reading_pitch
 			// 
-			this.reading_pitch.Location = new System.Drawing.Point(174, 231);
+			this.reading_pitch.Location = new System.Drawing.Point(185, 231);
 			this.reading_pitch.Margin = new System.Windows.Forms.Padding(6);
 			this.reading_pitch.Name = "reading_pitch";
 			this.reading_pitch.Size = new System.Drawing.Size(196, 31);
@@ -385,6 +393,8 @@
 			// 
 			// groupBox3
 			// 
+			this.groupBox3.Controls.Add(this.label12);
+			this.groupBox3.Controls.Add(this.status_magnetometer);
 			this.groupBox3.Controls.Add(this.label4);
 			this.groupBox3.Controls.Add(this.label_accelerometer);
 			this.groupBox3.Controls.Add(this.status_accelerometer);
@@ -396,18 +406,24 @@
 			this.groupBox3.Controls.Add(this.status_leds);
 			this.groupBox3.Location = new System.Drawing.Point(987, 23);
 			this.groupBox3.Name = "groupBox3";
-			this.groupBox3.Size = new System.Drawing.Size(394, 244);
+			this.groupBox3.Size = new System.Drawing.Size(394, 282);
 			this.groupBox3.TabIndex = 23;
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "Status";
 			// 
 			// groupBox4
 			// 
+			this.groupBox4.Controls.Add(this.reading_magnetY);
 			this.groupBox4.Controls.Add(this.reading_accelY);
+			this.groupBox4.Controls.Add(this.reading_magnetX);
+			this.groupBox4.Controls.Add(this.reading_magnetZ);
 			this.groupBox4.Controls.Add(this.reading_accelX);
 			this.groupBox4.Controls.Add(this.label3);
+			this.groupBox4.Controls.Add(this.MagnetometerX);
 			this.groupBox4.Controls.Add(this.reading_accelZ);
+			this.groupBox4.Controls.Add(this.label13);
 			this.groupBox4.Controls.Add(this.reading_pitch);
+			this.groupBox4.Controls.Add(this.label14);
 			this.groupBox4.Controls.Add(this.reading_tilt);
 			this.groupBox4.Controls.Add(this.readingPositionRight);
 			this.groupBox4.Controls.Add(this.label7);
@@ -419,16 +435,88 @@
 			this.groupBox4.Controls.Add(this.label2);
 			this.groupBox4.Location = new System.Drawing.Point(24, 286);
 			this.groupBox4.Name = "groupBox4";
-			this.groupBox4.Size = new System.Drawing.Size(678, 364);
+			this.groupBox4.Size = new System.Drawing.Size(678, 598);
 			this.groupBox4.TabIndex = 24;
 			this.groupBox4.TabStop = false;
 			this.groupBox4.Text = "Readings";
+			// 
+			// reading_magnetY
+			// 
+			this.reading_magnetY.Location = new System.Drawing.Point(185, 324);
+			this.reading_magnetY.Margin = new System.Windows.Forms.Padding(6);
+			this.reading_magnetY.Name = "reading_magnetY";
+			this.reading_magnetY.Size = new System.Drawing.Size(196, 31);
+			this.reading_magnetY.TabIndex = 26;
+			this.reading_magnetY.Text = "-";
+			// 
+			// reading_magnetX
+			// 
+			this.reading_magnetX.Location = new System.Drawing.Point(185, 274);
+			this.reading_magnetX.Margin = new System.Windows.Forms.Padding(6);
+			this.reading_magnetX.Name = "reading_magnetX";
+			this.reading_magnetX.Size = new System.Drawing.Size(196, 31);
+			this.reading_magnetX.TabIndex = 25;
+			this.reading_magnetX.Text = "-";
+			// 
+			// reading_magnetZ
+			// 
+			this.reading_magnetZ.Location = new System.Drawing.Point(185, 374);
+			this.reading_magnetZ.Margin = new System.Windows.Forms.Padding(6);
+			this.reading_magnetZ.Name = "reading_magnetZ";
+			this.reading_magnetZ.Size = new System.Drawing.Size(196, 31);
+			this.reading_magnetZ.TabIndex = 27;
+			this.reading_magnetZ.Text = "-";
+			// 
+			// MagnetometerX
+			// 
+			this.MagnetometerX.AutoSize = true;
+			this.MagnetometerX.Location = new System.Drawing.Point(11, 277);
+			this.MagnetometerX.Name = "MagnetometerX";
+			this.MagnetometerX.Size = new System.Drawing.Size(164, 25);
+			this.MagnetometerX.TabIndex = 29;
+			this.MagnetometerX.Text = "MagnetometerX";
+			// 
+			// label13
+			// 
+			this.label13.AutoSize = true;
+			this.label13.Location = new System.Drawing.Point(11, 374);
+			this.label13.Name = "label13";
+			this.label13.Size = new System.Drawing.Size(163, 25);
+			this.label13.TabIndex = 30;
+			this.label13.Text = "MagnetometerZ";
+			// 
+			// label14
+			// 
+			this.label14.AutoSize = true;
+			this.label14.Location = new System.Drawing.Point(11, 324);
+			this.label14.Name = "label14";
+			this.label14.Size = new System.Drawing.Size(165, 25);
+			this.label14.TabIndex = 31;
+			this.label14.Text = "MagnetometerY";
+			// 
+			// status_magnetometer
+			// 
+			this.status_magnetometer.AutoSize = true;
+			this.status_magnetometer.Location = new System.Drawing.Point(211, 216);
+			this.status_magnetometer.Name = "status_magnetometer";
+			this.status_magnetometer.Size = new System.Drawing.Size(19, 25);
+			this.status_magnetometer.TabIndex = 17;
+			this.status_magnetometer.Text = "-";
+			// 
+			// label12
+			// 
+			this.label12.AutoSize = true;
+			this.label12.Location = new System.Drawing.Point(30, 219);
+			this.label12.Name = "label12";
+			this.label12.Size = new System.Drawing.Size(150, 25);
+			this.label12.TabIndex = 18;
+			this.label12.Text = "Magnetometer";
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1404, 746);
+			this.ClientSize = new System.Drawing.Size(1404, 1180);
 			this.Controls.Add(this.groupBox4);
 			this.Controls.Add(this.groupBox3);
 			this.Controls.Add(this.groupBox2);
@@ -489,6 +577,14 @@
 		private System.Windows.Forms.TextBox reading_pitch;
 		private System.Windows.Forms.GroupBox groupBox3;
 		private System.Windows.Forms.GroupBox groupBox4;
+		private System.Windows.Forms.Label label12;
+		private System.Windows.Forms.Label status_magnetometer;
+		private System.Windows.Forms.TextBox reading_magnetY;
+		private System.Windows.Forms.TextBox reading_magnetX;
+		private System.Windows.Forms.TextBox reading_magnetZ;
+		private System.Windows.Forms.Label MagnetometerX;
+		private System.Windows.Forms.Label label13;
+		private System.Windows.Forms.Label label14;
 	}
 }
 

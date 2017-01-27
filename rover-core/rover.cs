@@ -56,6 +56,7 @@ namespace rover_core
 			myClient.SendData(CommandID.GetLEDandSwitchStatus); //this type needs no payload
 			myClient.SendData(CommandID.MotorPosition);
 			myClient.SendData(CommandID.GetAccelValue);
+			myClient.SendData(CommandID.GetMagnetValue);
 		}
 
 		void myClient_OnMessageReceived(Client_Message_EventArgs e)
@@ -92,6 +93,19 @@ namespace rover_core
 					roverData.Instance.accelerationZ = (short)((uint)e.RawMessage[9] | ((uint)e.RawMessage[8] << 8));
 
 					roverStatus.Instance.accelerometer = sensorStatus.ok;
+				}
+			}
+
+			if (e.RawMessage[3] == (byte)CommandID.GetMagnetValue)
+			{
+				short messageLength = (short)(e.RawMessage[1]);
+				if (messageLength == 0x8)
+				{
+					roverData.Instance.magnetX = (short)((uint)e.RawMessage[5] | ((uint)e.RawMessage[4] << 8));
+					roverData.Instance.magnetY = (short)((uint)e.RawMessage[7] | ((uint)e.RawMessage[6] << 8));
+					roverData.Instance.magnetZ = (short)((uint)e.RawMessage[9] | ((uint)e.RawMessage[8] << 8));
+
+					roverStatus.Instance.magnetometer = sensorStatus.ok;
 				}
 			}
 		}

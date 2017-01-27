@@ -49,6 +49,7 @@
     <Compile Include="models\roverStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="sensors\Accelerometer.cs" />
+    <Compile Include="sensors\Magnetometer.cs" />
     <Compile Include="server\ClientBase.cs" />
     <Compile Include="server\Common.cs" />
     <Compile Include="server\ServerBase.cs" />
