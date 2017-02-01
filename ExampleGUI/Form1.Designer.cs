@@ -32,7 +32,6 @@
 			this.btnCon = new System.Windows.Forms.Button();
 			this.txtIP = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
-			this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.lblRedStatus = new System.Windows.Forms.Label();
 			this.lblGreenStatus = new System.Windows.Forms.Label();
 			this.btnToggleRed = new System.Windows.Forms.Button();
@@ -61,6 +60,10 @@
 			this.label11 = new System.Windows.Forms.Label();
 			this.reading_pitch = new System.Windows.Forms.TextBox();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
+			this.label15 = new System.Windows.Forms.Label();
+			this.status_controller = new System.Windows.Forms.Label();
+			this.label12 = new System.Windows.Forms.Label();
+			this.status_magnetometer = new System.Windows.Forms.Label();
 			this.groupBox4 = new System.Windows.Forms.GroupBox();
 			this.reading_magnetY = new System.Windows.Forms.TextBox();
 			this.reading_magnetX = new System.Windows.Forms.TextBox();
@@ -68,12 +71,15 @@
 			this.MagnetometerX = new System.Windows.Forms.Label();
 			this.label13 = new System.Windows.Forms.Label();
 			this.label14 = new System.Windows.Forms.Label();
-			this.status_magnetometer = new System.Windows.Forms.Label();
-			this.label12 = new System.Windows.Forms.Label();
+			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.label78 = new System.Windows.Forms.Label();
+			this.motorSpeedOverride = new System.Windows.Forms.TextBox();
+			this.textbox_error = new System.Windows.Forms.TextBox();
+			this.button_zeroencoders = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
-			this.groupBox2.SuspendLayout();
 			this.groupBox3.SuspendLayout();
 			this.groupBox4.SuspendLayout();
+			this.groupBox2.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// groupBox1
@@ -122,25 +128,10 @@
 			this.label1.TabIndex = 0;
 			this.label1.Text = "IP";
 			// 
-			// groupBox2
-			// 
-			this.groupBox2.Controls.Add(this.lblRedStatus);
-			this.groupBox2.Controls.Add(this.lblGreenStatus);
-			this.groupBox2.Controls.Add(this.btnToggleRed);
-			this.groupBox2.Controls.Add(this.btnToggleGreen);
-			this.groupBox2.Location = new System.Drawing.Point(378, 23);
-			this.groupBox2.Margin = new System.Windows.Forms.Padding(6);
-			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Padding = new System.Windows.Forms.Padding(6);
-			this.groupBox2.Size = new System.Drawing.Size(590, 244);
-			this.groupBox2.TabIndex = 1;
-			this.groupBox2.TabStop = false;
-			this.groupBox2.Text = "LEDs and buttons";
-			// 
 			// lblRedStatus
 			// 
 			this.lblRedStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.lblRedStatus.Location = new System.Drawing.Point(332, 133);
+			this.lblRedStatus.Location = new System.Drawing.Point(183, 478);
 			this.lblRedStatus.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
 			this.lblRedStatus.Name = "lblRedStatus";
 			this.lblRedStatus.Size = new System.Drawing.Size(198, 33);
@@ -151,7 +142,7 @@
 			// lblGreenStatus
 			// 
 			this.lblGreenStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.lblGreenStatus.Location = new System.Drawing.Point(332, 77);
+			this.lblGreenStatus.Location = new System.Drawing.Point(183, 424);
 			this.lblGreenStatus.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
 			this.lblGreenStatus.Name = "lblGreenStatus";
 			this.lblGreenStatus.Size = new System.Drawing.Size(198, 33);
@@ -161,7 +152,7 @@
 			// 
 			// btnToggleRed
 			// 
-			this.btnToggleRed.Location = new System.Drawing.Point(42, 129);
+			this.btnToggleRed.Location = new System.Drawing.Point(20, 92);
 			this.btnToggleRed.Margin = new System.Windows.Forms.Padding(6);
 			this.btnToggleRed.Name = "btnToggleRed";
 			this.btnToggleRed.Size = new System.Drawing.Size(216, 44);
@@ -172,7 +163,7 @@
 			// 
 			// btnToggleGreen
 			// 
-			this.btnToggleGreen.Location = new System.Drawing.Point(42, 73);
+			this.btnToggleGreen.Location = new System.Drawing.Point(20, 36);
 			this.btnToggleGreen.Margin = new System.Windows.Forms.Padding(6);
 			this.btnToggleGreen.Name = "btnToggleGreen";
 			this.btnToggleGreen.Size = new System.Drawing.Size(216, 44);
@@ -393,6 +384,8 @@
 			// 
 			// groupBox3
 			// 
+			this.groupBox3.Controls.Add(this.label15);
+			this.groupBox3.Controls.Add(this.status_controller);
 			this.groupBox3.Controls.Add(this.label12);
 			this.groupBox3.Controls.Add(this.status_magnetometer);
 			this.groupBox3.Controls.Add(this.label4);
@@ -404,16 +397,54 @@
 			this.groupBox3.Controls.Add(this.status_conn);
 			this.groupBox3.Controls.Add(this.status_position);
 			this.groupBox3.Controls.Add(this.status_leds);
-			this.groupBox3.Location = new System.Drawing.Point(987, 23);
+			this.groupBox3.Location = new System.Drawing.Point(375, 12);
 			this.groupBox3.Name = "groupBox3";
-			this.groupBox3.Size = new System.Drawing.Size(394, 282);
+			this.groupBox3.Size = new System.Drawing.Size(628, 255);
 			this.groupBox3.TabIndex = 23;
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "Status";
 			// 
+			// label15
+			// 
+			this.label15.AutoSize = true;
+			this.label15.Location = new System.Drawing.Point(358, 36);
+			this.label15.Name = "label15";
+			this.label15.Size = new System.Drawing.Size(105, 25);
+			this.label15.TabIndex = 19;
+			this.label15.Text = "Controller";
+			// 
+			// status_controller
+			// 
+			this.status_controller.AutoSize = true;
+			this.status_controller.Location = new System.Drawing.Point(539, 36);
+			this.status_controller.Name = "status_controller";
+			this.status_controller.Size = new System.Drawing.Size(19, 25);
+			this.status_controller.TabIndex = 20;
+			this.status_controller.Text = "-";
+			// 
+			// label12
+			// 
+			this.label12.AutoSize = true;
+			this.label12.Location = new System.Drawing.Point(30, 219);
+			this.label12.Name = "label12";
+			this.label12.Size = new System.Drawing.Size(150, 25);
+			this.label12.TabIndex = 18;
+			this.label12.Text = "Magnetometer";
+			// 
+			// status_magnetometer
+			// 
+			this.status_magnetometer.AutoSize = true;
+			this.status_magnetometer.Location = new System.Drawing.Point(211, 216);
+			this.status_magnetometer.Name = "status_magnetometer";
+			this.status_magnetometer.Size = new System.Drawing.Size(19, 25);
+			this.status_magnetometer.TabIndex = 17;
+			this.status_magnetometer.Text = "-";
+			// 
 			// groupBox4
 			// 
+			this.groupBox4.Controls.Add(this.lblRedStatus);
 			this.groupBox4.Controls.Add(this.reading_magnetY);
+			this.groupBox4.Controls.Add(this.lblGreenStatus);
 			this.groupBox4.Controls.Add(this.reading_accelY);
 			this.groupBox4.Controls.Add(this.reading_magnetX);
 			this.groupBox4.Controls.Add(this.reading_magnetZ);
@@ -494,32 +525,69 @@
 			this.label14.TabIndex = 31;
 			this.label14.Text = "MagnetometerY";
 			// 
-			// status_magnetometer
+			// groupBox2
 			// 
-			this.status_magnetometer.AutoSize = true;
-			this.status_magnetometer.Location = new System.Drawing.Point(211, 216);
-			this.status_magnetometer.Name = "status_magnetometer";
-			this.status_magnetometer.Size = new System.Drawing.Size(19, 25);
-			this.status_magnetometer.TabIndex = 17;
-			this.status_magnetometer.Text = "-";
+			this.groupBox2.Controls.Add(this.button_zeroencoders);
+			this.groupBox2.Controls.Add(this.label78);
+			this.groupBox2.Controls.Add(this.motorSpeedOverride);
+			this.groupBox2.Controls.Add(this.btnToggleGreen);
+			this.groupBox2.Controls.Add(this.btnToggleRed);
+			this.groupBox2.Location = new System.Drawing.Point(1049, 12);
+			this.groupBox2.Name = "groupBox2";
+			this.groupBox2.Size = new System.Drawing.Size(430, 872);
+			this.groupBox2.TabIndex = 25;
+			this.groupBox2.TabStop = false;
+			this.groupBox2.Text = "Actions";
 			// 
-			// label12
+			// label78
 			// 
-			this.label12.AutoSize = true;
-			this.label12.Location = new System.Drawing.Point(30, 219);
-			this.label12.Name = "label12";
-			this.label12.Size = new System.Drawing.Size(150, 25);
-			this.label12.TabIndex = 18;
-			this.label12.Text = "Magnetometer";
+			this.label78.AutoSize = true;
+			this.label78.Location = new System.Drawing.Point(15, 145);
+			this.label78.Name = "label78";
+			this.label78.Size = new System.Drawing.Size(151, 25);
+			this.label78.TabIndex = 26;
+			this.label78.Text = "Manual Speed";
+			// 
+			// motorSpeedOverride
+			// 
+			this.motorSpeedOverride.Location = new System.Drawing.Point(20, 170);
+			this.motorSpeedOverride.Name = "motorSpeedOverride";
+			this.motorSpeedOverride.Size = new System.Drawing.Size(216, 31);
+			this.motorSpeedOverride.TabIndex = 26;
+			this.motorSpeedOverride.Text = "00000";
+			this.motorSpeedOverride.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.motorSpeedOverride_KeyPress);
+			// 
+			// textbox_error
+			// 
+			this.textbox_error.BackColor = System.Drawing.Color.Black;
+			this.textbox_error.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+			this.textbox_error.ForeColor = System.Drawing.Color.White;
+			this.textbox_error.Location = new System.Drawing.Point(2, 1128);
+			this.textbox_error.Margin = new System.Windows.Forms.Padding(5);
+			this.textbox_error.Name = "textbox_error";
+			this.textbox_error.Size = new System.Drawing.Size(1404, 44);
+			this.textbox_error.TabIndex = 26;
+			// 
+			// button_zeroencoders
+			// 
+			this.button_zeroencoders.Location = new System.Drawing.Point(20, 216);
+			this.button_zeroencoders.Margin = new System.Windows.Forms.Padding(6);
+			this.button_zeroencoders.Name = "button_zeroencoders";
+			this.button_zeroencoders.Size = new System.Drawing.Size(216, 44);
+			this.button_zeroencoders.TabIndex = 27;
+			this.button_zeroencoders.Text = "reZero Encoders";
+			this.button_zeroencoders.UseVisualStyleBackColor = true;
+			this.button_zeroencoders.Click += new System.EventHandler(this.button_zeroencoders_Click);
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1404, 1180);
+			this.Controls.Add(this.textbox_error);
+			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox4);
 			this.Controls.Add(this.groupBox3);
-			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox1);
 			this.KeyPreview = true;
 			this.Margin = new System.Windows.Forms.Padding(6);
@@ -532,12 +600,14 @@
 			this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Form1_PreviewKeyDown);
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
-			this.groupBox2.ResumeLayout(false);
 			this.groupBox3.ResumeLayout(false);
 			this.groupBox3.PerformLayout();
 			this.groupBox4.ResumeLayout(false);
 			this.groupBox4.PerformLayout();
+			this.groupBox2.ResumeLayout(false);
+			this.groupBox2.PerformLayout();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
         }
 
@@ -547,7 +617,6 @@
         private System.Windows.Forms.Button btnCon;
         private System.Windows.Forms.TextBox txtIP;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label lblRedStatus;
         private System.Windows.Forms.Label lblGreenStatus;
         private System.Windows.Forms.Button btnToggleRed;
@@ -585,6 +654,13 @@
 		private System.Windows.Forms.Label MagnetometerX;
 		private System.Windows.Forms.Label label13;
 		private System.Windows.Forms.Label label14;
+		private System.Windows.Forms.GroupBox groupBox2;
+		private System.Windows.Forms.Label label15;
+		private System.Windows.Forms.Label status_controller;
+		private System.Windows.Forms.Label label78;
+		private System.Windows.Forms.TextBox motorSpeedOverride;
+		private System.Windows.Forms.TextBox textbox_error;
+		private System.Windows.Forms.Button button_zeroencoders;
 	}
 }
 

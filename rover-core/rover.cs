@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CommsLib;
 using rover_core.models;
 using System.Timers;
+using System.Net.Sockets;
 
 namespace rover_core
 {
@@ -36,9 +37,25 @@ namespace rover_core
 			myRequestTimer.Start();
 		}
 
-		public void connect(string ip, int port)
+		public async Task connect(string ip, int port)
 		{
-			myClient.ConnectToServer(ip, 9760);
+			roverStatus.Instance.connection = connectionStatus.connecting;
+
+			try
+			{
+				await Task.Run(() => myClient.ConnectToServer(ip, 9760));
+			}
+			catch (SocketException ex)
+			{
+				roverStatus.Instance.connection = connectionStatus.not_found;
+				throw ex;
+			}
+			catch (Exception ex)
+			{
+				roverStatus.Instance.connection = connectionStatus.failed;
+				throw ex;
+			}
+
 			roverStatus.Instance.connection = connectionStatus.connected;
 		}
 
@@ -78,8 +95,20 @@ namespace rover_core
 			if (e.RawMessage[3] == (byte)CommandID.MotorPosition)
 			{
 
-				roverData.Instance.positionLeft = (short)((uint)e.RawMessage[6] | ((uint)e.RawMessage[5] << 8));
-				roverData.Instance.positionRight = (short)((uint)e.RawMessage[9] | ((uint)e.RawMessage[8] << 8));
+				var left = (short)((uint)e.RawMessage[6] | ((uint)e.RawMessage[5] << 8));
+				var right = (short)((uint)e.RawMessage[9] | ((uint)e.RawMessage[8] << 8));
+
+				roverData.Instance.rawencoderLeft = left;
+				roverData.Instance.rawencoderRight = right;
+
+				if (roverData.Instance.rawencoderLeftOffset == 0)
+				{
+					roverData.Instance.rawencoderLeftOffset = left;
+				}
+				if (roverData.Instance.rawencoderRightOffset == 0)
+				{
+					roverData.Instance.rawencoderRightOffset = right;
+				}
 
 				roverStatus.Instance.position = sensorStatus.ok;
 			}

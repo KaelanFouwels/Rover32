@@ -17,8 +17,25 @@ namespace rover_core.models
 		public short accelerationX { get; internal set; } = 0;
 		public short accelerationY { get; internal set; } = 0;
 		public short accelerationZ { get; internal set; } = 0;
-		public double positionLeft { get; internal set; } = 0.00;
-		public double positionRight { get; internal set; } = 0.00;
+		internal double rawencoderLeftOffset { get; set; } = 0.00;
+		internal double rawencoderRightOffset { get; set; } = 0.00;
+		internal double rawencoderLeft { get; set; } = 0.00;
+		internal double rawencoderRight { get; set; } = 0.00;
+
+		public double encoderLeft
+		{
+			get
+			{
+				return rawencoderLeft - rawencoderLeftOffset;
+			}
+		}
+		public double encoderRight
+		{
+			get
+			{
+				return rawencoderRight - rawencoderRightOffset;
+			}
+		}
 		public bool ledGreen { get; internal set; } = false;
 		public bool ledRed { get; internal set; } = false;
 		public short magnetX { get; internal set; } = 0;

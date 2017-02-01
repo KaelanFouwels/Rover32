@@ -31,27 +31,27 @@ namespace Comms
 
 		}
 
-		private void btnCon_Click(object sender, EventArgs e)
+		private async void btnCon_Click(object sender, EventArgs e)
 		{
 			if ("Connect" == btnCon.Text)
 			{
 				try
 				{
-					rover.connect(txtIP.Text,9760);
+					await rover.connect(txtIP.Text, 9760);
 				}
 				catch (Exception ex)
 				{
-					MessageBox.Show(ex.Message+"\r\n"+ex.StackTrace);
+					MessageBox.Show(ex.Message + "\r\n" + ex.StackTrace);
 					return;
 				}
 
 				//if we get here, then we are connected
-				btnCon.Text="Disconnect";
+				btnCon.Text = "Disconnect";
 			}
 			else
 			{
 				rover.disconnect();
-				if (roverStatus.Instance.connection != connectionStatus.connected) btnCon.Text="Connect";
+				if (roverStatus.Instance.connection != connectionStatus.connected) btnCon.Text = "Connect";
 			}
 		}
 
@@ -73,8 +73,8 @@ namespace Comms
 			//- Draw values
 			if (roverStatus.Instance.position == sensorStatus.ok)
 			{
-				reading_positionLeft.Text = roverData.Instance.positionLeft.ToString();
-				readingPositionRight.Text = roverData.Instance.positionRight.ToString();
+				reading_positionLeft.Text = roverData.Instance.encoderLeft.ToString();
+				readingPositionRight.Text = roverData.Instance.encoderRight.ToString();
 			}
 
 			if (roverStatus.Instance.accelerometer == sensorStatus.ok)
@@ -130,35 +130,36 @@ namespace Comms
 
 		private void Form1_KeyDown(object sender, KeyEventArgs e)
 		{
-			switch (e.KeyCode)
-			{
-				case Keys.Up:
-					robotIsMoving = true;
-					rover.Movement.moveUp();
-					e.Handled = true;
-					break;
+			//switch (e.KeyCode)
+			//{
+			//	case Keys.Up:
+			//		robotIsMoving = true;
+			//		rover.Movement.moveUp();
+			//		e.Handled = true;
+			//		break;
 
-				case Keys.Down:
-					robotIsMoving = true;
-					rover.Movement.moveDown();
-					e.Handled=true;
-					break;
+			//	case Keys.Down:
+			//		robotIsMoving = true;
+			//		rover.Movement.moveDown();
+			//		e.Handled = true;
+			//		break;
 
-				case Keys.Left:
-					robotIsMoving = true;
-					rover.Movement.moveLeft();
-					e.Handled=true;
-					break;
-				case Keys.Right:
-					robotIsMoving = true;
-					rover.Movement.moveRight();
-					e.Handled=true;
-					break;
+			//	case Keys.Left:
+			//		robotIsMoving = true;
+			//		rover.Movement.moveLeft();
+			//		e.Handled = true;
+			//		break;
+			//	case Keys.Right:
+			//		robotIsMoving = true;
+			//		rover.Movement.moveRight();
+			//		e.Handled = true;
+			//		break;
 
-				default: e.Handled=false;
-					break;
+			//	default:
+			//		e.Handled = false;
+			//		break;
 
-			}
+			//}
 		}
 
 		private void Form1_KeyUp(object sender, KeyEventArgs e)
@@ -169,7 +170,7 @@ namespace Comms
 				robotIsMoving = false;
 			}
 		}
- 
+
 
 		private void txtIP_TextChanged(object sender, EventArgs e)
 		{
@@ -193,6 +194,50 @@ namespace Comms
 		private void Form1_Load(object sender, EventArgs e)
 		{
 
+		}
+
+		private void motorSpeedOverride_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			if (e.KeyChar != (char)Keys.Enter) return;
+
+			if (roverStatus.Instance.connection != connectionStatus.connected)
+			{
+				textbox_error.Text = "Failed, rover disconnected";
+				return;
+			}
+
+			string value = motorSpeedOverride.Text;
+			if (value.Length > 8 || value.Length % 2 != 0)
+			{
+				textbox_error.Text = "Both input side numbers must be same length (including sign character)";
+				return;
+			}
+
+			int speedLeft = 0;
+			int speedRight = 0;
+
+			try
+			{
+				speedLeft = Convert.ToInt16(value.Substring(0, value.Length / 2));
+				speedRight = Convert.ToInt16(value.Substring(value.Length / 2, value.Length / 2));
+			}
+			catch
+			{
+				textbox_error.Text = "Failed, not a number.";
+				return;
+			}
+			if (speedLeft > 127 || speedRight < -128 || speedRight > 127 || speedRight < -128)
+			{
+				textbox_error.Text = "Failed, values must be between 127 and -128.";
+				return;
+			}
+
+			rover.Movement.setSpeed(Convert.ToSByte(speedLeft), Convert.ToSByte(speedRight));
+		}
+
+		private void button_zeroencoders_Click(object sender, EventArgs e)
+		{
+			rover.Movement.zeroEncoderCount();
 		}
 	}
 }

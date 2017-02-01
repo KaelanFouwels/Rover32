@@ -29,5 +29,8 @@ namespace rover_core.models
 	{
 		disconnected = 0,
 		connected = 1,
+		connecting = 2,
+		failed = 2,
+		not_found = 3
 	}
 }
