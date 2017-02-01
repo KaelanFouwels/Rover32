@@ -250,3 +250,43 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+/Embedded/WIFIROVER2016G-mplabx/WIFIROVER2016G/TCPIP/Demo App/nbproject/private/
+/Embedded/WIFIROVER2016Gx/WIFIROVER2016G/TCPIP/demo/WiFiRover2016G.X/nbproject/private/
+/Embedded/WIFIROVER2016Gx/WIFIROVER2016G/TCPIP/demo/WiFiRover2016G.X/build/default/
+/Embedded/WIFIROVER2016Gx/WIFIROVER2016G/TCPIP/demo/WiFiRover2016G.X/dist/default/
+
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+*.o
+
+*.d

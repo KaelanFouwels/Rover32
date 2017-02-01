@@ -38,6 +38,8 @@ namespace CommsLib
 		MagDATABufferPacketX = 0x89,
 		MagDATABufferPacketY = 0x8A,
 		MagDATABufferPacketZ = 0x8B,
-		DRIVE_MAX_SPEED = 0xC8
+		DRIVE_MAX_SPEED = 0xC8,
+		CMDGyroPosition = 201
+
 	};
 }
