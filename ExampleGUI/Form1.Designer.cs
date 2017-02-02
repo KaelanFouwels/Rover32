@@ -76,10 +76,22 @@
 			this.motorSpeedOverride = new System.Windows.Forms.TextBox();
 			this.textbox_error = new System.Windows.Forms.TextBox();
 			this.button_zeroencoders = new System.Windows.Forms.Button();
+			this.groupBox5 = new System.Windows.Forms.GroupBox();
+			this.label16 = new System.Windows.Forms.Label();
+			this.label17 = new System.Windows.Forms.Label();
+			this.label18 = new System.Windows.Forms.Label();
+			this.label19 = new System.Windows.Forms.Label();
+			this.status_navbearing = new System.Windows.Forms.Label();
+			this.status_navdistance = new System.Windows.Forms.Label();
+			this.number_navcurrentgrid = new System.Windows.Forms.NumericUpDown();
+			this.number_navdestinationgrid = new System.Windows.Forms.NumericUpDown();
 			this.groupBox1.SuspendLayout();
 			this.groupBox3.SuspendLayout();
 			this.groupBox4.SuspendLayout();
 			this.groupBox2.SuspendLayout();
+			this.groupBox5.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.number_navcurrentgrid)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.number_navdestinationgrid)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// groupBox1
@@ -534,7 +546,7 @@
 			this.groupBox2.Controls.Add(this.btnToggleRed);
 			this.groupBox2.Location = new System.Drawing.Point(1049, 12);
 			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(430, 872);
+			this.groupBox2.Size = new System.Drawing.Size(636, 255);
 			this.groupBox2.TabIndex = 25;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Actions";
@@ -542,7 +554,7 @@
 			// label78
 			// 
 			this.label78.AutoSize = true;
-			this.label78.Location = new System.Drawing.Point(15, 145);
+			this.label78.Location = new System.Drawing.Point(273, 36);
 			this.label78.Name = "label78";
 			this.label78.Size = new System.Drawing.Size(151, 25);
 			this.label78.TabIndex = 26;
@@ -550,7 +562,7 @@
 			// 
 			// motorSpeedOverride
 			// 
-			this.motorSpeedOverride.Location = new System.Drawing.Point(20, 170);
+			this.motorSpeedOverride.Location = new System.Drawing.Point(278, 61);
 			this.motorSpeedOverride.Name = "motorSpeedOverride";
 			this.motorSpeedOverride.Size = new System.Drawing.Size(216, 31);
 			this.motorSpeedOverride.TabIndex = 26;
@@ -570,7 +582,7 @@
 			// 
 			// button_zeroencoders
 			// 
-			this.button_zeroencoders.Location = new System.Drawing.Point(20, 216);
+			this.button_zeroencoders.Location = new System.Drawing.Point(20, 148);
 			this.button_zeroencoders.Margin = new System.Windows.Forms.Padding(6);
 			this.button_zeroencoders.Name = "button_zeroencoders";
 			this.button_zeroencoders.Size = new System.Drawing.Size(216, 44);
@@ -579,11 +591,102 @@
 			this.button_zeroencoders.UseVisualStyleBackColor = true;
 			this.button_zeroencoders.Click += new System.EventHandler(this.button_zeroencoders_Click);
 			// 
+			// groupBox5
+			// 
+			this.groupBox5.Controls.Add(this.number_navdestinationgrid);
+			this.groupBox5.Controls.Add(this.number_navcurrentgrid);
+			this.groupBox5.Controls.Add(this.status_navdistance);
+			this.groupBox5.Controls.Add(this.status_navbearing);
+			this.groupBox5.Controls.Add(this.label18);
+			this.groupBox5.Controls.Add(this.label19);
+			this.groupBox5.Controls.Add(this.label17);
+			this.groupBox5.Controls.Add(this.label16);
+			this.groupBox5.Location = new System.Drawing.Point(733, 286);
+			this.groupBox5.Name = "groupBox5";
+			this.groupBox5.Size = new System.Drawing.Size(624, 598);
+			this.groupBox5.TabIndex = 27;
+			this.groupBox5.TabStop = false;
+			this.groupBox5.Text = "Navigation";
+			this.groupBox5.Enter += new System.EventHandler(this.groupBox5_Enter);
+			// 
+			// label16
+			// 
+			this.label16.AutoSize = true;
+			this.label16.Location = new System.Drawing.Point(29, 41);
+			this.label16.Name = "label16";
+			this.label16.Size = new System.Drawing.Size(129, 25);
+			this.label16.TabIndex = 1;
+			this.label16.Text = "Current Grid";
+			// 
+			// label17
+			// 
+			this.label17.AutoSize = true;
+			this.label17.Location = new System.Drawing.Point(26, 108);
+			this.label17.Name = "label17";
+			this.label17.Size = new System.Drawing.Size(166, 25);
+			this.label17.TabIndex = 3;
+			this.label17.Text = "Destination Grid";
+			this.label17.Click += new System.EventHandler(this.label17_Click);
+			// 
+			// label18
+			// 
+			this.label18.AutoSize = true;
+			this.label18.Location = new System.Drawing.Point(293, 72);
+			this.label18.Name = "label18";
+			this.label18.Size = new System.Drawing.Size(86, 25);
+			this.label18.TabIndex = 6;
+			this.label18.Text = "Bearing";
+			this.label18.Click += new System.EventHandler(this.label18_Click);
+			// 
+			// label19
+			// 
+			this.label19.AutoSize = true;
+			this.label19.Location = new System.Drawing.Point(293, 139);
+			this.label19.Name = "label19";
+			this.label19.Size = new System.Drawing.Size(96, 25);
+			this.label19.TabIndex = 5;
+			this.label19.Text = "Distance";
+			this.label19.Click += new System.EventHandler(this.label19_Click);
+			// 
+			// status_navbearing
+			// 
+			this.status_navbearing.AutoSize = true;
+			this.status_navbearing.Location = new System.Drawing.Point(395, 72);
+			this.status_navbearing.Name = "status_navbearing";
+			this.status_navbearing.Size = new System.Drawing.Size(19, 25);
+			this.status_navbearing.TabIndex = 7;
+			this.status_navbearing.Text = "-";
+			// 
+			// status_navdistance
+			// 
+			this.status_navdistance.AutoSize = true;
+			this.status_navdistance.Location = new System.Drawing.Point(395, 142);
+			this.status_navdistance.Name = "status_navdistance";
+			this.status_navdistance.Size = new System.Drawing.Size(19, 25);
+			this.status_navdistance.TabIndex = 8;
+			this.status_navdistance.Text = "-";
+			// 
+			// number_navcurrentgrid
+			// 
+			this.number_navcurrentgrid.Location = new System.Drawing.Point(33, 71);
+			this.number_navcurrentgrid.Name = "number_navcurrentgrid";
+			this.number_navcurrentgrid.Size = new System.Drawing.Size(197, 31);
+			this.number_navcurrentgrid.TabIndex = 9;
+			// 
+			// number_navdestinationgrid
+			// 
+			this.number_navdestinationgrid.Location = new System.Drawing.Point(32, 139);
+			this.number_navdestinationgrid.Name = "number_navdestinationgrid";
+			this.number_navdestinationgrid.Size = new System.Drawing.Size(197, 31);
+			this.number_navdestinationgrid.TabIndex = 10;
+			this.number_navdestinationgrid.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.number_navdestinationgrid_KeyPress);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1404, 1180);
+			this.ClientSize = new System.Drawing.Size(2310, 1180);
+			this.Controls.Add(this.groupBox5);
 			this.Controls.Add(this.textbox_error);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox4);
@@ -606,6 +709,10 @@
 			this.groupBox4.PerformLayout();
 			this.groupBox2.ResumeLayout(false);
 			this.groupBox2.PerformLayout();
+			this.groupBox5.ResumeLayout(false);
+			this.groupBox5.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.number_navcurrentgrid)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.number_navdestinationgrid)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -661,6 +768,15 @@
 		private System.Windows.Forms.TextBox motorSpeedOverride;
 		private System.Windows.Forms.TextBox textbox_error;
 		private System.Windows.Forms.Button button_zeroencoders;
+		private System.Windows.Forms.GroupBox groupBox5;
+		private System.Windows.Forms.Label label16;
+		private System.Windows.Forms.Label label17;
+		private System.Windows.Forms.Label label18;
+		private System.Windows.Forms.Label label19;
+		private System.Windows.Forms.Label status_navdistance;
+		private System.Windows.Forms.Label status_navbearing;
+		private System.Windows.Forms.NumericUpDown number_navdestinationgrid;
+		private System.Windows.Forms.NumericUpDown number_navcurrentgrid;
 	}
 }
 
