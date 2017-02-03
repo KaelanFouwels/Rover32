@@ -69,6 +69,7 @@ namespace Comms
 			status_leds.Text = roverStatus.Instance.leds.ToString();
 			status_position.Text = roverStatus.Instance.position.ToString();
 			status_magnetometer.Text = roverStatus.Instance.magnetometer.ToString();
+			status_gyroscope.Text = roverStatus.Instance.gyroscope.ToString();
 
 			//- Draw values
 			if (roverStatus.Instance.position == sensorStatus.ok)
@@ -97,6 +98,11 @@ namespace Comms
 				reading_magnetX.Text = roverData.Instance.magnetX.ToString();
 				reading_magnetY.Text = roverData.Instance.magnetY.ToString();
 				reading_magnetZ.Text = roverData.Instance.magnetZ.ToString();
+			}
+
+			if (roverStatus.Instance.gyroscope == sensorStatus.ok)
+			{
+				status_currentbearing.Text = roverData.Instance.gyroRadians.ToString();
 			}
 		}
 
@@ -238,6 +244,50 @@ namespace Comms
 		private void button_zeroencoders_Click(object sender, EventArgs e)
 		{
 			rover.Movement.zeroEncoderCount();
+		}
+
+		private void groupBox5_Enter(object sender, EventArgs e)
+		{
+
+		}
+
+		private void label17_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void textBox1_TextChanged_1(object sender, EventArgs e)
+		{
+
+		}
+
+		private void label18_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void label19_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void number_navdestinationgrid_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			if (e.KeyChar != (char)Keys.Enter) return;
+
+			var currentgrid = number_navcurrentgrid.Value;
+			var destinationgrid = number_navcurrentgrid.Value;
+
+			if (currentgrid % 2 != 0 || destinationgrid % 2 != 0)
+			{
+				textbox_error.Text = "Grid references must be 6, or 8, or other even figures.";
+				return;
+			}
+		}
+
+		private void label20_Click(object sender, EventArgs e)
+		{
+
 		}
 	}
 }

@@ -57,6 +57,8 @@
 
 #define speedhyst 100
 
+#define CMDGyroPosition 201
+
 
 
 void initi2Cs(void);
@@ -129,6 +131,8 @@ volatile unsigned char RX1[RXBUFFERsize];
 volatile int RxHead1,RxTail1;
 volatile unsigned char RX2[RXBUFFERsize];
 volatile int RxHead2,RxTail2;
+
+INT16 gyroRotationRadians = 0;
 
 
 void startmyINTs(void)
@@ -1061,6 +1065,20 @@ void processcommand(void)		// the main routine which processes commands
                   
 			 }
 			break;
+
+        case CMDGyroPosition:
+            if (commandlen == 0) {
+
+                if (gyroRotationRadians == 0) {
+                    POSTTCPhead(0, CMDGyroPosition);
+                    break;
+                }
+
+                POSTTCPhead(2, CMDGyroPosition);
+                POSTTCPchar((char) gyroRotationRadians >> 8);
+                POSTTCPchar((char) gyroRotationRadians);
+            }
+            break;
   }
 }
 
