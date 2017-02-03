@@ -49,5 +49,8 @@ namespace rover_core.models
 		public short accellX { get; internal set; } = 0;
 		public short accellY { get; internal set; } = 0;
 		public short accellZ { get; internal set; } = 0;
+		public short gyro1 { get; internal set; } = 0;
+		public short gyro2 { get; internal set; } = 0;
+		public short gyro3 { get; internal set; } = 0;
 	}
 }

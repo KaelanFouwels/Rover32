@@ -17,6 +17,7 @@ namespace CommsLib
 		SetLeftMotorSpeed = 0x05,
 		SetRightMotorSpeed = 0x06,
 		SetMotorsSpeed = 0x07,
+		SetMotorSpeedClosed = 0x38,
 		LineFollowingData = 0x08,
 		SetLineThresholds = 0x09,
 		GetLightAuxValue = 0x11,
@@ -39,7 +40,8 @@ namespace CommsLib
 		MagDATABufferPacketY = 0x8A,
 		MagDATABufferPacketZ = 0x8B,
 		DRIVE_MAX_SPEED = 0xC8,
-		CMDGyroPosition = 201
+		CMDGyroPosition = 201,
+		CMDRotateRadians = 202
 
 	};
 }

@@ -70,6 +70,7 @@ namespace Comms
 			status_position.Text = roverStatus.Instance.position.ToString();
 			status_magnetometer.Text = roverStatus.Instance.magnetometer.ToString();
 			status_gyroscope.Text = roverStatus.Instance.gyroscope.ToString();
+			status_gyroscope.Text = roverStatus.Instance.gyroscope.ToString();
 
 			//- Draw values
 			if (roverStatus.Instance.position == sensorStatus.ok)
@@ -103,6 +104,9 @@ namespace Comms
 			if (roverStatus.Instance.gyroscope == sensorStatus.ok)
 			{
 				status_currentbearing.Text = roverData.Instance.gyroRadians.ToString();
+				reading_gyro1.Text = roverData.Instance.gyro1.ToString();
+				reading_gyro2.Text = roverData.Instance.gyro2.ToString();
+				reading_gyro3.Text = roverData.Instance.gyro3.ToString();
 			}
 		}
 
@@ -213,7 +217,7 @@ namespace Comms
 			}
 
 			string value = motorSpeedOverride.Text;
-			if (value.Length > 8 || value.Length % 2 != 0)
+			if (value.Length % 2 != 0)
 			{
 				textbox_error.Text = "Both input side numbers must be same length (including sign character)";
 				return;
@@ -232,13 +236,13 @@ namespace Comms
 				textbox_error.Text = "Failed, not a number.";
 				return;
 			}
-			if (speedLeft > 127 || speedRight < -128 || speedRight > 127 || speedRight < -128)
+			if (speedLeft > 32767 || speedRight < -32768 || speedRight > 32767 || speedRight < -32768)
 			{
-				textbox_error.Text = "Failed, values must be between 127 and -128.";
+				textbox_error.Text = "Failed, values must be between 32767 and -32768.";
 				return;
 			}
 
-			rover.Movement.setSpeed(Convert.ToSByte(speedLeft), Convert.ToSByte(speedRight));
+			rover.Movement.setSpeed(Convert.ToInt16(speedLeft), Convert.ToInt16(speedRight));
 		}
 
 		private void button_zeroencoders_Click(object sender, EventArgs e)
@@ -286,6 +290,36 @@ namespace Comms
 		}
 
 		private void label20_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void label15_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void label22_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void label23_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void textBox1_TextChanged(object sender, EventArgs e)
+		{
+
+		}
+
+		private void textBox3_TextChanged(object sender, EventArgs e)
+		{
+
+		}
+
+		private void textBox2_TextChanged(object sender, EventArgs e)
 		{
 
 		}

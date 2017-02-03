@@ -60,6 +60,8 @@
 			this.label11 = new System.Windows.Forms.Label();
 			this.reading_pitch = new System.Windows.Forms.TextBox();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
+			this.label21 = new System.Windows.Forms.Label();
+			this.status_gyroscope = new System.Windows.Forms.Label();
 			this.label12 = new System.Windows.Forms.Label();
 			this.status_magnetometer = new System.Windows.Forms.Label();
 			this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -85,8 +87,12 @@
 			this.label19 = new System.Windows.Forms.Label();
 			this.label17 = new System.Windows.Forms.Label();
 			this.label16 = new System.Windows.Forms.Label();
-			this.label21 = new System.Windows.Forms.Label();
-			this.status_gyroscope = new System.Windows.Forms.Label();
+			this.reading_gyro2 = new System.Windows.Forms.TextBox();
+			this.reading_gyro1 = new System.Windows.Forms.TextBox();
+			this.reading_gyro3 = new System.Windows.Forms.TextBox();
+			this.label15 = new System.Windows.Forms.Label();
+			this.label22 = new System.Windows.Forms.Label();
+			this.label23 = new System.Windows.Forms.Label();
 			this.groupBox1.SuspendLayout();
 			this.groupBox3.SuspendLayout();
 			this.groupBox4.SuspendLayout();
@@ -143,7 +149,7 @@
 			// lblRedStatus
 			// 
 			this.lblRedStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.lblRedStatus.Location = new System.Drawing.Point(183, 478);
+			this.lblRedStatus.Location = new System.Drawing.Point(183, 638);
 			this.lblRedStatus.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
 			this.lblRedStatus.Name = "lblRedStatus";
 			this.lblRedStatus.Size = new System.Drawing.Size(198, 33);
@@ -154,7 +160,7 @@
 			// lblGreenStatus
 			// 
 			this.lblGreenStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.lblGreenStatus.Location = new System.Drawing.Point(183, 424);
+			this.lblGreenStatus.Location = new System.Drawing.Point(183, 584);
 			this.lblGreenStatus.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
 			this.lblGreenStatus.Name = "lblGreenStatus";
 			this.lblGreenStatus.Size = new System.Drawing.Size(198, 33);
@@ -416,6 +422,24 @@
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "Status";
 			// 
+			// label21
+			// 
+			this.label21.AutoSize = true;
+			this.label21.Location = new System.Drawing.Point(353, 37);
+			this.label21.Name = "label21";
+			this.label21.Size = new System.Drawing.Size(116, 25);
+			this.label21.TabIndex = 22;
+			this.label21.Text = "Gyroscope";
+			// 
+			// status_gyroscope
+			// 
+			this.status_gyroscope.AutoSize = true;
+			this.status_gyroscope.Location = new System.Drawing.Point(534, 34);
+			this.status_gyroscope.Name = "status_gyroscope";
+			this.status_gyroscope.Size = new System.Drawing.Size(19, 25);
+			this.status_gyroscope.TabIndex = 21;
+			this.status_gyroscope.Text = "-";
+			// 
 			// label12
 			// 
 			this.label12.AutoSize = true;
@@ -436,6 +460,12 @@
 			// 
 			// groupBox4
 			// 
+			this.groupBox4.Controls.Add(this.reading_gyro2);
+			this.groupBox4.Controls.Add(this.reading_gyro1);
+			this.groupBox4.Controls.Add(this.reading_gyro3);
+			this.groupBox4.Controls.Add(this.label15);
+			this.groupBox4.Controls.Add(this.label22);
+			this.groupBox4.Controls.Add(this.label23);
 			this.groupBox4.Controls.Add(this.lblRedStatus);
 			this.groupBox4.Controls.Add(this.reading_magnetY);
 			this.groupBox4.Controls.Add(this.lblGreenStatus);
@@ -460,7 +490,7 @@
 			this.groupBox4.Controls.Add(this.label2);
 			this.groupBox4.Location = new System.Drawing.Point(24, 286);
 			this.groupBox4.Name = "groupBox4";
-			this.groupBox4.Size = new System.Drawing.Size(678, 598);
+			this.groupBox4.Size = new System.Drawing.Size(678, 712);
 			this.groupBox4.TabIndex = 24;
 			this.groupBox4.TabStop = false;
 			this.groupBox4.Text = "Readings";
@@ -684,23 +714,65 @@
 			this.label16.TabIndex = 1;
 			this.label16.Text = "Current Grid";
 			// 
-			// label21
+			// reading_gyro2
 			// 
-			this.label21.AutoSize = true;
-			this.label21.Location = new System.Drawing.Point(353, 37);
-			this.label21.Name = "label21";
-			this.label21.Size = new System.Drawing.Size(116, 25);
-			this.label21.TabIndex = 22;
-			this.label21.Text = "Gyroscope";
+			this.reading_gyro2.Location = new System.Drawing.Point(183, 467);
+			this.reading_gyro2.Margin = new System.Windows.Forms.Padding(6);
+			this.reading_gyro2.Name = "reading_gyro2";
+			this.reading_gyro2.Size = new System.Drawing.Size(196, 31);
+			this.reading_gyro2.TabIndex = 33;
+			this.reading_gyro2.Text = "-";
+			this.reading_gyro2.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
 			// 
-			// status_gyroscope
+			// reading_gyro1
 			// 
-			this.status_gyroscope.AutoSize = true;
-			this.status_gyroscope.Location = new System.Drawing.Point(534, 34);
-			this.status_gyroscope.Name = "status_gyroscope";
-			this.status_gyroscope.Size = new System.Drawing.Size(19, 25);
-			this.status_gyroscope.TabIndex = 21;
-			this.status_gyroscope.Text = "-";
+			this.reading_gyro1.Location = new System.Drawing.Point(183, 417);
+			this.reading_gyro1.Margin = new System.Windows.Forms.Padding(6);
+			this.reading_gyro1.Name = "reading_gyro1";
+			this.reading_gyro1.Size = new System.Drawing.Size(196, 31);
+			this.reading_gyro1.TabIndex = 32;
+			this.reading_gyro1.Text = "-";
+			this.reading_gyro1.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+			// 
+			// reading_gyro3
+			// 
+			this.reading_gyro3.Location = new System.Drawing.Point(183, 517);
+			this.reading_gyro3.Margin = new System.Windows.Forms.Padding(6);
+			this.reading_gyro3.Name = "reading_gyro3";
+			this.reading_gyro3.Size = new System.Drawing.Size(196, 31);
+			this.reading_gyro3.TabIndex = 34;
+			this.reading_gyro3.Text = "-";
+			this.reading_gyro3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+			// 
+			// label15
+			// 
+			this.label15.AutoSize = true;
+			this.label15.Location = new System.Drawing.Point(9, 420);
+			this.label15.Name = "label15";
+			this.label15.Size = new System.Drawing.Size(70, 25);
+			this.label15.TabIndex = 35;
+			this.label15.Text = "Gyro1";
+			this.label15.Click += new System.EventHandler(this.label15_Click);
+			// 
+			// label22
+			// 
+			this.label22.AutoSize = true;
+			this.label22.Location = new System.Drawing.Point(9, 517);
+			this.label22.Name = "label22";
+			this.label22.Size = new System.Drawing.Size(70, 25);
+			this.label22.TabIndex = 36;
+			this.label22.Text = "Gyro3";
+			this.label22.Click += new System.EventHandler(this.label22_Click);
+			// 
+			// label23
+			// 
+			this.label23.AutoSize = true;
+			this.label23.Location = new System.Drawing.Point(9, 467);
+			this.label23.Name = "label23";
+			this.label23.Size = new System.Drawing.Size(70, 25);
+			this.label23.TabIndex = 37;
+			this.label23.Text = "Gyro2";
+			this.label23.Click += new System.EventHandler(this.label23_Click);
 			// 
 			// Form1
 			// 
@@ -800,6 +872,12 @@
 		private System.Windows.Forms.Label status_currentbearing;
 		private System.Windows.Forms.Label label21;
 		private System.Windows.Forms.Label status_gyroscope;
+		private System.Windows.Forms.TextBox reading_gyro2;
+		private System.Windows.Forms.TextBox reading_gyro1;
+		private System.Windows.Forms.TextBox reading_gyro3;
+		private System.Windows.Forms.Label label15;
+		private System.Windows.Forms.Label label22;
+		private System.Windows.Forms.Label label23;
 	}
 }
 
