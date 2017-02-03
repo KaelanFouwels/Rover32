@@ -17,6 +17,7 @@ namespace rover_core.models
 		public sensorStatus position { get; internal set; } = sensorStatus.waiting;
 		public sensorStatus leds { get; internal set; } = sensorStatus.waiting;
 		public sensorStatus magnetometer { get; internal set; } = sensorStatus.waiting;
+		public sensorStatus gyroscope { get; internal set; } = sensorStatus.waiting;
 		public connectionStatus connection { get; internal set; } = connectionStatus.disconnected;
 	}
 
@@ -24,6 +25,7 @@ namespace rover_core.models
 	{
 		waiting = 0,
 		ok = 1,
+		novalue = 2
 	}
 	public enum connectionStatus
 	{
