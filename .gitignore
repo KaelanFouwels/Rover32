@@ -290,3 +290,5 @@ paket-files/
 *.o
 
 *.d
+
+Embedded/WIFIROVER2016Gx/WIFIROVER2016G/TCPIP/demo/WiFiRover2016G.X/nbproject/Makefile-genesis.properties

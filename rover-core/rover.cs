@@ -32,7 +32,7 @@ namespace rover_core
 			myClient.OnMessageReceived += new ClientBase.ClientMessageReceivedEvent(myClient_OnMessageReceived);
 
 			myRequestTimer = new Timer();
-			myRequestTimer.Interval = 50; //every half a second
+			myRequestTimer.Interval = 100; //every x ms
 			myRequestTimer.Elapsed += new ElapsedEventHandler(myRequestTimer_Tick);
 			myRequestTimer.Start();
 		}
@@ -74,7 +74,7 @@ namespace rover_core
 			myClient.SendData(CommandID.MotorPosition);
 			myClient.SendData(CommandID.GetAccelValue);
 			myClient.SendData(CommandID.GetMagnetValue);
-			myClient.SendData(CommandID.GetGyroValue);
+			myClient.SendData(CommandID.CMDGyroPosition);
 		}
 
 		void myClient_OnMessageReceived(Client_Message_EventArgs e)
@@ -124,6 +124,10 @@ namespace rover_core
 
 					roverStatus.Instance.accelerometer = sensorStatus.ok;
 				}
+				else
+				{
+					roverStatus.Instance.accelerometer = sensorStatus.novalue;
+				}
 			}
 
 			if (e.RawMessage[3] == (byte)CommandID.GetMagnetValue)
@@ -136,6 +140,24 @@ namespace rover_core
 					roverData.Instance.magnetZ = (short)((uint)e.RawMessage[9] | ((uint)e.RawMessage[8] << 8));
 
 					roverStatus.Instance.magnetometer = sensorStatus.ok;
+				}
+				else
+				{
+					roverStatus.Instance.magnetometer = sensorStatus.novalue;
+				}
+			}
+
+			if (e.RawMessage[3] == (byte)CommandID.CMDGyroPosition)
+			{
+				short messageLength = (short)(e.RawMessage[1]);
+				if (messageLength == 4)
+				{
+					roverData.Instance.gyroRadians = (short)((uint)e.RawMessage[5] | ((uint)e.RawMessage[4] << 8));
+					roverStatus.Instance.gyroscope = sensorStatus.ok;
+				}
+				else
+				{
+					roverStatus.Instance.gyroscope = sensorStatus.novalue;
 				}
 			}
 		}
