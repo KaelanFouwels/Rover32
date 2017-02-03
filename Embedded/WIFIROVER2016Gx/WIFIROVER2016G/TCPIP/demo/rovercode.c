@@ -274,11 +274,12 @@ CLflag=0;
 
 
 
+
 volatile unsigned char setLineLed=0;
 
 void __attribute((interrupt(ipl3), vector(_ADC_VECTOR), nomips16)) _ADCInterrupt(void)
 {
-  int v;	
+  int v;
 MotorPWMcount++;
 if (MotorPWMcount>(511+(8*16))) 
 	{
@@ -528,6 +529,8 @@ void __attribute((interrupt(ipl4), vector(_INPUT_CAPTURE_4_VECTOR), nomips16)) _
 IFS0bits.IC4IF=0;
 }
 
+
+
 #define comsdatasize 1024
 char comsdata[comsdatasize];
 unsigned int comsdatahead=0;
@@ -594,9 +597,9 @@ I2send(0x39);
 										I2S();I2send(0xd2);I2send(0x0f);I2SR();I2send(0xd3);			  res=I2GET(0);			  I2P();
 										I2S();
 I2send(0xd2);
-I2send(0x20|0x80);
+I2send(0x20|0x80); //Enable Auto Register address increment.
 I2send(0x3f);  // 100 sps 25hz cutoff
-I2send(0x06); //HP 0.1Hz
+I2send(0x06);  `//HP 0.1Hz
 I2send(0x00);
 I2send(0x11);  // 500 degrees/S full scale  
 I2send(0x10);  // HP enable
@@ -1115,7 +1118,26 @@ void ProcessIO(void)
    }
 
  }
-
+              
+  //if should integrate
+              //take most recent samples from LOCAL copy
+              // do the integral
+              
+              
+  if (_T5IF)
+  {
+    _T5IF=0;
+    
+    //read how many samples (tuples) are in the fifo
+    //then read from FIFO location 2*samples bytes
+    
+    //set process flag
+      
+  }
+  
+              
+              
+              
 }
 
 
