@@ -41,7 +41,8 @@ namespace CommsLib
 		MagDATABufferPacketZ = 0x8B,
 		DRIVE_MAX_SPEED = 0xC8,
 		CMDGyroPosition = 201,
-		CMDRotateRadians = 202
-
+		CMDRotateRadians = 202,
+		CMDGetIsMovingForward = 203,
+		CMDMoveForward = 204,
 	};
 }

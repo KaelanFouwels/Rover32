@@ -60,6 +60,9 @@
 #define CMDGyroPosition 201
 #define CMDRotateRadians 202
 
+#define CMDGetIsMovingForward 203
+#define CMDMoveForward 204
+
 
 
 void initi2Cs(void);
@@ -127,12 +130,16 @@ INT16 McmdR = 0;
 volatile int MotorPWMcount = 0;
 volatile int MotorleftV = 0;
 volatile int MotorrightV = 0;
+volatile int ForwardDistanceRemaining = 0;
 
 #define RXBUFFERsize 256
 volatile unsigned char RX1[RXBUFFERsize];
 volatile int RxHead1, RxTail1;
 volatile unsigned char RX2[RXBUFFERsize];
 volatile int RxHead2, RxTail2;
+
+volatile int pos1Zero = 0;
+volatile int pos2Zero = 0;
 
 INT16 gyroRotationRadians = 0;
 
@@ -580,12 +587,12 @@ void initi2Cs(void) // called once when rover starts
     I2send(0x2a);
     I2send(0x20);
     I2send(0x2);
-    I2P(); //50Hz nonactive 
+    I2P(); //50Hz nonactive
     I2S();
     I2send(0x38);
     I2send(0x2a);
     I2send(0x21);
-    I2P(); //50Hz active  
+    I2P(); //50Hz active
 
     //setup gyro L3G4200D
     I2S();
@@ -601,11 +608,11 @@ void initi2Cs(void) // called once when rover starts
     I2send(0x3f); // 100 sps 25hz cutoff
     I2send(0x06); //HP 0.1Hz
     I2send(0x00);
-    I2send(0x11); // 500 degrees/S full scale  
+    I2send(0x11); // 500 degrees/S full scale
     I2send(0x10); // HP enable
     I2P();
 
-    //setup mag MAG3110FCR1 
+    //setup mag MAG3110FCR1
     I2S();
     I2send(0x1c);
     I2send(0x7);
@@ -633,7 +640,7 @@ void initi2Cs(void) // called once when rover starts
     }
 }
 
-void setspeed(int newspeed1, int newspeed2) // routine sets speed of motors 
+void setspeed(int newspeed1, int newspeed2) // routine sets speed of motors
 // only alters motors if speed has changed
 {
     if (newspeed1 != speed1) {
@@ -1201,7 +1208,42 @@ void processcommand(void) // the main routine which processes commands
                 POSTTCPchar((char) gyroRotationRadians);
             }
             break;
+
+        case CMDMoveForward:
+            if (commandlen == 2) {
+                i = (char) (nextcommand[1]);
+                i = (i << 8) | nextcommand[2];
+                ForwardDistanceRemaining = i;
+                pos1Zero = pos1;
+                pos2Zero = pos2;
+            }
+            break;
+
+        case CMDGetIsMovingForward:
+            POSTTCPhead(1, CMDGetIsMovingForward);
+            if (ForwardDistanceRemaining == -1 || ForwardDistanceRemaining == 0) {
+                POSTTCPchar((char) 0);
+            } else {
+                POSTTCPchar((char) 1);
+            }
+            break;
     }
+}
+
+void moveForward(void) {
+
+    int p = 0.1;
+
+    int speedL = 1010;
+    int speedR = 1000;
+
+    int errL = (pos2 - pos2Zero) - (pos1 - pos1Zero);
+    int errR = (pos1 - pos1Zero) - (pos2 - pos2Zero);
+
+    speedL = speedL + errL * p;
+    speedR = speedR + errR * p;
+
+    setspeed(speedL, speedR);
 }
 
 //Process packets
@@ -1215,6 +1257,12 @@ void ProcessIO(void) {
     //if ((TickGet()-lasticB)>(TICK_SECOND/10))
     //  if (PeriodB<0x2000000) PeriodB*=2;
     if (CLflag) doclosedloop();
+
+    if (ForwardDistanceRemaining - ((pos2 - pos2Zero) + (pos1 - pos1Zero)) / 2 <= 0) {
+        setspeed(0, 0);
+    } else {
+        moveForward();
+    }
     if (yescomsdata()) {
         if (commandstate < 0) {
             if ((unsigned char) getcomsdata() == 0xff) {
@@ -1244,7 +1292,6 @@ void ProcessIO(void) {
         }
 
     }
-
 }
 
 void uartsetup(void) {
@@ -1332,7 +1379,7 @@ void __attribute((interrupt(ipl2), vector(_UART_2_VECTOR), nomips16)) _U2Interru
     static void InitializeBoard(void)
 
   Description:
-    This routine initializes the hardware.  
+    This routine initializes the hardware.
   Precondition:
     None
 
@@ -1376,9 +1423,9 @@ void InitializeBoard(void) {
     mOSCSetPBDIV(OSC_PB_DIV_1); // Use 1:1 CPU Core:Peripheral clocks
 
     // Disable JTAG port so we get our I/O pins back, but first
-    // wait 50ms so if you want to reprogram the part with 
+    // wait 50ms so if you want to reprogram the part with
     // JTAG, you'll still have a tiny window before JTAG goes away.
-    // The PIC32 Starter Kit debuggers use JTAG and therefore must not 
+    // The PIC32 Starter Kit debuggers use JTAG and therefore must not
     // disable JTAG.
     DelayMs(50);
 #if !defined(__MPLAB_DEBUGGER_PIC32MXSK) && !defined(__MPLAB_DEBUGGER_FS2)
@@ -1399,9 +1446,9 @@ void InitializeBoard(void) {
     AD1CON1 = 0x8444; // Turn on, auto sample start, convert on t3,
 
 
-    // Deassert all chip select lines so there isn't any problem with 
-    // initialization order.  Ex: When ENC28J60 is on SPI2 with Explorer 16, 
-    // MAX3232 ROUT2 pin will drive RF12/U2CTS ENC28J60 CS line asserted, 
+    // Deassert all chip select lines so there isn't any problem with
+    // initialization order.  Ex: When ENC28J60 is on SPI2 with Explorer 16,
+    // MAX3232 ROUT2 pin will drive RF12/U2CTS ENC28J60 CS line asserted,
     // preventing proper 25LC256 EEPROM operation.
 #if defined(WF_CS_TRIS)
     WF_CS_IO = 1;

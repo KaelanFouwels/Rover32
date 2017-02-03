@@ -76,6 +76,7 @@ namespace rover_core
 			myClient.SendData(CommandID.GetMagnetValue);
 			myClient.SendData(CommandID.CMDGyroPosition);
 			myClient.SendData(CommandID.GetGyroValue);
+			myClient.SendData(CommandID.CMDGetIsMovingForward);
 		}
 
 		void myClient_OnMessageReceived(Client_Message_EventArgs e)
@@ -176,6 +177,19 @@ namespace rover_core
 				else
 				{
 					roverStatus.Instance.gyroscopeBearing = sensorStatus.novalue;
+				}
+			}
+
+			if (e.RawMessage[3] == (byte)CommandID.CMDGetIsMovingForward)
+			{
+				short messageLength = (short)(e.RawMessage[1]);
+				if (messageLength == 3)
+				{
+					roverStatus.Instance.isMoving = (short)((uint)e.RawMessage[4]) == 1 ? movementStatus.moving : movementStatus.moving;
+				}
+				else
+				{
+					roverStatus.Instance.isMoving = movementStatus.novalue;
 				}
 			}
 		}

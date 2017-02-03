@@ -140,36 +140,36 @@ namespace Comms
 
 		private void Form1_KeyDown(object sender, KeyEventArgs e)
 		{
-			//switch (e.KeyCode)
-			//{
-			//	case Keys.Up:
-			//		robotIsMoving = true;
-			//		rover.Movement.moveUp();
-			//		e.Handled = true;
-			//		break;
+			switch (e.KeyCode)
+			{
+				case Keys.Up:
+					robotIsMoving = true;
+					rover.Movement.moveUp();
+					e.Handled = true;
+					break;
 
-			//	case Keys.Down:
-			//		robotIsMoving = true;
-			//		rover.Movement.moveDown();
-			//		e.Handled = true;
-			//		break;
+				case Keys.Down:
+					robotIsMoving = true;
+					rover.Movement.moveDown();
+					e.Handled = true;
+					break;
 
-			//	case Keys.Left:
-			//		robotIsMoving = true;
-			//		rover.Movement.moveLeft();
-			//		e.Handled = true;
-			//		break;
-			//	case Keys.Right:
-			//		robotIsMoving = true;
-			//		rover.Movement.moveRight();
-			//		e.Handled = true;
-			//		break;
+				case Keys.Left:
+					robotIsMoving = true;
+					rover.Movement.moveLeft();
+					e.Handled = true;
+					break;
+				case Keys.Right:
+					robotIsMoving = true;
+					rover.Movement.moveRight();
+					e.Handled = true;
+					break;
 
-			//	default:
-			//		e.Handled = false;
-			//		break;
+				default:
+					e.Handled = false;
+					break;
 
-			//}
+			}
 		}
 
 		private void Form1_KeyUp(object sender, KeyEventArgs e)
@@ -322,6 +322,21 @@ namespace Comms
 		private void textBox2_TextChanged(object sender, EventArgs e)
 		{
 
+		}
+
+		private void motorDistanceOverride_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			if (e.KeyChar != (char)Keys.Enter) return;
+
+			Int16 distance = 0;
+			try{
+				distance = Convert.ToInt16(motorDistanceOverride.Text);
+			}
+			catch{
+				textbox_error.Text = "Error, distance must be below 2^16";
+				return;
+			}
+			rover.Movement.moveForward(distance);
 		}
 	}
 }

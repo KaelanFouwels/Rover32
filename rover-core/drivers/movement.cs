@@ -55,6 +55,15 @@ namespace rover_core.drivers
 			_tcpClient.SendData(CommandID.SetMotorSpeedClosed, payload);
 		}
 
+		public void moveForward(Int16 distance)
+		{
+			byte[] payload = new byte[2] {
+				(byte)(distance >> 8),
+				(byte)(distance)
+			};
+			_tcpClient.SendData(CommandID.CMDMoveForward, payload);
+		}
+
 		public void zeroEncoderCount()
 		{
 			roverData.Instance.rawencoderRightOffset = roverData.Instance.rawencoderRight;
