@@ -180,11 +180,7 @@
   </logicalFolder>
   <sourceRootList>
     <Elem>..</Elem>
-    <Elem>../../../Microchip/TCPIP Stack</Elem>
-    <Elem>../../../Microchip/Include/TCPIP Stack</Elem>
-    <Elem>../../../Microchip/Include</Elem>
     <Elem>../../../Microchip/TCPIP Stack/WiFi</Elem>
-    <Elem>../Configs</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -196,7 +192,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>ICD3PlatformTool</platformTool>
         <languageToolchain>XC32</languageToolchain>
-        <languageToolchainVersion>1.32</languageToolchainVersion>
+        <languageToolchainVersion>1.31</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <compileType>
@@ -211,8 +207,6 @@
           <parseOnProdLoad>true</parseOnProdLoad>
           <alternateLoadableFile></alternateLoadableFile>
         </loading>
-        <subordinates>
-        </subordinates>
       </compileType>
       <makeCustomizationType>
         <makeCustomizationPreStepEnabled>false</makeCustomizationPreStepEnabled>

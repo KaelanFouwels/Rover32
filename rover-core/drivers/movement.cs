@@ -43,9 +43,25 @@ namespace rover_core.drivers
 			_tcpClient.SendData(CommandID.SetMotorsSpeed, new byte[] { 0, 0 });
 		}
 
-		public async void setSpeed(sbyte left, sbyte right)
+		public void setSpeed(Int16 left, Int16 right)
 		{
-			await Task.Run(() => _tcpClient.SendData(CommandID.SetMotorsSpeed, new byte[] { (byte)left, (byte)right}));
+			byte[] payload = new byte[5] {
+				(byte)(left >> 8),
+				(byte)(left),
+				(byte)(right >> 8),
+				(byte)(right),
+				(byte)1
+			};
+			_tcpClient.SendData(CommandID.SetMotorSpeedClosed, payload);
+		}
+
+		public void moveForward(Int16 distance)
+		{
+			byte[] payload = new byte[2] {
+				(byte)(distance >> 8),
+				(byte)(distance)
+			};
+			_tcpClient.SendData(CommandID.CMDMoveForward, payload);
 		}
 
 		public void zeroEncoderCount()
