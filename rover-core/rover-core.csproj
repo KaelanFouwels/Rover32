@@ -69,6 +69,9 @@
     <Compile Include="drivers\driver.cs" />
     <Compile Include="drivers\leds.cs" />
     <Compile Include="drivers\movement.cs" />
+    <Compile Include="drivers\Servo.cs" />
+    <Compile Include="routines\CalibrateMagnetometer.cs" />
+    <Compile Include="routines\MoveDegrees.cs" />
     <Compile Include="rover.cs" />
     <Compile Include="models\roverData.cs" />
     <Compile Include="models\roverStatus.cs" />

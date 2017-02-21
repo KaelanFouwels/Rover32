@@ -17,6 +17,7 @@ namespace rover_core
 		public drivers.Leds Leds { get; private set; }
 		public drivers.Movement Movement { get; private set; }
 		public sensors.Accelerometer Accelerometer { get; private set; }
+		public drivers.Servo Servo { get; private set; }
 
 		public Rover()
 		{
@@ -25,10 +26,14 @@ namespace rover_core
 			//Drivers
 			Leds = new drivers.Leds(myClient);
 			Movement = new drivers.Movement(myClient);
+			Servo = new drivers.Servo(myClient);
+
+			//Start with servos off
+			Servo.power1(false);
+			Servo.power2(false);
 
 			//Sensors
 			Accelerometer = new sensors.Accelerometer();
-			
 			myClient.OnMessageReceived += new ClientBase.ClientMessageReceivedEvent(myClient_OnMessageReceived);
 
 			myRequestTimer = new Timer();

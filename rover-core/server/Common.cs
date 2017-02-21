@@ -44,5 +44,8 @@ namespace CommsLib
 		CMDRotateRadians = 202,
 		CMDGetIsMovingForward = 203,
 		CMDMoveForward = 204,
+		SetServoPower = 21,
+		SetServo1 = 22,
+		SetServo2 = 23,
 	};
 }
