@@ -10,6 +10,7 @@ using rover_core.models;
 using rover_core.sensors;
 using rover_core.drivers;
 using rover_core;
+using rover_core.routines;
 
 namespace Comms
 {
@@ -71,6 +72,9 @@ namespace Comms
 			status_magnetometer.Text = roverStatus.Instance.magnetometer.ToString();
 			status_gyroscope.Text = roverStatus.Instance.gyroscope.ToString();
 			status_gyroscope.Text = roverStatus.Instance.gyroscope.ToString();
+			status_magcalibration.Text = roverStatus.Instance.magnetometerCalibration.ToString();
+			status_servo1.Text = roverStatus.Instance.servo1.ToString();
+			status_servo2.Text = roverStatus.Instance.servo2.ToString();
 
 			//- Draw values
 			if (roverStatus.Instance.position == sensorStatus.ok)
@@ -99,6 +103,11 @@ namespace Comms
 				reading_magnetX.Text = roverData.Instance.magnetX.ToString();
 				reading_magnetY.Text = roverData.Instance.magnetY.ToString();
 				reading_magnetZ.Text = roverData.Instance.magnetZ.ToString();
+
+				if (roverStatus.Instance.magnetometerCalibration == calibrationStatus.calibrated)
+				{
+					status_currentbearing.Text = Magnetometer.getAngle().ToString();
+				}
 			}
 
 			if (roverStatus.Instance.gyroscope == sensorStatus.ok)
@@ -337,6 +346,75 @@ namespace Comms
 				return;
 			}
 			rover.Movement.moveForward(distance);
+		}
+
+		private void servo1Override_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			if (e.KeyChar != (char)Keys.Enter) return;
+
+			Byte position;
+			try
+			{
+				position = Convert.ToByte(servo1Override.Text);
+			}
+			catch
+			{
+				textbox_error.Text = "Error, position must be below 255";
+				return;
+			}
+			rover.Servo.set1(position);
+
+		}
+
+		private void servo2Override_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			if (e.KeyChar != (char)Keys.Enter) return;
+
+			Byte position;
+			try
+			{
+				position = Convert.ToByte(servo2Override.Text);
+			}
+			catch
+			{
+				textbox_error.Text = "Error, position must be below 255";
+				return;
+			}
+
+			rover.Servo.set2(position);
+		}
+
+		private void servo1PowerButton_Click(object sender, EventArgs e)
+		{
+			rover.Servo.power1(roverStatus.Instance.servo1 == powerStatus.off);
+		}
+
+		private void servo2PowerButton_Click(object sender, EventArgs e)
+		{
+			rover.Servo.power2(roverStatus.Instance.servo2 == powerStatus.off);
+		}
+
+		private void calibrateMagnetometerFast_click(object sender, EventArgs e)
+		{
+			rover_core.routines.CalibrateMagnetometer.Run(rover, 30);
+		}
+
+		private void calibrateMagnetometerSlow_click(object sender, EventArgs e)
+		{
+			rover_core.routines.CalibrateMagnetometer.Run(rover, 10);
+		}
+
+		private void moveDistance_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			if (e.KeyChar != (char)Keys.Enter) return;
+			rover.Movement.moveForward(Convert.ToInt16(moveDistance.Value));
+
+		}
+
+		private void moveRotation_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			if (e.KeyChar != (char)Keys.Enter) return;
+			rover_core.routines.MoveDegrees.Run(rover, Convert.ToDouble(moveDistance.Value));
 		}
 	}
 }

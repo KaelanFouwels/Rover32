@@ -21,6 +21,22 @@ namespace rover_core.models
 		public sensorStatus gyroscopeBearing { get; internal set; } = sensorStatus.waiting;
 		public connectionStatus connection { get; internal set; } = connectionStatus.disconnected;
 		public movementStatus isMoving { get; internal set; } = movementStatus.complete;
+		public powerStatus servo1 { get; internal set; } = powerStatus.off;
+		public powerStatus servo2 { get; internal set; } = powerStatus.off;
+		public calibrationStatus magnetometerCalibration { get; internal set; } = calibrationStatus.uncalibrated;
+	}
+
+	public enum powerStatus
+	{
+		on = 0,
+		off = 1
+	}
+
+	public enum calibrationStatus
+	{
+		calibrated = 0,
+		uncalibrated = 1,
+		stale = 2
 	}
 
 	public enum sensorStatus

@@ -43,6 +43,11 @@ namespace rover_core.drivers
 			_tcpClient.SendData(CommandID.SetMotorsSpeed, new byte[] { 0, 0 });
 		}
 
+		public void setSpeedRaw(byte left, byte right)
+		{
+			_tcpClient.SendData(CommandID.SetMotorsSpeed, new byte[] { Convert.ToByte(left), Convert.ToByte(right)});
+		}
+
 		public void setSpeed(Int16 left, Int16 right)
 		{
 			byte[] payload = new byte[5] {
