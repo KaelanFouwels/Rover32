@@ -99,23 +99,39 @@
 			this.motorSpeedOverride = new System.Windows.Forms.TextBox();
 			this.textbox_error = new System.Windows.Forms.TextBox();
 			this.groupBox5 = new System.Windows.Forms.GroupBox();
-			this.status_currentbearing = new System.Windows.Forms.Label();
+			this.label32 = new System.Windows.Forms.Label();
+			this.label31 = new System.Windows.Forms.Label();
+			this.moveRotation = new System.Windows.Forms.NumericUpDown();
+			this.moveDistance = new System.Windows.Forms.NumericUpDown();
 			this.label20 = new System.Windows.Forms.Label();
 			this.number_navdestinationgrid = new System.Windows.Forms.NumericUpDown();
 			this.number_navcurrentgrid = new System.Windows.Forms.NumericUpDown();
-			this.status_navdistance = new System.Windows.Forms.Label();
 			this.status_navbearing = new System.Windows.Forms.Label();
 			this.label18 = new System.Windows.Forms.Label();
-			this.label19 = new System.Windows.Forms.Label();
 			this.label17 = new System.Windows.Forms.Label();
 			this.label16 = new System.Windows.Forms.Label();
 			this.groupBox6 = new System.Windows.Forms.GroupBox();
 			this.button2 = new System.Windows.Forms.Button();
 			this.button1 = new System.Windows.Forms.Button();
-			this.moveDistance = new System.Windows.Forms.NumericUpDown();
-			this.moveRotation = new System.Windows.Forms.NumericUpDown();
-			this.label31 = new System.Windows.Forms.Label();
-			this.label32 = new System.Windows.Forms.Label();
+			this.status_currentBearing = new System.Windows.Forms.Label();
+			this.status_currentRawBearing = new System.Windows.Forms.Label();
+			this.label34 = new System.Windows.Forms.Label();
+			this.label19 = new System.Windows.Forms.Label();
+			this.label33 = new System.Windows.Forms.Label();
+			this.label35 = new System.Windows.Forms.Label();
+			this.label36 = new System.Windows.Forms.Label();
+			this.magymax = new System.Windows.Forms.Label();
+			this.magymin = new System.Windows.Forms.Label();
+			this.magxmax = new System.Windows.Forms.Label();
+			this.magxmin = new System.Windows.Forms.Label();
+			this.calibratePassive = new System.Windows.Forms.Button();
+			this.label37 = new System.Windows.Forms.Label();
+			this.label38 = new System.Windows.Forms.Label();
+			this.magmin = new System.Windows.Forms.Label();
+			this.magmax = new System.Windows.Forms.Label();
+			this.button3 = new System.Windows.Forms.Button();
+			this.button4 = new System.Windows.Forms.Button();
+			this.button5 = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			this.groupBox3.SuspendLayout();
 			this.groupBox4.SuspendLayout();
@@ -123,11 +139,11 @@
 			((System.ComponentModel.ISupportInitialize)(this.servo2Override)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.servo1Override)).BeginInit();
 			this.groupBox5.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.moveRotation)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.moveDistance)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.number_navdestinationgrid)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.number_navcurrentgrid)).BeginInit();
 			this.groupBox6.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.moveDistance)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.moveRotation)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// groupBox1
@@ -139,7 +155,7 @@
 			this.groupBox1.Margin = new System.Windows.Forms.Padding(6);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Padding = new System.Windows.Forms.Padding(6);
-			this.groupBox1.Size = new System.Drawing.Size(342, 244);
+			this.groupBox1.Size = new System.Drawing.Size(342, 268);
 			this.groupBox1.TabIndex = 0;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Communications";
@@ -430,6 +446,18 @@
 			// 
 			// groupBox3
 			// 
+			this.groupBox3.Controls.Add(this.magmax);
+			this.groupBox3.Controls.Add(this.magmin);
+			this.groupBox3.Controls.Add(this.label38);
+			this.groupBox3.Controls.Add(this.label37);
+			this.groupBox3.Controls.Add(this.magxmin);
+			this.groupBox3.Controls.Add(this.magxmax);
+			this.groupBox3.Controls.Add(this.magymin);
+			this.groupBox3.Controls.Add(this.magymax);
+			this.groupBox3.Controls.Add(this.label36);
+			this.groupBox3.Controls.Add(this.label35);
+			this.groupBox3.Controls.Add(this.label33);
+			this.groupBox3.Controls.Add(this.label19);
 			this.groupBox3.Controls.Add(this.status_magcalibration);
 			this.groupBox3.Controls.Add(this.label30);
 			this.groupBox3.Controls.Add(this.status_servo2);
@@ -453,7 +481,7 @@
 			this.groupBox3.Controls.Add(this.status_leds);
 			this.groupBox3.Location = new System.Drawing.Point(387, 12);
 			this.groupBox3.Name = "groupBox3";
-			this.groupBox3.Size = new System.Drawing.Size(812, 255);
+			this.groupBox3.Size = new System.Drawing.Size(1019, 279);
 			this.groupBox3.TabIndex = 23;
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "Status";
@@ -461,7 +489,7 @@
 			// status_magcalibration
 			// 
 			this.status_magcalibration.AutoSize = true;
-			this.status_magcalibration.Location = new System.Drawing.Point(452, 218);
+			this.status_magcalibration.Location = new System.Drawing.Point(530, 218);
 			this.status_magcalibration.Name = "status_magcalibration";
 			this.status_magcalibration.Size = new System.Drawing.Size(19, 25);
 			this.status_magcalibration.TabIndex = 30;
@@ -470,7 +498,7 @@
 			// label30
 			// 
 			this.label30.AutoSize = true;
-			this.label30.Location = new System.Drawing.Point(271, 215);
+			this.label30.Location = new System.Drawing.Point(349, 215);
 			this.label30.Name = "label30";
 			this.label30.Size = new System.Drawing.Size(163, 25);
 			this.label30.TabIndex = 29;
@@ -479,7 +507,7 @@
 			// status_servo2
 			// 
 			this.status_servo2.AutoSize = true;
-			this.status_servo2.Location = new System.Drawing.Point(452, 174);
+			this.status_servo2.Location = new System.Drawing.Point(530, 174);
 			this.status_servo2.Name = "status_servo2";
 			this.status_servo2.Size = new System.Drawing.Size(19, 25);
 			this.status_servo2.TabIndex = 28;
@@ -488,7 +516,7 @@
 			// status_servo1
 			// 
 			this.status_servo1.AutoSize = true;
-			this.status_servo1.Location = new System.Drawing.Point(452, 126);
+			this.status_servo1.Location = new System.Drawing.Point(530, 126);
 			this.status_servo1.Name = "status_servo1";
 			this.status_servo1.Size = new System.Drawing.Size(19, 25);
 			this.status_servo1.TabIndex = 27;
@@ -497,7 +525,7 @@
 			// label29
 			// 
 			this.label29.AutoSize = true;
-			this.label29.Location = new System.Drawing.Point(272, 174);
+			this.label29.Location = new System.Drawing.Point(350, 174);
 			this.label29.Name = "label29";
 			this.label29.Size = new System.Drawing.Size(80, 25);
 			this.label29.TabIndex = 26;
@@ -506,7 +534,7 @@
 			// Servo1
 			// 
 			this.Servo1.AutoSize = true;
-			this.Servo1.Location = new System.Drawing.Point(272, 126);
+			this.Servo1.Location = new System.Drawing.Point(350, 126);
 			this.Servo1.Name = "Servo1";
 			this.Servo1.Size = new System.Drawing.Size(80, 25);
 			this.Servo1.TabIndex = 25;
@@ -515,7 +543,7 @@
 			// label24
 			// 
 			this.label24.AutoSize = true;
-			this.label24.Location = new System.Drawing.Point(271, 80);
+			this.label24.Location = new System.Drawing.Point(349, 80);
 			this.label24.Name = "label24";
 			this.label24.Size = new System.Drawing.Size(98, 25);
 			this.label24.TabIndex = 24;
@@ -524,7 +552,7 @@
 			// label25
 			// 
 			this.label25.AutoSize = true;
-			this.label25.Location = new System.Drawing.Point(452, 77);
+			this.label25.Location = new System.Drawing.Point(530, 77);
 			this.label25.Name = "label25";
 			this.label25.Size = new System.Drawing.Size(19, 25);
 			this.label25.TabIndex = 23;
@@ -533,7 +561,7 @@
 			// label21
 			// 
 			this.label21.AutoSize = true;
-			this.label21.Location = new System.Drawing.Point(271, 36);
+			this.label21.Location = new System.Drawing.Point(349, 36);
 			this.label21.Name = "label21";
 			this.label21.Size = new System.Drawing.Size(116, 25);
 			this.label21.TabIndex = 22;
@@ -542,7 +570,7 @@
 			// status_gyroscope
 			// 
 			this.status_gyroscope.AutoSize = true;
-			this.status_gyroscope.Location = new System.Drawing.Point(452, 33);
+			this.status_gyroscope.Location = new System.Drawing.Point(530, 33);
 			this.status_gyroscope.Name = "status_gyroscope";
 			this.status_gyroscope.Size = new System.Drawing.Size(19, 25);
 			this.status_gyroscope.TabIndex = 21;
@@ -596,9 +624,9 @@
 			this.groupBox4.Controls.Add(this.label9);
 			this.groupBox4.Controls.Add(this.label10);
 			this.groupBox4.Controls.Add(this.label2);
-			this.groupBox4.Location = new System.Drawing.Point(24, 286);
+			this.groupBox4.Location = new System.Drawing.Point(37, 322);
 			this.groupBox4.Name = "groupBox4";
-			this.groupBox4.Size = new System.Drawing.Size(678, 712);
+			this.groupBox4.Size = new System.Drawing.Size(678, 812);
 			this.groupBox4.TabIndex = 24;
 			this.groupBox4.TabStop = false;
 			this.groupBox4.Text = "Readings";
@@ -732,7 +760,7 @@
 			this.groupBox2.Controls.Add(this.motorSpeedOverride);
 			this.groupBox2.Controls.Add(this.btnToggleGreen);
 			this.groupBox2.Controls.Add(this.btnToggleRed);
-			this.groupBox2.Location = new System.Drawing.Point(721, 286);
+			this.groupBox2.Location = new System.Drawing.Point(733, 312);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(634, 822);
 			this.groupBox2.TabIndex = 25;
@@ -850,6 +878,7 @@
 			this.motorSpeedOverride.Size = new System.Drawing.Size(216, 31);
 			this.motorSpeedOverride.TabIndex = 26;
 			this.motorSpeedOverride.Text = "00000";
+			this.motorSpeedOverride.TextChanged += new System.EventHandler(this.motorSpeedOverride_TextChanged);
 			this.motorSpeedOverride.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.motorSpeedOverride_KeyPress);
 			// 
 			// textbox_error
@@ -857,7 +886,7 @@
 			this.textbox_error.BackColor = System.Drawing.Color.Black;
 			this.textbox_error.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
 			this.textbox_error.ForeColor = System.Drawing.Color.White;
-			this.textbox_error.Location = new System.Drawing.Point(2, 1128);
+			this.textbox_error.Location = new System.Drawing.Point(2, 1164);
 			this.textbox_error.Margin = new System.Windows.Forms.Padding(5);
 			this.textbox_error.Name = "textbox_error";
 			this.textbox_error.Size = new System.Drawing.Size(1404, 44);
@@ -865,36 +894,61 @@
 			// 
 			// groupBox5
 			// 
+			this.groupBox5.Controls.Add(this.status_currentRawBearing);
+			this.groupBox5.Controls.Add(this.label34);
+			this.groupBox5.Controls.Add(this.status_currentBearing);
 			this.groupBox5.Controls.Add(this.label32);
 			this.groupBox5.Controls.Add(this.label31);
 			this.groupBox5.Controls.Add(this.moveRotation);
 			this.groupBox5.Controls.Add(this.moveDistance);
-			this.groupBox5.Controls.Add(this.status_currentbearing);
 			this.groupBox5.Controls.Add(this.label20);
 			this.groupBox5.Controls.Add(this.number_navdestinationgrid);
 			this.groupBox5.Controls.Add(this.number_navcurrentgrid);
-			this.groupBox5.Controls.Add(this.status_navdistance);
 			this.groupBox5.Controls.Add(this.status_navbearing);
 			this.groupBox5.Controls.Add(this.label18);
-			this.groupBox5.Controls.Add(this.label19);
 			this.groupBox5.Controls.Add(this.label17);
 			this.groupBox5.Controls.Add(this.label16);
-			this.groupBox5.Location = new System.Drawing.Point(1373, 286);
+			this.groupBox5.Location = new System.Drawing.Point(1395, 312);
 			this.groupBox5.Name = "groupBox5";
-			this.groupBox5.Size = new System.Drawing.Size(638, 834);
+			this.groupBox5.Size = new System.Drawing.Size(722, 822);
 			this.groupBox5.TabIndex = 27;
 			this.groupBox5.TabStop = false;
 			this.groupBox5.Text = "Navigation";
 			this.groupBox5.Enter += new System.EventHandler(this.groupBox5_Enter);
 			// 
-			// status_currentbearing
+			// label32
 			// 
-			this.status_currentbearing.AutoSize = true;
-			this.status_currentbearing.Location = new System.Drawing.Point(513, 123);
-			this.status_currentbearing.Name = "status_currentbearing";
-			this.status_currentbearing.Size = new System.Drawing.Size(19, 25);
-			this.status_currentbearing.TabIndex = 12;
-			this.status_currentbearing.Text = "-";
+			this.label32.AutoSize = true;
+			this.label32.Location = new System.Drawing.Point(29, 314);
+			this.label32.Name = "label32";
+			this.label32.Size = new System.Drawing.Size(218, 25);
+			this.label32.TabIndex = 16;
+			this.label32.Text = "Do rotation (Degrees)";
+			// 
+			// label31
+			// 
+			this.label31.AutoSize = true;
+			this.label31.Location = new System.Drawing.Point(29, 226);
+			this.label31.Name = "label31";
+			this.label31.Size = new System.Drawing.Size(152, 25);
+			this.label31.TabIndex = 15;
+			this.label31.Text = "Move distance";
+			// 
+			// moveRotation
+			// 
+			this.moveRotation.Location = new System.Drawing.Point(34, 342);
+			this.moveRotation.Name = "moveRotation";
+			this.moveRotation.Size = new System.Drawing.Size(195, 31);
+			this.moveRotation.TabIndex = 14;
+			this.moveRotation.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.moveRotation_KeyPress);
+			// 
+			// moveDistance
+			// 
+			this.moveDistance.Location = new System.Drawing.Point(34, 254);
+			this.moveDistance.Name = "moveDistance";
+			this.moveDistance.Size = new System.Drawing.Size(195, 31);
+			this.moveDistance.TabIndex = 13;
+			this.moveDistance.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.moveDistance_KeyPress);
 			// 
 			// label20
 			// 
@@ -921,15 +975,6 @@
 			this.number_navcurrentgrid.Size = new System.Drawing.Size(197, 31);
 			this.number_navcurrentgrid.TabIndex = 9;
 			// 
-			// status_navdistance
-			// 
-			this.status_navdistance.AutoSize = true;
-			this.status_navdistance.Location = new System.Drawing.Point(513, 167);
-			this.status_navdistance.Name = "status_navdistance";
-			this.status_navdistance.Size = new System.Drawing.Size(19, 25);
-			this.status_navdistance.TabIndex = 8;
-			this.status_navdistance.Text = "-";
-			// 
 			// status_navbearing
 			// 
 			this.status_navbearing.AutoSize = true;
@@ -948,16 +993,6 @@
 			this.label18.TabIndex = 6;
 			this.label18.Text = "Bearing";
 			this.label18.Click += new System.EventHandler(this.label18_Click);
-			// 
-			// label19
-			// 
-			this.label19.AutoSize = true;
-			this.label19.Location = new System.Drawing.Point(293, 165);
-			this.label19.Name = "label19";
-			this.label19.Size = new System.Drawing.Size(96, 25);
-			this.label19.TabIndex = 5;
-			this.label19.Text = "Distance";
-			this.label19.Click += new System.EventHandler(this.label19_Click);
 			// 
 			// label17
 			// 
@@ -980,11 +1015,15 @@
 			// 
 			// groupBox6
 			// 
+			this.groupBox6.Controls.Add(this.button5);
+			this.groupBox6.Controls.Add(this.button4);
+			this.groupBox6.Controls.Add(this.button3);
+			this.groupBox6.Controls.Add(this.calibratePassive);
 			this.groupBox6.Controls.Add(this.button2);
 			this.groupBox6.Controls.Add(this.button1);
-			this.groupBox6.Location = new System.Drawing.Point(1221, 12);
+			this.groupBox6.Location = new System.Drawing.Point(1453, 12);
 			this.groupBox6.Name = "groupBox6";
-			this.groupBox6.Size = new System.Drawing.Size(664, 255);
+			this.groupBox6.Size = new System.Drawing.Size(664, 279);
 			this.groupBox6.TabIndex = 28;
 			this.groupBox6.TabStop = false;
 			this.groupBox6.Text = "Routines";
@@ -1011,45 +1050,190 @@
 			this.button1.UseVisualStyleBackColor = true;
 			this.button1.Click += new System.EventHandler(this.calibrateMagnetometerSlow_click);
 			// 
-			// moveDistance
+			// status_currentBearing
 			// 
-			this.moveDistance.Location = new System.Drawing.Point(34, 293);
-			this.moveDistance.Name = "moveDistance";
-			this.moveDistance.Size = new System.Drawing.Size(195, 31);
-			this.moveDistance.TabIndex = 13;
-			this.moveDistance.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.moveDistance_KeyPress);
+			this.status_currentBearing.AutoSize = true;
+			this.status_currentBearing.Location = new System.Drawing.Point(513, 118);
+			this.status_currentBearing.Name = "status_currentBearing";
+			this.status_currentBearing.Size = new System.Drawing.Size(19, 25);
+			this.status_currentBearing.TabIndex = 17;
+			this.status_currentBearing.Text = "-";
 			// 
-			// moveRotation
+			// status_currentRawBearing
 			// 
-			this.moveRotation.Location = new System.Drawing.Point(34, 354);
-			this.moveRotation.Name = "moveRotation";
-			this.moveRotation.Size = new System.Drawing.Size(195, 31);
-			this.moveRotation.TabIndex = 14;
-			this.moveRotation.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.moveRotation_KeyPress);
+			this.status_currentRawBearing.AutoSize = true;
+			this.status_currentRawBearing.Location = new System.Drawing.Point(513, 167);
+			this.status_currentRawBearing.Name = "status_currentRawBearing";
+			this.status_currentRawBearing.Size = new System.Drawing.Size(19, 25);
+			this.status_currentRawBearing.TabIndex = 19;
+			this.status_currentRawBearing.Text = "-";
 			// 
-			// label31
+			// label34
 			// 
-			this.label31.AutoSize = true;
-			this.label31.Location = new System.Drawing.Point(29, 265);
-			this.label31.Name = "label31";
-			this.label31.Size = new System.Drawing.Size(152, 25);
-			this.label31.TabIndex = 15;
-			this.label31.Text = "Move distance";
+			this.label34.AutoSize = true;
+			this.label34.Location = new System.Drawing.Point(293, 167);
+			this.label34.Name = "label34";
+			this.label34.Size = new System.Drawing.Size(211, 25);
+			this.label34.TabIndex = 18;
+			this.label34.Text = "Current Raw Bearing";
 			// 
-			// label32
+			// label19
 			// 
-			this.label32.AutoSize = true;
-			this.label32.Location = new System.Drawing.Point(29, 326);
-			this.label32.Name = "label32";
-			this.label32.Size = new System.Drawing.Size(218, 25);
-			this.label32.TabIndex = 16;
-			this.label32.Text = "Do rotation (Degrees)";
+			this.label19.AutoSize = true;
+			this.label19.Location = new System.Drawing.Point(705, 36);
+			this.label19.Name = "label19";
+			this.label19.Size = new System.Drawing.Size(121, 25);
+			this.label19.TabIndex = 31;
+			this.label19.Text = "Mag YMAX";
+			// 
+			// label33
+			// 
+			this.label33.AutoSize = true;
+			this.label33.Location = new System.Drawing.Point(705, 69);
+			this.label33.Name = "label33";
+			this.label33.Size = new System.Drawing.Size(113, 25);
+			this.label33.TabIndex = 32;
+			this.label33.Text = "Mag YMIN";
+			// 
+			// label35
+			// 
+			this.label35.AutoSize = true;
+			this.label35.Location = new System.Drawing.Point(705, 145);
+			this.label35.Name = "label35";
+			this.label35.Size = new System.Drawing.Size(112, 25);
+			this.label35.TabIndex = 33;
+			this.label35.Text = "Mag XMIN";
+			// 
+			// label36
+			// 
+			this.label36.AutoSize = true;
+			this.label36.Location = new System.Drawing.Point(703, 106);
+			this.label36.Name = "label36";
+			this.label36.Size = new System.Drawing.Size(120, 25);
+			this.label36.TabIndex = 34;
+			this.label36.Text = "Mag XMAX";
+			// 
+			// magymax
+			// 
+			this.magymax.AutoSize = true;
+			this.magymax.Location = new System.Drawing.Point(879, 36);
+			this.magymax.Name = "magymax";
+			this.magymax.Size = new System.Drawing.Size(19, 25);
+			this.magymax.TabIndex = 35;
+			this.magymax.Text = "-";
+			// 
+			// magymin
+			// 
+			this.magymin.AutoSize = true;
+			this.magymin.Location = new System.Drawing.Point(879, 72);
+			this.magymin.Name = "magymin";
+			this.magymin.Size = new System.Drawing.Size(19, 25);
+			this.magymin.TabIndex = 36;
+			this.magymin.Text = "-";
+			// 
+			// magxmax
+			// 
+			this.magxmax.AutoSize = true;
+			this.magxmax.Location = new System.Drawing.Point(879, 105);
+			this.magxmax.Name = "magxmax";
+			this.magxmax.Size = new System.Drawing.Size(19, 25);
+			this.magxmax.TabIndex = 37;
+			this.magxmax.Text = "-";
+			// 
+			// magxmin
+			// 
+			this.magxmin.AutoSize = true;
+			this.magxmin.Location = new System.Drawing.Point(879, 144);
+			this.magxmin.Name = "magxmin";
+			this.magxmin.Size = new System.Drawing.Size(19, 25);
+			this.magxmin.TabIndex = 38;
+			this.magxmin.Text = "-";
+			// 
+			// calibratePassive
+			// 
+			this.calibratePassive.Location = new System.Drawing.Point(23, 145);
+			this.calibratePassive.Margin = new System.Windows.Forms.Padding(6);
+			this.calibratePassive.Name = "calibratePassive";
+			this.calibratePassive.Size = new System.Drawing.Size(216, 44);
+			this.calibratePassive.TabIndex = 38;
+			this.calibratePassive.Text = "Autocalibrate";
+			this.calibratePassive.UseVisualStyleBackColor = true;
+			this.calibratePassive.Click += new System.EventHandler(this.calibratePassive_Click);
+			// 
+			// label37
+			// 
+			this.label37.AutoSize = true;
+			this.label37.Location = new System.Drawing.Point(705, 182);
+			this.label37.Name = "label37";
+			this.label37.Size = new System.Drawing.Size(98, 25);
+			this.label37.TabIndex = 39;
+			this.label37.Text = "Mag MIN";
+			// 
+			// label38
+			// 
+			this.label38.AutoSize = true;
+			this.label38.Location = new System.Drawing.Point(705, 219);
+			this.label38.Name = "label38";
+			this.label38.Size = new System.Drawing.Size(106, 25);
+			this.label38.TabIndex = 40;
+			this.label38.Text = "Mag MAX";
+			// 
+			// magmin
+			// 
+			this.magmin.AutoSize = true;
+			this.magmin.Location = new System.Drawing.Point(879, 176);
+			this.magmin.Name = "magmin";
+			this.magmin.Size = new System.Drawing.Size(19, 25);
+			this.magmin.TabIndex = 41;
+			this.magmin.Text = "-";
+			// 
+			// magmax
+			// 
+			this.magmax.AutoSize = true;
+			this.magmax.Location = new System.Drawing.Point(879, 219);
+			this.magmax.Name = "magmax";
+			this.magmax.Size = new System.Drawing.Size(19, 25);
+			this.magmax.TabIndex = 42;
+			this.magmax.Text = "-";
+			// 
+			// button3
+			// 
+			this.button3.Location = new System.Drawing.Point(23, 199);
+			this.button3.Margin = new System.Windows.Forms.Padding(6);
+			this.button3.Name = "button3";
+			this.button3.Size = new System.Drawing.Size(216, 44);
+			this.button3.TabIndex = 39;
+			this.button3.Text = "Mark calibrated";
+			this.button3.UseVisualStyleBackColor = true;
+			this.button3.Click += new System.EventHandler(this.button3_Click);
+			// 
+			// button4
+			// 
+			this.button4.Location = new System.Drawing.Point(258, 33);
+			this.button4.Margin = new System.Windows.Forms.Padding(6);
+			this.button4.Name = "button4";
+			this.button4.Size = new System.Drawing.Size(216, 44);
+			this.button4.TabIndex = 40;
+			this.button4.Text = "Drop pen";
+			this.button4.UseVisualStyleBackColor = true;
+			this.button4.Click += new System.EventHandler(this.button4_Click_1);
+			// 
+			// button5
+			// 
+			this.button5.Location = new System.Drawing.Point(258, 88);
+			this.button5.Margin = new System.Windows.Forms.Padding(6);
+			this.button5.Name = "button5";
+			this.button5.Size = new System.Drawing.Size(216, 44);
+			this.button5.TabIndex = 41;
+			this.button5.Text = "Raise pen";
+			this.button5.UseVisualStyleBackColor = true;
+			this.button5.Click += new System.EventHandler(this.button5_Click_1);
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(2324, 1180);
+			this.ClientSize = new System.Drawing.Size(2144, 1215);
 			this.Controls.Add(this.groupBox6);
 			this.Controls.Add(this.groupBox5);
 			this.Controls.Add(this.textbox_error);
@@ -1078,11 +1262,11 @@
 			((System.ComponentModel.ISupportInitialize)(this.servo1Override)).EndInit();
 			this.groupBox5.ResumeLayout(false);
 			this.groupBox5.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.moveRotation)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.moveDistance)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.number_navdestinationgrid)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.number_navcurrentgrid)).EndInit();
 			this.groupBox6.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.moveDistance)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.moveRotation)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -1140,13 +1324,10 @@
 		private System.Windows.Forms.Label label16;
 		private System.Windows.Forms.Label label17;
 		private System.Windows.Forms.Label label18;
-		private System.Windows.Forms.Label label19;
-		private System.Windows.Forms.Label status_navdistance;
 		private System.Windows.Forms.Label status_navbearing;
 		private System.Windows.Forms.NumericUpDown number_navdestinationgrid;
 		private System.Windows.Forms.NumericUpDown number_navcurrentgrid;
 		private System.Windows.Forms.Label label20;
-		private System.Windows.Forms.Label status_currentbearing;
 		private System.Windows.Forms.Label label21;
 		private System.Windows.Forms.Label status_gyroscope;
 		private System.Windows.Forms.TextBox reading_gyro2;
@@ -1178,6 +1359,25 @@
 		private System.Windows.Forms.Label label31;
 		private System.Windows.Forms.NumericUpDown moveRotation;
 		private System.Windows.Forms.NumericUpDown moveDistance;
+		private System.Windows.Forms.Label status_currentBearing;
+		private System.Windows.Forms.Label status_currentRawBearing;
+		private System.Windows.Forms.Label label34;
+		private System.Windows.Forms.Label magxmin;
+		private System.Windows.Forms.Label magxmax;
+		private System.Windows.Forms.Label magymin;
+		private System.Windows.Forms.Label magymax;
+		private System.Windows.Forms.Label label36;
+		private System.Windows.Forms.Label label35;
+		private System.Windows.Forms.Label label33;
+		private System.Windows.Forms.Label label19;
+		private System.Windows.Forms.Button calibratePassive;
+		private System.Windows.Forms.Label magmax;
+		private System.Windows.Forms.Label magmin;
+		private System.Windows.Forms.Label label38;
+		private System.Windows.Forms.Label label37;
+		private System.Windows.Forms.Button button3;
+		private System.Windows.Forms.Button button5;
+		private System.Windows.Forms.Button button4;
 	}
 }
 

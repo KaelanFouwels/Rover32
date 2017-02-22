@@ -9,8 +9,9 @@ namespace rover_core.routines
 {
 	public static class MoveDegrees
 	{
-		public static bool Run(Rover rover, double degrees)
+		public async static Task<bool> Run(Rover rover, double degrees)
 		{
+			degrees = degrees % 360;
 			//prerequisites
 			if (roverStatus.Instance.magnetometer != sensorStatus.ok)
 			{
@@ -25,14 +26,18 @@ namespace rover_core.routines
 				return false;
 			}
 
-			double currentDegrees = sensors.Magnetometer.getAngle();
+			double currentDegrees = sensors.Magnetometer.get360Angle();
+
 			double targetDegrees = currentDegrees + degrees;
+
+			targetDegrees = targetDegrees % 360;
+
 
 			if (currentDegrees < targetDegrees)
 			{
 				rover.Movement.moveRight();
 
-				while (sensors.Magnetometer.getAngle() < targetDegrees)
+				while (sensors.Magnetometer.get360Angle() < targetDegrees)
 				{
 
 				}
@@ -42,7 +47,7 @@ namespace rover_core.routines
 			{
 				rover.Movement.moveLeft();
 
-				while (sensors.Magnetometer.getAngle() > targetDegrees)
+				while (sensors.Magnetometer.get360Angle() > targetDegrees)
 				{
 
 				}

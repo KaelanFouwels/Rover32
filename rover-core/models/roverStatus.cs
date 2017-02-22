@@ -23,7 +23,7 @@ namespace rover_core.models
 		public movementStatus isMoving { get; internal set; } = movementStatus.complete;
 		public powerStatus servo1 { get; internal set; } = powerStatus.off;
 		public powerStatus servo2 { get; internal set; } = powerStatus.off;
-		public calibrationStatus magnetometerCalibration { get; internal set; } = calibrationStatus.uncalibrated;
+		public calibrationStatus magnetometerCalibration { get; set; } = calibrationStatus.uncalibrated;
 	}
 
 	public enum powerStatus

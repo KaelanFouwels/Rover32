@@ -1259,7 +1259,10 @@ void ProcessIO(void) {
     if (CLflag) doclosedloop();
 
     if (ForwardDistanceRemaining - ((pos2 - pos2Zero) + (pos1 - pos1Zero)) / 2 <= 0) {
-        setspeed(0, 0);
+        if (ForwardDistanceRemaining != -1) {
+            setspeed(0, 0);
+            ForwardDistanceRemaining = -1;
+        }
     } else {
         moveForward();
     }

@@ -52,9 +52,11 @@ namespace rover_core.models
 		public short gyro1 { get; internal set; } = 0;
 		public short gyro2 { get; internal set; } = 0;
 		public short gyro3 { get; internal set; } = 0;
-		public double magnetometerXMin { get;  set; } = 0;
-		internal double magnetometerXMax { get;  set; } = 0;
-		internal double magnetometerYMin { get;  set; } = 0;
-		internal double magnetometerYMax { get;  set; } = 0;
+		public double magnetometerXMin { get;  internal set; } = 999999;
+		public double magnetometerXMax { get;  internal set; } = -999999;
+		public double magnetometerYMin { get; internal set; } = 9999999;
+		public double magnetometerYMax { get; internal set; } = -9999999;
+		public double magnetometerangleMin { get; set; } = 9999999;
+		public double magnetometerangleMax { get; set; } = -9999999;
 	}
 }

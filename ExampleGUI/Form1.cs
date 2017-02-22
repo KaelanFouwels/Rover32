@@ -11,6 +11,7 @@ using rover_core.sensors;
 using rover_core.drivers;
 using rover_core;
 using rover_core.routines;
+using System.Threading.Tasks;
 
 namespace Comms
 {
@@ -104,15 +105,23 @@ namespace Comms
 				reading_magnetY.Text = roverData.Instance.magnetY.ToString();
 				reading_magnetZ.Text = roverData.Instance.magnetZ.ToString();
 
+				magxmax.Text = roverData.Instance.magnetometerXMax.ToString();
+				magxmin.Text = roverData.Instance.magnetometerXMin.ToString();
+				magymax.Text = roverData.Instance.magnetometerYMax.ToString();
+				magymin.Text = roverData.Instance.magnetometerYMin.ToString();
+				magmin.Text = roverData.Instance.magnetometerangleMin.ToString();
+				magmax.Text = roverData.Instance.magnetometerangleMax.ToString();
+
 				if (roverStatus.Instance.magnetometerCalibration == calibrationStatus.calibrated)
 				{
-					status_currentbearing.Text = Magnetometer.getAngle().ToString();
+					var angle = Magnetometer.get360Angle();
+					status_currentBearing.Text = angle.ToString();
+					status_currentRawBearing.Text = Magnetometer.getAngle().ToString();
 				}
 			}
 
 			if (roverStatus.Instance.gyroscope == sensorStatus.ok)
 			{
-				status_currentbearing.Text = roverData.Instance.gyroRadians.ToString();
 				reading_gyro1.Text = roverData.Instance.gyro1.ToString();
 				reading_gyro2.Text = roverData.Instance.gyro2.ToString();
 				reading_gyro3.Text = roverData.Instance.gyro3.ToString();
@@ -251,7 +260,7 @@ namespace Comms
 				return;
 			}
 
-			rover.Movement.setSpeed(Convert.ToInt16(speedLeft), Convert.ToInt16(speedRight));
+			rover.Movement.setSpeedRaw(Convert.ToByte(speedLeft), Convert.ToByte(speedRight));
 		}
 
 		private void button_zeroencoders_Click(object sender, EventArgs e)
@@ -386,22 +395,22 @@ namespace Comms
 
 		private void servo1PowerButton_Click(object sender, EventArgs e)
 		{
-			rover.Servo.power1(roverStatus.Instance.servo1 == powerStatus.off);
+			rover.Servo.power2(roverStatus.Instance.servo2 == powerStatus.off);
 		}
 
 		private void servo2PowerButton_Click(object sender, EventArgs e)
 		{
-			rover.Servo.power2(roverStatus.Instance.servo2 == powerStatus.off);
+			rover.Servo.power1(roverStatus.Instance.servo1 == powerStatus.off);
 		}
 
-		private void calibrateMagnetometerFast_click(object sender, EventArgs e)
+		private async void calibrateMagnetometerFast_click(object sender, EventArgs e)
 		{
-			rover_core.routines.CalibrateMagnetometer.Run(rover, 30);
+			await Task.Run(() => rover_core.routines.CalibrateMagnetometer.Run(rover, 5));
 		}
 
-		private void calibrateMagnetometerSlow_click(object sender, EventArgs e)
+		private async void calibrateMagnetometerSlow_click(object sender, EventArgs e)
 		{
-			rover_core.routines.CalibrateMagnetometer.Run(rover, 10);
+			await Task.Run(() => rover_core.routines.CalibrateMagnetometer.Run(rover, 20));
 		}
 
 		private void moveDistance_KeyPress(object sender, KeyPressEventArgs e)
@@ -411,10 +420,44 @@ namespace Comms
 
 		}
 
-		private void moveRotation_KeyPress(object sender, KeyPressEventArgs e)
+		private async void moveRotation_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			if (e.KeyChar != (char)Keys.Enter) return;
-			rover_core.routines.MoveDegrees.Run(rover, Convert.ToDouble(moveDistance.Value));
+			await Task.Run(() => rover_core.routines.MoveDegrees.Run(rover, Convert.ToDouble(moveRotation.Value)));
+		}
+
+		private void motorSpeedOverride_TextChanged(object sender, EventArgs e)
+		{
+
+		}
+
+		private async void calibratePassive_Click(object sender, EventArgs e)
+		{
+			await Task.Run(() => rover_core.routines.CalibrateMagnetometer.RunPassive());
+		}
+
+		private void button3_Click(object sender, EventArgs e)
+		{
+			roverStatus.Instance.magnetometerCalibration = calibrationStatus.calibrated;
+		}
+
+		private void button4_Click(object sender, EventArgs e)
+		{
+			roverData.Instance.magnetometerangleMin = Magnetometer.getAngle();
+		}
+		private void button5_Click(object sender, EventArgs e)
+		{
+			roverData.Instance.magnetometerangleMax = Magnetometer.getAngle();
+		}
+
+		private void button4_Click_1(object sender, EventArgs e)
+		{
+			rover.Servo.set1(50);
+		}
+
+		private void button5_Click_1(object sender, EventArgs e)
+		{
+			rover.Servo.set1(0);
 		}
 	}
 }

@@ -11,7 +11,7 @@ namespace rover_core.routines
 {
 	public static class CalibrateMagnetometer
 	{
-		public static bool Run(Rover rover, int duration)
+		public async static Task<bool> Run(Rover rover, int duration)
 		{
 
 			//prerequisites
@@ -27,16 +27,17 @@ namespace rover_core.routines
 			int initialX = roverData.Instance.magnetX;
 			int initialY = roverData.Instance.magnetY;
 
-			int maxX = 0;
-			int maxY = 0;
-			int minX = 0;
-			int minY = 0;
+			int maxX = -9999999;
+			int maxY = -9999999;
+			int minX = 99999999;
+			int minY = 99999999;
 
 			Stopwatch sw = new Stopwatch();
+			sw.Start();
 
 			rover.Movement.moveLeft();
 
-			while (sw.ElapsedMilliseconds != (duration * 1000)/2)
+			while (sw.ElapsedMilliseconds < (duration * 1000) / 2)
 			{
 				maxX = roverData.Instance.magnetX > maxX ? roverData.Instance.magnetX : maxX;
 				maxY = roverData.Instance.magnetY > maxY ? roverData.Instance.magnetY : maxY;
@@ -44,16 +45,18 @@ namespace rover_core.routines
 				minY = roverData.Instance.magnetY < minY ? roverData.Instance.magnetY : minY;
 			}
 
-			rover.Movement.moveRight();
+			//sw.Restart();
+			//rover.Movement.moveRight();
 
-			while (sw.ElapsedMilliseconds != (duration * 1000) / 2)
-			{
-				maxX = roverData.Instance.magnetX > maxX ? roverData.Instance.magnetX : maxX;
-				maxY = roverData.Instance.magnetY > maxY ? roverData.Instance.magnetY : maxY;
-				minX = roverData.Instance.magnetX < minX ? roverData.Instance.magnetX : minX;
-				minY = roverData.Instance.magnetY < minY ? roverData.Instance.magnetY : minY;
-			}
+			//while (sw.ElapsedMilliseconds < (duration * 1000) / 2)
+			//{
+			//	maxX = roverData.Instance.magnetX > maxX ? roverData.Instance.magnetX : maxX;
+			//	maxY = roverData.Instance.magnetY > maxY ? roverData.Instance.magnetY : maxY;
+			//	minX = roverData.Instance.magnetX < minX ? roverData.Instance.magnetX : minX;
+			//	minY = roverData.Instance.magnetY < minY ? roverData.Instance.magnetY : minY;
+			//}
 
+			rover.Movement.moveStop();
 			sw.Stop();
 
 			roverData.Instance.magnetometerXMax = maxX;
@@ -63,9 +66,25 @@ namespace rover_core.routines
 
 			roverStatus.Instance.magnetometerCalibration = calibrationStatus.calibrated;
 
-			rover.Movement.moveStop();
-
 			return true;
+		}
+		public async static void RunPassive()
+		{
+			while (true)
+			{
+				if (roverStatus.Instance.magnetometer != sensorStatus.ok)
+				{
+					continue;
+				}
+				if (roverStatus.Instance.connection != connectionStatus.connected)
+				{
+					continue;
+				}
+				roverData.Instance.magnetometerXMax = roverData.Instance.magnetX > roverData.Instance.magnetometerXMax ? roverData.Instance.magnetX : roverData.Instance.magnetometerXMax;
+				roverData.Instance.magnetometerYMax = roverData.Instance.magnetY > roverData.Instance.magnetometerYMax ? roverData.Instance.magnetY : roverData.Instance.magnetometerYMax;
+				roverData.Instance.magnetometerXMin = roverData.Instance.magnetX < roverData.Instance.magnetometerXMin ? roverData.Instance.magnetX : roverData.Instance.magnetometerXMin;
+				roverData.Instance.magnetometerYMin = roverData.Instance.magnetY < roverData.Instance.magnetometerYMin ? roverData.Instance.magnetY : roverData.Instance.magnetometerYMin;
+			}
 		}
 	}
 }
