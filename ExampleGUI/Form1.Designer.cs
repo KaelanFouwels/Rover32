@@ -937,6 +937,11 @@
 			// moveRotation
 			// 
 			this.moveRotation.Location = new System.Drawing.Point(34, 342);
+			this.moveRotation.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
 			this.moveRotation.Name = "moveRotation";
 			this.moveRotation.Size = new System.Drawing.Size(195, 31);
 			this.moveRotation.TabIndex = 14;

@@ -22,7 +22,9 @@ namespace rover_core.drivers
 
 		public void moveRight()
 		{
-			_tcpClient.SendData(CommandID.SetMotorsSpeed, new byte[] { 60, 190 });
+			sbyte left = 40;
+			sbyte right = -40;
+			_tcpClient.SendData(CommandID.SetMotorsSpeed, new byte[] {(byte)(left), (byte)(right) });
 		}
 
 		public void moveUp()
@@ -35,7 +37,9 @@ namespace rover_core.drivers
 		}
 
 		public void moveLeft() {
-			_tcpClient.SendData(CommandID.SetMotorsSpeed, new byte[] { 190, 60 });
+			sbyte left = -40;
+			sbyte right = 40;
+			_tcpClient.SendData(CommandID.SetMotorsSpeed, new byte[] { (byte)(left), (byte)(right) });
 		}
 
 		public void moveStop()
@@ -62,9 +66,13 @@ namespace rover_core.drivers
 
 		public void moveForward(Int16 distance)
 		{
-			byte[] payload = new byte[2] {
+			byte isNegative = distance < 0 ? (byte)1 : (byte)0;
+
+			distance = Math.Abs(distance);
+			byte[] payload = new byte[3] {
 				(byte)(distance >> 8),
-				(byte)(distance)
+				(byte)(distance),
+				isNegative
 			};
 			_tcpClient.SendData(CommandID.CMDMoveForward, payload);
 		}

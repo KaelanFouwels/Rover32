@@ -131,6 +131,7 @@ volatile int MotorPWMcount = 0;
 volatile int MotorleftV = 0;
 volatile int MotorrightV = 0;
 volatile int ForwardDistanceRemaining = 0;
+volatile char isFowardDistanceBackwards = 0;
 
 #define RXBUFFERsize 256
 volatile unsigned char RX1[RXBUFFERsize];
@@ -1210,10 +1211,18 @@ void processcommand(void) // the main routine which processes commands
             break;
 
         case CMDMoveForward:
-            if (commandlen == 2) {
+            if (commandlen == 3) {
                 i = (char) (nextcommand[1]);
                 i = (i << 8) | nextcommand[2];
-                ForwardDistanceRemaining = i;
+
+                isFowardDistanceBackwards = nextcommand[3];
+
+                if (isFowardDistanceBackwards == 1) {
+                    ForwardDistanceRemaining = -i;
+                } else {
+                    ForwardDistanceRemaining = i;
+                }
+
                 pos1Zero = pos1;
                 pos2Zero = pos2;
             }
@@ -1234,7 +1243,7 @@ void moveForward(void) {
 
     int p = 0.1;
 
-    int speedL = 1010;
+    int speedL = 1000;
     int speedR = 1000;
 
     int errL = (pos2 - pos2Zero) - (pos1 - pos1Zero);
@@ -1244,6 +1253,24 @@ void moveForward(void) {
     speedR = speedR + errR * p;
 
     setspeed(speedL, speedR);
+}
+
+void moveBackwards(void) {
+
+    int p = 0.1;
+
+    int speedL = -1000;
+    int speedR = -1000;
+
+    int errL = (pos2 - pos2Zero) - (pos1 - pos1Zero);
+    int errR = (pos1 - pos1Zero) - (pos2 - pos2Zero);
+
+    speedL = speedL - errL * p;
+    speedR = speedR - errR * p;
+
+    setspeed(speedL, speedR);
+
+
 }
 
 //Process packets
@@ -1264,7 +1291,11 @@ void ProcessIO(void) {
             ForwardDistanceRemaining = -1;
         }
     } else {
-        moveForward();
+        if (isFowardDistanceBackwards == 1) {
+            moveBackwards();
+        } else {
+            moveForward();
+        }
     }
     if (yescomsdata()) {
         if (commandstate < 0) {

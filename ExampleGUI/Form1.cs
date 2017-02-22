@@ -410,7 +410,7 @@ namespace Comms
 
 		private async void calibrateMagnetometerSlow_click(object sender, EventArgs e)
 		{
-			await Task.Run(() => rover_core.routines.CalibrateMagnetometer.Run(rover, 20));
+			await Task.Run(() => rover_core.routines.CalibrateMagnetometer.Run(rover, 40));
 		}
 
 		private void moveDistance_KeyPress(object sender, KeyPressEventArgs e)
