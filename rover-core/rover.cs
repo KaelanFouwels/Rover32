@@ -75,13 +75,13 @@ namespace rover_core
 			if (!myClient.isConnected) return; //if no connection, don't do anything
 
 			//we will request the status of the LEDs on a regular basis
-			myClient.SendData(CommandID.GetLEDandSwitchStatus); //this type needs no payload
+			//myClient.SendData(CommandID.GetLEDandSwitchStatus); //this type needs no payload
 			myClient.SendData(CommandID.MotorPosition);
-			myClient.SendData(CommandID.GetAccelValue);
+			//myClient.SendData(CommandID.GetAccelValue);
 			myClient.SendData(CommandID.GetMagnetValue);
-			myClient.SendData(CommandID.CMDGyroPosition);
-			myClient.SendData(CommandID.GetGyroValue);
-			myClient.SendData(CommandID.CMDGetIsMovingForward);
+			//myClient.SendData(CommandID.CMDGyroPosition);
+			//myClient.SendData(CommandID.GetGyroValue);
+			//myClient.SendData(CommandID.CMDGetIsMovingForward);
 		}
 
 		void myClient_OnMessageReceived(Client_Message_EventArgs e)

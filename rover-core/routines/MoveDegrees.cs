@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace rover_core.routines
@@ -11,7 +12,6 @@ namespace rover_core.routines
 	{
 		public async static Task<bool> Run(Rover rover, double degrees)
 		{
-			degrees = degrees % 360;
 			//prerequisites
 			if (roverStatus.Instance.magnetometer != sensorStatus.ok)
 			{
@@ -26,33 +26,87 @@ namespace rover_core.routines
 				return false;
 			}
 
-			double currentDegrees = sensors.Magnetometer.get360Angle();
+			
 
-			double targetDegrees = currentDegrees + degrees;
-
-			targetDegrees = targetDegrees % 360;
-
-
-			if (currentDegrees < targetDegrees)
+			double targetDegrees = degrees;
+		
+			var hit = false;
+			var steps = 0;
+			int last = 0;
+			while (hit == false)
 			{
-				rover.Movement.moveRight();
+				int cachedLast = last;
+				double currentDegrees = sensors.Magnetometer.getAngle();
 
-				while (sensors.Magnetometer.get360Angle() < targetDegrees)
+				if (currentDegrees < targetDegrees)
 				{
-
+					last = 1;
+					switch (steps)
+					{
+						case 0:
+							rover.Movement.setSpeedRaw(40, -40);
+							break;
+						case 1:
+							rover.Movement.setSpeedRaw(40, -40);
+							break;
+						case 2:
+							rover.Movement.setSpeedRaw(35, -35);
+							break;
+						case 3:
+							rover.Movement.setSpeedRaw(35, -35);
+							break;
+						case 4:
+							rover.Movement.setSpeedRaw(30, -30);
+							break;
+						case 5:
+							rover.Movement.setSpeedRaw(30, -30);
+							break;
+						default:
+							hit = true;
+							break;
+					}
 				}
-				rover.Movement.moveStop();
-			}
-			else
-			{
-				rover.Movement.moveLeft();
+				else {
+					last = 2;
+					switch (steps)
+					{
+						case 0:
+							rover.Movement.setSpeedRaw(-40, 40);
+							break;
+						case 1:
+							rover.Movement.setSpeedRaw(-40, 40);
+							break;
+						case 2:
+							rover.Movement.setSpeedRaw(-35, 35);
+							break;
+						case 3:
+							rover.Movement.setSpeedRaw(-35, 35);
+							break;
+						case 4:
+							rover.Movement.setSpeedRaw(-30, 30);
+							break;
+						case 5:
+							rover.Movement.setSpeedRaw(-30, 30);
+							break;
+						default:
+							hit = true;
+							break;
+					}
+				}
 
-				while (sensors.Magnetometer.get360Angle() > targetDegrees)
+				if (last != cachedLast && last != 0)
 				{
-
+					steps++;
 				}
-				rover.Movement.moveStop();
+
+				if (Convert.ToInt32(currentDegrees) == Convert.ToInt32(targetDegrees))
+				{
+					hit = true;
+				}
+				Thread.Sleep(100);
+
 			}
+			rover.Movement.moveStop();
 
 			return true;
 		}

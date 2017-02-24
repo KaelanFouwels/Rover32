@@ -71,6 +71,7 @@
     <Compile Include="drivers\movement.cs" />
     <Compile Include="drivers\Servo.cs" />
     <Compile Include="routines\CalibrateMagnetometer.cs" />
+    <Compile Include="routines\Drawing.cs" />
     <Compile Include="routines\MoveDegrees.cs" />
     <Compile Include="rover.cs" />
     <Compile Include="models\roverData.cs" />

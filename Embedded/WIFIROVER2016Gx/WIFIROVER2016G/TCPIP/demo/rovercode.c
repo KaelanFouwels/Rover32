@@ -1243,8 +1243,8 @@ void moveForward(void) {
 
     int p = 0.1;
 
-    int speedL = 1000;
-    int speedR = 1000;
+    int speedL = 400;
+    int speedR = 400;
 
     int errL = (pos2 - pos2Zero) - (pos1 - pos1Zero);
     int errR = (pos1 - pos1Zero) - (pos2 - pos2Zero);

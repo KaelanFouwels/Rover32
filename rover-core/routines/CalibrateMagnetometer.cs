@@ -32,10 +32,15 @@ namespace rover_core.routines
 			int minX = 99999999;
 			int minY = 99999999;
 
+			roverData.Instance.magnetometerXMax = maxX;
+			roverData.Instance.magnetometerXMin = minX;
+			roverData.Instance.magnetometerYMax = maxY;
+			roverData.Instance.magnetometerYMin = minY;
+
 			Stopwatch sw = new Stopwatch();
 			sw.Start();
 
-			rover.Movement.moveLeft();
+			rover.Movement.setSpeedRaw(100, -100);
 
 			while (sw.ElapsedMilliseconds < (duration * 1000) / 2)
 			{
@@ -65,6 +70,8 @@ namespace rover_core.routines
 			roverData.Instance.magnetometerYMin = minY;
 
 			roverStatus.Instance.magnetometerCalibration = calibrationStatus.calibrated;
+
+			await routines.MoveDegrees.Run(rover,0);
 
 			return true;
 		}

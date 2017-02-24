@@ -109,8 +109,6 @@ namespace Comms
 				magxmin.Text = roverData.Instance.magnetometerXMin.ToString();
 				magymax.Text = roverData.Instance.magnetometerYMax.ToString();
 				magymin.Text = roverData.Instance.magnetometerYMin.ToString();
-				magmin.Text = roverData.Instance.magnetometerangleMin.ToString();
-				magmax.Text = roverData.Instance.magnetometerangleMax.ToString();
 
 				if (roverStatus.Instance.magnetometerCalibration == calibrationStatus.calibrated)
 				{
@@ -260,7 +258,7 @@ namespace Comms
 				return;
 			}
 
-			rover.Movement.setSpeedRaw(Convert.ToByte(speedLeft), Convert.ToByte(speedRight));
+			rover.Movement.setSpeedRaw(Convert.ToSByte(speedLeft), Convert.ToSByte(speedRight));
 		}
 
 		private void button_zeroencoders_Click(object sender, EventArgs e)
@@ -410,7 +408,7 @@ namespace Comms
 
 		private async void calibrateMagnetometerSlow_click(object sender, EventArgs e)
 		{
-			await Task.Run(() => rover_core.routines.CalibrateMagnetometer.Run(rover, 40));
+			await Task.Run(() => rover_core.routines.CalibrateMagnetometer.Run(rover, 20));
 		}
 
 		private void moveDistance_KeyPress(object sender, KeyPressEventArgs e)
@@ -419,8 +417,13 @@ namespace Comms
 			rover.Movement.moveForward(Convert.ToInt16(moveDistance.Value));
 
 		}
+        
+        private void moveDistanceCM_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            
+        }
 
-		private async void moveRotation_KeyPress(object sender, KeyPressEventArgs e)
+        private async void moveRotation_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			if (e.KeyChar != (char)Keys.Enter) return;
 			await Task.Run(() => rover_core.routines.MoveDegrees.Run(rover, Convert.ToDouble(moveRotation.Value)));
@@ -459,5 +462,35 @@ namespace Comms
 		{
 			rover.Servo.set1(0);
 		}
-	}
+
+        private void moveDistanceCM_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            double DistanceClicks = 0;
+            double multiplier = 0.913037002; //contant for conversion of clicks to CM
+
+            if (e.KeyChar != (char)Keys.Enter) return;
+            DistanceClicks = multiplier * Convert.ToDouble(moveDistanceCM.Value); //converts clicks to CM
+            rover.Movement.moveForward(Convert.ToInt16(DistanceClicks));
+
+        }
+
+        private void BtnDrawLine_Click(object sender, EventArgs e)
+        {
+            Task.Run(() => rover_core.routines.Drawing.ASyncDrawLine(rover));
+            
+
+
+        }
+
+        private void BtnRotateCircle_Click(object sender, EventArgs e)
+        {
+            Task.Run(() => rover_core.routines.Drawing.ASyncDrawCircle(rover));
+        }
+
+        private void BtnDrawTriangle_Click(object sender, EventArgs e)
+        {
+            Task.Run(() => rover_core.routines.Drawing.ASyncDrawTriangle(rover));
+        }
+    }
 }
+ 

@@ -60,6 +60,14 @@
 			this.label11 = new System.Windows.Forms.Label();
 			this.reading_pitch = new System.Windows.Forms.TextBox();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
+			this.magxmin = new System.Windows.Forms.Label();
+			this.magxmax = new System.Windows.Forms.Label();
+			this.magymin = new System.Windows.Forms.Label();
+			this.magymax = new System.Windows.Forms.Label();
+			this.label36 = new System.Windows.Forms.Label();
+			this.label35 = new System.Windows.Forms.Label();
+			this.label33 = new System.Windows.Forms.Label();
+			this.label19 = new System.Windows.Forms.Label();
 			this.status_magcalibration = new System.Windows.Forms.Label();
 			this.label30 = new System.Windows.Forms.Label();
 			this.status_servo2 = new System.Windows.Forms.Label();
@@ -86,6 +94,9 @@
 			this.label13 = new System.Windows.Forms.Label();
 			this.label14 = new System.Windows.Forms.Label();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.BtnDrawTriangle = new System.Windows.Forms.Button();
+			this.BtnRotateCircle = new System.Windows.Forms.Button();
+			this.BtnDrawLine = new System.Windows.Forms.Button();
 			this.servo2PowerButton = new System.Windows.Forms.Button();
 			this.servo1PowerButton = new System.Windows.Forms.Button();
 			this.label28 = new System.Windows.Forms.Label();
@@ -99,6 +110,11 @@
 			this.motorSpeedOverride = new System.Windows.Forms.TextBox();
 			this.textbox_error = new System.Windows.Forms.TextBox();
 			this.groupBox5 = new System.Windows.Forms.GroupBox();
+			this.label39 = new System.Windows.Forms.Label();
+			this.moveDistanceCM = new System.Windows.Forms.NumericUpDown();
+			this.status_currentRawBearing = new System.Windows.Forms.Label();
+			this.label34 = new System.Windows.Forms.Label();
+			this.status_currentBearing = new System.Windows.Forms.Label();
 			this.label32 = new System.Windows.Forms.Label();
 			this.label31 = new System.Windows.Forms.Label();
 			this.moveRotation = new System.Windows.Forms.NumericUpDown();
@@ -111,27 +127,12 @@
 			this.label17 = new System.Windows.Forms.Label();
 			this.label16 = new System.Windows.Forms.Label();
 			this.groupBox6 = new System.Windows.Forms.GroupBox();
+			this.button5 = new System.Windows.Forms.Button();
+			this.button4 = new System.Windows.Forms.Button();
+			this.button3 = new System.Windows.Forms.Button();
+			this.calibratePassive = new System.Windows.Forms.Button();
 			this.button2 = new System.Windows.Forms.Button();
 			this.button1 = new System.Windows.Forms.Button();
-			this.status_currentBearing = new System.Windows.Forms.Label();
-			this.status_currentRawBearing = new System.Windows.Forms.Label();
-			this.label34 = new System.Windows.Forms.Label();
-			this.label19 = new System.Windows.Forms.Label();
-			this.label33 = new System.Windows.Forms.Label();
-			this.label35 = new System.Windows.Forms.Label();
-			this.label36 = new System.Windows.Forms.Label();
-			this.magymax = new System.Windows.Forms.Label();
-			this.magymin = new System.Windows.Forms.Label();
-			this.magxmax = new System.Windows.Forms.Label();
-			this.magxmin = new System.Windows.Forms.Label();
-			this.calibratePassive = new System.Windows.Forms.Button();
-			this.label37 = new System.Windows.Forms.Label();
-			this.label38 = new System.Windows.Forms.Label();
-			this.magmin = new System.Windows.Forms.Label();
-			this.magmax = new System.Windows.Forms.Label();
-			this.button3 = new System.Windows.Forms.Button();
-			this.button4 = new System.Windows.Forms.Button();
-			this.button5 = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			this.groupBox3.SuspendLayout();
 			this.groupBox4.SuspendLayout();
@@ -139,6 +140,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.servo2Override)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.servo1Override)).BeginInit();
 			this.groupBox5.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.moveDistanceCM)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.moveRotation)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.moveDistance)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.number_navdestinationgrid)).BeginInit();
@@ -152,18 +154,18 @@
 			this.groupBox1.Controls.Add(this.txtIP);
 			this.groupBox1.Controls.Add(this.label1);
 			this.groupBox1.Location = new System.Drawing.Point(24, 23);
-			this.groupBox1.Margin = new System.Windows.Forms.Padding(6);
+			this.groupBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Padding = new System.Windows.Forms.Padding(6);
-			this.groupBox1.Size = new System.Drawing.Size(342, 268);
+			this.groupBox1.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.groupBox1.Size = new System.Drawing.Size(342, 269);
 			this.groupBox1.TabIndex = 0;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Communications";
 			// 
 			// btnCon
 			// 
-			this.btnCon.Location = new System.Drawing.Point(96, 154);
-			this.btnCon.Margin = new System.Windows.Forms.Padding(6);
+			this.btnCon.Location = new System.Drawing.Point(96, 155);
+			this.btnCon.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
 			this.btnCon.Name = "btnCon";
 			this.btnCon.Size = new System.Drawing.Size(150, 44);
 			this.btnCon.TabIndex = 2;
@@ -174,7 +176,7 @@
 			// txtIP
 			// 
 			this.txtIP.Location = new System.Drawing.Point(96, 58);
-			this.txtIP.Margin = new System.Windows.Forms.Padding(6);
+			this.txtIP.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
 			this.txtIP.Name = "txtIP";
 			this.txtIP.Size = new System.Drawing.Size(192, 31);
 			this.txtIP.TabIndex = 1;
@@ -183,7 +185,7 @@
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(32, 63);
+			this.label1.Location = new System.Drawing.Point(32, 62);
 			this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(31, 25);
@@ -215,7 +217,7 @@
 			// btnToggleRed
 			// 
 			this.btnToggleRed.Location = new System.Drawing.Point(20, 92);
-			this.btnToggleRed.Margin = new System.Windows.Forms.Padding(6);
+			this.btnToggleRed.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
 			this.btnToggleRed.Name = "btnToggleRed";
 			this.btnToggleRed.Size = new System.Drawing.Size(216, 44);
 			this.btnToggleRed.TabIndex = 0;
@@ -226,7 +228,7 @@
 			// btnToggleGreen
 			// 
 			this.btnToggleGreen.Location = new System.Drawing.Point(20, 36);
-			this.btnToggleGreen.Margin = new System.Windows.Forms.Padding(6);
+			this.btnToggleGreen.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
 			this.btnToggleGreen.Name = "btnToggleGreen";
 			this.btnToggleGreen.Size = new System.Drawing.Size(216, 44);
 			this.btnToggleGreen.TabIndex = 0;
@@ -237,7 +239,7 @@
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(427, 82);
+			this.label3.Location = new System.Drawing.Point(428, 81);
 			this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(172, 25);
@@ -247,7 +249,7 @@
 			// readingPositionRight
 			// 
 			this.readingPositionRight.AutoSize = true;
-			this.readingPositionRight.Location = new System.Drawing.Point(600, 82);
+			this.readingPositionRight.Location = new System.Drawing.Point(600, 81);
 			this.readingPositionRight.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
 			this.readingPositionRight.Name = "readingPositionRight";
 			this.readingPositionRight.Size = new System.Drawing.Size(24, 25);
@@ -257,7 +259,7 @@
 			// reading_positionLeft
 			// 
 			this.reading_positionLeft.AutoSize = true;
-			this.reading_positionLeft.Location = new System.Drawing.Point(601, 47);
+			this.reading_positionLeft.Location = new System.Drawing.Point(602, 47);
 			this.reading_positionLeft.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
 			this.reading_positionLeft.Name = "reading_positionLeft";
 			this.reading_positionLeft.Size = new System.Drawing.Size(24, 25);
@@ -267,7 +269,7 @@
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(481, 47);
+			this.label2.Location = new System.Drawing.Point(482, 47);
 			this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(117, 25);
@@ -276,8 +278,8 @@
 			// 
 			// reading_accelX
 			// 
-			this.reading_accelX.Location = new System.Drawing.Point(185, 41);
-			this.reading_accelX.Margin = new System.Windows.Forms.Padding(6);
+			this.reading_accelX.Location = new System.Drawing.Point(184, 41);
+			this.reading_accelX.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
 			this.reading_accelX.Name = "reading_accelX";
 			this.reading_accelX.Size = new System.Drawing.Size(196, 31);
 			this.reading_accelX.TabIndex = 3;
@@ -285,8 +287,8 @@
 			// 
 			// reading_accelY
 			// 
-			this.reading_accelY.Location = new System.Drawing.Point(185, 91);
-			this.reading_accelY.Margin = new System.Windows.Forms.Padding(6);
+			this.reading_accelY.Location = new System.Drawing.Point(184, 91);
+			this.reading_accelY.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
 			this.reading_accelY.Name = "reading_accelY";
 			this.reading_accelY.Size = new System.Drawing.Size(196, 31);
 			this.reading_accelY.TabIndex = 4;
@@ -294,8 +296,8 @@
 			// 
 			// reading_accelZ
 			// 
-			this.reading_accelZ.Location = new System.Drawing.Point(185, 141);
-			this.reading_accelZ.Margin = new System.Windows.Forms.Padding(6);
+			this.reading_accelZ.Location = new System.Drawing.Point(184, 141);
+			this.reading_accelZ.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
 			this.reading_accelZ.Name = "reading_accelZ";
 			this.reading_accelZ.Size = new System.Drawing.Size(196, 31);
 			this.reading_accelZ.TabIndex = 5;
@@ -303,8 +305,8 @@
 			// 
 			// reading_tilt
 			// 
-			this.reading_tilt.Location = new System.Drawing.Point(185, 187);
-			this.reading_tilt.Margin = new System.Windows.Forms.Padding(6);
+			this.reading_tilt.Location = new System.Drawing.Point(184, 188);
+			this.reading_tilt.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
 			this.reading_tilt.Name = "reading_tilt";
 			this.reading_tilt.Size = new System.Drawing.Size(196, 31);
 			this.reading_tilt.TabIndex = 6;
@@ -322,7 +324,7 @@
 			// status_accelerometer
 			// 
 			this.status_accelerometer.AutoSize = true;
-			this.status_accelerometer.Location = new System.Drawing.Point(211, 81);
+			this.status_accelerometer.Location = new System.Drawing.Point(212, 81);
 			this.status_accelerometer.Name = "status_accelerometer";
 			this.status_accelerometer.Size = new System.Drawing.Size(19, 25);
 			this.status_accelerometer.TabIndex = 9;
@@ -366,7 +368,7 @@
 			// status_conn
 			// 
 			this.status_conn.AutoSize = true;
-			this.status_conn.Location = new System.Drawing.Point(211, 36);
+			this.status_conn.Location = new System.Drawing.Point(212, 36);
 			this.status_conn.Name = "status_conn";
 			this.status_conn.Size = new System.Drawing.Size(19, 25);
 			this.status_conn.TabIndex = 14;
@@ -375,7 +377,7 @@
 			// status_position
 			// 
 			this.status_position.AutoSize = true;
-			this.status_position.Location = new System.Drawing.Point(211, 127);
+			this.status_position.Location = new System.Drawing.Point(212, 127);
 			this.status_position.Name = "status_position";
 			this.status_position.Size = new System.Drawing.Size(19, 25);
 			this.status_position.TabIndex = 15;
@@ -384,7 +386,7 @@
 			// status_leds
 			// 
 			this.status_leds.AutoSize = true;
-			this.status_leds.Location = new System.Drawing.Point(211, 175);
+			this.status_leds.Location = new System.Drawing.Point(212, 175);
 			this.status_leds.Name = "status_leds";
 			this.status_leds.Size = new System.Drawing.Size(19, 25);
 			this.status_leds.TabIndex = 16;
@@ -393,7 +395,7 @@
 			// label7
 			// 
 			this.label7.AutoSize = true;
-			this.label7.Location = new System.Drawing.Point(31, 44);
+			this.label7.Location = new System.Drawing.Point(32, 44);
 			this.label7.Name = "label7";
 			this.label7.Size = new System.Drawing.Size(145, 25);
 			this.label7.TabIndex = 17;
@@ -402,7 +404,7 @@
 			// label8
 			// 
 			this.label8.AutoSize = true;
-			this.label8.Location = new System.Drawing.Point(31, 141);
+			this.label8.Location = new System.Drawing.Point(32, 141);
 			this.label8.Name = "label8";
 			this.label8.Size = new System.Drawing.Size(144, 25);
 			this.label8.TabIndex = 18;
@@ -411,7 +413,7 @@
 			// label9
 			// 
 			this.label9.AutoSize = true;
-			this.label9.Location = new System.Drawing.Point(31, 91);
+			this.label9.Location = new System.Drawing.Point(32, 91);
 			this.label9.Name = "label9";
 			this.label9.Size = new System.Drawing.Size(146, 25);
 			this.label9.TabIndex = 19;
@@ -420,7 +422,7 @@
 			// label10
 			// 
 			this.label10.AutoSize = true;
-			this.label10.Location = new System.Drawing.Point(134, 187);
+			this.label10.Location = new System.Drawing.Point(134, 188);
 			this.label10.Name = "label10";
 			this.label10.Size = new System.Drawing.Size(41, 25);
 			this.label10.TabIndex = 20;
@@ -429,7 +431,7 @@
 			// label11
 			// 
 			this.label11.AutoSize = true;
-			this.label11.Location = new System.Drawing.Point(115, 231);
+			this.label11.Location = new System.Drawing.Point(116, 231);
 			this.label11.Name = "label11";
 			this.label11.Size = new System.Drawing.Size(60, 25);
 			this.label11.TabIndex = 21;
@@ -437,8 +439,8 @@
 			// 
 			// reading_pitch
 			// 
-			this.reading_pitch.Location = new System.Drawing.Point(185, 231);
-			this.reading_pitch.Margin = new System.Windows.Forms.Padding(6);
+			this.reading_pitch.Location = new System.Drawing.Point(184, 231);
+			this.reading_pitch.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
 			this.reading_pitch.Name = "reading_pitch";
 			this.reading_pitch.Size = new System.Drawing.Size(196, 31);
 			this.reading_pitch.TabIndex = 22;
@@ -446,10 +448,6 @@
 			// 
 			// groupBox3
 			// 
-			this.groupBox3.Controls.Add(this.magmax);
-			this.groupBox3.Controls.Add(this.magmin);
-			this.groupBox3.Controls.Add(this.label38);
-			this.groupBox3.Controls.Add(this.label37);
 			this.groupBox3.Controls.Add(this.magxmin);
 			this.groupBox3.Controls.Add(this.magxmax);
 			this.groupBox3.Controls.Add(this.magymin);
@@ -481,15 +479,87 @@
 			this.groupBox3.Controls.Add(this.status_leds);
 			this.groupBox3.Location = new System.Drawing.Point(387, 12);
 			this.groupBox3.Name = "groupBox3";
-			this.groupBox3.Size = new System.Drawing.Size(1019, 279);
+			this.groupBox3.Size = new System.Drawing.Size(1018, 280);
 			this.groupBox3.TabIndex = 23;
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "Status";
 			// 
+			// magxmin
+			// 
+			this.magxmin.AutoSize = true;
+			this.magxmin.Location = new System.Drawing.Point(879, 144);
+			this.magxmin.Name = "magxmin";
+			this.magxmin.Size = new System.Drawing.Size(19, 25);
+			this.magxmin.TabIndex = 38;
+			this.magxmin.Text = "-";
+			// 
+			// magxmax
+			// 
+			this.magxmax.AutoSize = true;
+			this.magxmax.Location = new System.Drawing.Point(879, 105);
+			this.magxmax.Name = "magxmax";
+			this.magxmax.Size = new System.Drawing.Size(19, 25);
+			this.magxmax.TabIndex = 37;
+			this.magxmax.Text = "-";
+			// 
+			// magymin
+			// 
+			this.magymin.AutoSize = true;
+			this.magymin.Location = new System.Drawing.Point(879, 72);
+			this.magymin.Name = "magymin";
+			this.magymin.Size = new System.Drawing.Size(19, 25);
+			this.magymin.TabIndex = 36;
+			this.magymin.Text = "-";
+			// 
+			// magymax
+			// 
+			this.magymax.AutoSize = true;
+			this.magymax.Location = new System.Drawing.Point(879, 36);
+			this.magymax.Name = "magymax";
+			this.magymax.Size = new System.Drawing.Size(19, 25);
+			this.magymax.TabIndex = 35;
+			this.magymax.Text = "-";
+			// 
+			// label36
+			// 
+			this.label36.AutoSize = true;
+			this.label36.Location = new System.Drawing.Point(704, 106);
+			this.label36.Name = "label36";
+			this.label36.Size = new System.Drawing.Size(120, 25);
+			this.label36.TabIndex = 34;
+			this.label36.Text = "Mag XMAX";
+			// 
+			// label35
+			// 
+			this.label35.AutoSize = true;
+			this.label35.Location = new System.Drawing.Point(705, 145);
+			this.label35.Name = "label35";
+			this.label35.Size = new System.Drawing.Size(112, 25);
+			this.label35.TabIndex = 33;
+			this.label35.Text = "Mag XMIN";
+			// 
+			// label33
+			// 
+			this.label33.AutoSize = true;
+			this.label33.Location = new System.Drawing.Point(705, 69);
+			this.label33.Name = "label33";
+			this.label33.Size = new System.Drawing.Size(113, 25);
+			this.label33.TabIndex = 32;
+			this.label33.Text = "Mag YMIN";
+			// 
+			// label19
+			// 
+			this.label19.AutoSize = true;
+			this.label19.Location = new System.Drawing.Point(705, 36);
+			this.label19.Name = "label19";
+			this.label19.Size = new System.Drawing.Size(121, 25);
+			this.label19.TabIndex = 31;
+			this.label19.Text = "Mag YMAX";
+			// 
 			// status_magcalibration
 			// 
 			this.status_magcalibration.AutoSize = true;
-			this.status_magcalibration.Location = new System.Drawing.Point(530, 218);
+			this.status_magcalibration.Location = new System.Drawing.Point(530, 219);
 			this.status_magcalibration.Name = "status_magcalibration";
 			this.status_magcalibration.Size = new System.Drawing.Size(19, 25);
 			this.status_magcalibration.TabIndex = 30;
@@ -498,7 +568,7 @@
 			// label30
 			// 
 			this.label30.AutoSize = true;
-			this.label30.Location = new System.Drawing.Point(349, 215);
+			this.label30.Location = new System.Drawing.Point(350, 216);
 			this.label30.Name = "label30";
 			this.label30.Size = new System.Drawing.Size(163, 25);
 			this.label30.TabIndex = 29;
@@ -507,7 +577,7 @@
 			// status_servo2
 			// 
 			this.status_servo2.AutoSize = true;
-			this.status_servo2.Location = new System.Drawing.Point(530, 174);
+			this.status_servo2.Location = new System.Drawing.Point(530, 173);
 			this.status_servo2.Name = "status_servo2";
 			this.status_servo2.Size = new System.Drawing.Size(19, 25);
 			this.status_servo2.TabIndex = 28;
@@ -516,7 +586,7 @@
 			// status_servo1
 			// 
 			this.status_servo1.AutoSize = true;
-			this.status_servo1.Location = new System.Drawing.Point(530, 126);
+			this.status_servo1.Location = new System.Drawing.Point(530, 127);
 			this.status_servo1.Name = "status_servo1";
 			this.status_servo1.Size = new System.Drawing.Size(19, 25);
 			this.status_servo1.TabIndex = 27;
@@ -525,7 +595,7 @@
 			// label29
 			// 
 			this.label29.AutoSize = true;
-			this.label29.Location = new System.Drawing.Point(350, 174);
+			this.label29.Location = new System.Drawing.Point(350, 173);
 			this.label29.Name = "label29";
 			this.label29.Size = new System.Drawing.Size(80, 25);
 			this.label29.TabIndex = 26;
@@ -534,7 +604,7 @@
 			// Servo1
 			// 
 			this.Servo1.AutoSize = true;
-			this.Servo1.Location = new System.Drawing.Point(350, 126);
+			this.Servo1.Location = new System.Drawing.Point(350, 127);
 			this.Servo1.Name = "Servo1";
 			this.Servo1.Size = new System.Drawing.Size(80, 25);
 			this.Servo1.TabIndex = 25;
@@ -543,7 +613,7 @@
 			// label24
 			// 
 			this.label24.AutoSize = true;
-			this.label24.Location = new System.Drawing.Point(349, 80);
+			this.label24.Location = new System.Drawing.Point(350, 80);
 			this.label24.Name = "label24";
 			this.label24.Size = new System.Drawing.Size(98, 25);
 			this.label24.TabIndex = 24;
@@ -561,7 +631,7 @@
 			// label21
 			// 
 			this.label21.AutoSize = true;
-			this.label21.Location = new System.Drawing.Point(349, 36);
+			this.label21.Location = new System.Drawing.Point(350, 36);
 			this.label21.Name = "label21";
 			this.label21.Size = new System.Drawing.Size(116, 25);
 			this.label21.TabIndex = 22;
@@ -588,7 +658,7 @@
 			// status_magnetometer
 			// 
 			this.status_magnetometer.AutoSize = true;
-			this.status_magnetometer.Location = new System.Drawing.Point(211, 216);
+			this.status_magnetometer.Location = new System.Drawing.Point(212, 216);
 			this.status_magnetometer.Name = "status_magnetometer";
 			this.status_magnetometer.Size = new System.Drawing.Size(19, 25);
 			this.status_magnetometer.TabIndex = 17;
@@ -624,7 +694,7 @@
 			this.groupBox4.Controls.Add(this.label9);
 			this.groupBox4.Controls.Add(this.label10);
 			this.groupBox4.Controls.Add(this.label2);
-			this.groupBox4.Location = new System.Drawing.Point(37, 322);
+			this.groupBox4.Location = new System.Drawing.Point(38, 322);
 			this.groupBox4.Name = "groupBox4";
 			this.groupBox4.Size = new System.Drawing.Size(678, 812);
 			this.groupBox4.TabIndex = 24;
@@ -634,7 +704,7 @@
 			// reading_gyro2
 			// 
 			this.reading_gyro2.Location = new System.Drawing.Point(183, 467);
-			this.reading_gyro2.Margin = new System.Windows.Forms.Padding(6);
+			this.reading_gyro2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
 			this.reading_gyro2.Name = "reading_gyro2";
 			this.reading_gyro2.Size = new System.Drawing.Size(196, 31);
 			this.reading_gyro2.TabIndex = 33;
@@ -644,7 +714,7 @@
 			// reading_gyro1
 			// 
 			this.reading_gyro1.Location = new System.Drawing.Point(183, 417);
-			this.reading_gyro1.Margin = new System.Windows.Forms.Padding(6);
+			this.reading_gyro1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
 			this.reading_gyro1.Name = "reading_gyro1";
 			this.reading_gyro1.Size = new System.Drawing.Size(196, 31);
 			this.reading_gyro1.TabIndex = 32;
@@ -654,7 +724,7 @@
 			// reading_gyro3
 			// 
 			this.reading_gyro3.Location = new System.Drawing.Point(183, 517);
-			this.reading_gyro3.Margin = new System.Windows.Forms.Padding(6);
+			this.reading_gyro3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
 			this.reading_gyro3.Name = "reading_gyro3";
 			this.reading_gyro3.Size = new System.Drawing.Size(196, 31);
 			this.reading_gyro3.TabIndex = 34;
@@ -693,8 +763,8 @@
 			// 
 			// reading_magnetY
 			// 
-			this.reading_magnetY.Location = new System.Drawing.Point(185, 324);
-			this.reading_magnetY.Margin = new System.Windows.Forms.Padding(6);
+			this.reading_magnetY.Location = new System.Drawing.Point(184, 323);
+			this.reading_magnetY.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
 			this.reading_magnetY.Name = "reading_magnetY";
 			this.reading_magnetY.Size = new System.Drawing.Size(196, 31);
 			this.reading_magnetY.TabIndex = 26;
@@ -702,8 +772,8 @@
 			// 
 			// reading_magnetX
 			// 
-			this.reading_magnetX.Location = new System.Drawing.Point(185, 274);
-			this.reading_magnetX.Margin = new System.Windows.Forms.Padding(6);
+			this.reading_magnetX.Location = new System.Drawing.Point(184, 273);
+			this.reading_magnetX.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
 			this.reading_magnetX.Name = "reading_magnetX";
 			this.reading_magnetX.Size = new System.Drawing.Size(196, 31);
 			this.reading_magnetX.TabIndex = 25;
@@ -711,8 +781,8 @@
 			// 
 			// reading_magnetZ
 			// 
-			this.reading_magnetZ.Location = new System.Drawing.Point(185, 374);
-			this.reading_magnetZ.Margin = new System.Windows.Forms.Padding(6);
+			this.reading_magnetZ.Location = new System.Drawing.Point(184, 373);
+			this.reading_magnetZ.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
 			this.reading_magnetZ.Name = "reading_magnetZ";
 			this.reading_magnetZ.Size = new System.Drawing.Size(196, 31);
 			this.reading_magnetZ.TabIndex = 27;
@@ -721,7 +791,7 @@
 			// MagnetometerX
 			// 
 			this.MagnetometerX.AutoSize = true;
-			this.MagnetometerX.Location = new System.Drawing.Point(11, 277);
+			this.MagnetometerX.Location = new System.Drawing.Point(10, 277);
 			this.MagnetometerX.Name = "MagnetometerX";
 			this.MagnetometerX.Size = new System.Drawing.Size(164, 25);
 			this.MagnetometerX.TabIndex = 29;
@@ -730,7 +800,7 @@
 			// label13
 			// 
 			this.label13.AutoSize = true;
-			this.label13.Location = new System.Drawing.Point(11, 374);
+			this.label13.Location = new System.Drawing.Point(10, 373);
 			this.label13.Name = "label13";
 			this.label13.Size = new System.Drawing.Size(163, 25);
 			this.label13.TabIndex = 30;
@@ -739,7 +809,7 @@
 			// label14
 			// 
 			this.label14.AutoSize = true;
-			this.label14.Location = new System.Drawing.Point(11, 324);
+			this.label14.Location = new System.Drawing.Point(10, 323);
 			this.label14.Name = "label14";
 			this.label14.Size = new System.Drawing.Size(165, 25);
 			this.label14.TabIndex = 31;
@@ -747,6 +817,9 @@
 			// 
 			// groupBox2
 			// 
+			this.groupBox2.Controls.Add(this.BtnDrawTriangle);
+			this.groupBox2.Controls.Add(this.BtnRotateCircle);
+			this.groupBox2.Controls.Add(this.BtnDrawLine);
 			this.groupBox2.Controls.Add(this.servo2PowerButton);
 			this.groupBox2.Controls.Add(this.servo1PowerButton);
 			this.groupBox2.Controls.Add(this.label28);
@@ -760,17 +833,50 @@
 			this.groupBox2.Controls.Add(this.motorSpeedOverride);
 			this.groupBox2.Controls.Add(this.btnToggleGreen);
 			this.groupBox2.Controls.Add(this.btnToggleRed);
-			this.groupBox2.Location = new System.Drawing.Point(733, 312);
+			this.groupBox2.Location = new System.Drawing.Point(734, 312);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(634, 822);
 			this.groupBox2.TabIndex = 25;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Actions";
 			// 
+			// BtnDrawTriangle
+			// 
+			this.BtnDrawTriangle.Location = new System.Drawing.Point(20, 478);
+			this.BtnDrawTriangle.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.BtnDrawTriangle.Name = "BtnDrawTriangle";
+			this.BtnDrawTriangle.Size = new System.Drawing.Size(216, 44);
+			this.BtnDrawTriangle.TabIndex = 39;
+			this.BtnDrawTriangle.Text = "Draw triangle";
+			this.BtnDrawTriangle.UseVisualStyleBackColor = true;
+			this.BtnDrawTriangle.Click += new System.EventHandler(this.BtnDrawTriangle_Click);
+			// 
+			// BtnRotateCircle
+			// 
+			this.BtnRotateCircle.Location = new System.Drawing.Point(20, 422);
+			this.BtnRotateCircle.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.BtnRotateCircle.Name = "BtnRotateCircle";
+			this.BtnRotateCircle.Size = new System.Drawing.Size(216, 44);
+			this.BtnRotateCircle.TabIndex = 38;
+			this.BtnRotateCircle.Text = "Rotate circle";
+			this.BtnRotateCircle.UseVisualStyleBackColor = true;
+			this.BtnRotateCircle.Click += new System.EventHandler(this.BtnRotateCircle_Click);
+			// 
+			// BtnDrawLine
+			// 
+			this.BtnDrawLine.Location = new System.Drawing.Point(20, 366);
+			this.BtnDrawLine.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.BtnDrawLine.Name = "BtnDrawLine";
+			this.BtnDrawLine.Size = new System.Drawing.Size(216, 44);
+			this.BtnDrawLine.TabIndex = 37;
+			this.BtnDrawLine.Text = "Draw line";
+			this.BtnDrawLine.UseVisualStyleBackColor = true;
+			this.BtnDrawLine.Click += new System.EventHandler(this.BtnDrawLine_Click);
+			// 
 			// servo2PowerButton
 			// 
-			this.servo2PowerButton.Location = new System.Drawing.Point(20, 265);
-			this.servo2PowerButton.Margin = new System.Windows.Forms.Padding(6);
+			this.servo2PowerButton.Location = new System.Drawing.Point(20, 266);
+			this.servo2PowerButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
 			this.servo2PowerButton.Name = "servo2PowerButton";
 			this.servo2PowerButton.Size = new System.Drawing.Size(216, 44);
 			this.servo2PowerButton.TabIndex = 35;
@@ -781,7 +887,7 @@
 			// servo1PowerButton
 			// 
 			this.servo1PowerButton.Location = new System.Drawing.Point(20, 209);
-			this.servo1PowerButton.Margin = new System.Windows.Forms.Padding(6);
+			this.servo1PowerButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
 			this.servo1PowerButton.Name = "servo1PowerButton";
 			this.servo1PowerButton.Size = new System.Drawing.Size(216, 44);
 			this.servo1PowerButton.TabIndex = 34;
@@ -854,7 +960,7 @@
 			// button_zeroencoders
 			// 
 			this.button_zeroencoders.Location = new System.Drawing.Point(20, 148);
-			this.button_zeroencoders.Margin = new System.Windows.Forms.Padding(6);
+			this.button_zeroencoders.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
 			this.button_zeroencoders.Name = "button_zeroencoders";
 			this.button_zeroencoders.Size = new System.Drawing.Size(216, 44);
 			this.button_zeroencoders.TabIndex = 27;
@@ -887,13 +993,15 @@
 			this.textbox_error.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
 			this.textbox_error.ForeColor = System.Drawing.Color.White;
 			this.textbox_error.Location = new System.Drawing.Point(2, 1164);
-			this.textbox_error.Margin = new System.Windows.Forms.Padding(5);
+			this.textbox_error.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.textbox_error.Name = "textbox_error";
 			this.textbox_error.Size = new System.Drawing.Size(1404, 44);
 			this.textbox_error.TabIndex = 26;
 			// 
 			// groupBox5
 			// 
+			this.groupBox5.Controls.Add(this.label39);
+			this.groupBox5.Controls.Add(this.moveDistanceCM);
 			this.groupBox5.Controls.Add(this.status_currentRawBearing);
 			this.groupBox5.Controls.Add(this.label34);
 			this.groupBox5.Controls.Add(this.status_currentBearing);
@@ -916,10 +1024,59 @@
 			this.groupBox5.Text = "Navigation";
 			this.groupBox5.Enter += new System.EventHandler(this.groupBox5_Enter);
 			// 
+			// label39
+			// 
+			this.label39.AutoSize = true;
+			this.label39.Location = new System.Drawing.Point(272, 227);
+			this.label39.Name = "label39";
+			this.label39.Size = new System.Drawing.Size(192, 25);
+			this.label39.TabIndex = 21;
+			this.label39.Text = "Move distance mm";
+			// 
+			// moveDistanceCM
+			// 
+			this.moveDistanceCM.Location = new System.Drawing.Point(278, 255);
+			this.moveDistanceCM.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+			this.moveDistanceCM.Name = "moveDistanceCM";
+			this.moveDistanceCM.Size = new System.Drawing.Size(195, 31);
+			this.moveDistanceCM.TabIndex = 20;
+			this.moveDistanceCM.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.moveDistanceCM_KeyPress);
+			// 
+			// status_currentRawBearing
+			// 
+			this.status_currentRawBearing.AutoSize = true;
+			this.status_currentRawBearing.Location = new System.Drawing.Point(513, 167);
+			this.status_currentRawBearing.Name = "status_currentRawBearing";
+			this.status_currentRawBearing.Size = new System.Drawing.Size(19, 25);
+			this.status_currentRawBearing.TabIndex = 19;
+			this.status_currentRawBearing.Text = "-";
+			// 
+			// label34
+			// 
+			this.label34.AutoSize = true;
+			this.label34.Location = new System.Drawing.Point(292, 167);
+			this.label34.Name = "label34";
+			this.label34.Size = new System.Drawing.Size(211, 25);
+			this.label34.TabIndex = 18;
+			this.label34.Text = "Current Raw Bearing";
+			// 
+			// status_currentBearing
+			// 
+			this.status_currentBearing.AutoSize = true;
+			this.status_currentBearing.Location = new System.Drawing.Point(513, 119);
+			this.status_currentBearing.Name = "status_currentBearing";
+			this.status_currentBearing.Size = new System.Drawing.Size(19, 25);
+			this.status_currentBearing.TabIndex = 17;
+			this.status_currentBearing.Text = "-";
+			// 
 			// label32
 			// 
 			this.label32.AutoSize = true;
-			this.label32.Location = new System.Drawing.Point(29, 314);
+			this.label32.Location = new System.Drawing.Point(28, 314);
 			this.label32.Name = "label32";
 			this.label32.Size = new System.Drawing.Size(218, 25);
 			this.label32.TabIndex = 16;
@@ -928,7 +1085,7 @@
 			// label31
 			// 
 			this.label31.AutoSize = true;
-			this.label31.Location = new System.Drawing.Point(29, 226);
+			this.label31.Location = new System.Drawing.Point(28, 227);
 			this.label31.Name = "label31";
 			this.label31.Size = new System.Drawing.Size(152, 25);
 			this.label31.TabIndex = 15;
@@ -942,6 +1099,11 @@
             0,
             0,
             0});
+			this.moveRotation.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
 			this.moveRotation.Name = "moveRotation";
 			this.moveRotation.Size = new System.Drawing.Size(195, 31);
 			this.moveRotation.TabIndex = 14;
@@ -949,7 +1111,12 @@
 			// 
 			// moveDistance
 			// 
-			this.moveDistance.Location = new System.Drawing.Point(34, 254);
+			this.moveDistance.Location = new System.Drawing.Point(34, 255);
+			this.moveDistance.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
 			this.moveDistance.Name = "moveDistance";
 			this.moveDistance.Size = new System.Drawing.Size(195, 31);
 			this.moveDistance.TabIndex = 13;
@@ -958,7 +1125,7 @@
 			// label20
 			// 
 			this.label20.AutoSize = true;
-			this.label20.Location = new System.Drawing.Point(293, 118);
+			this.label20.Location = new System.Drawing.Point(292, 119);
 			this.label20.Name = "label20";
 			this.label20.Size = new System.Drawing.Size(163, 25);
 			this.label20.TabIndex = 11;
@@ -969,21 +1136,21 @@
 			// 
 			this.number_navdestinationgrid.Location = new System.Drawing.Point(32, 159);
 			this.number_navdestinationgrid.Name = "number_navdestinationgrid";
-			this.number_navdestinationgrid.Size = new System.Drawing.Size(197, 31);
+			this.number_navdestinationgrid.Size = new System.Drawing.Size(196, 31);
 			this.number_navdestinationgrid.TabIndex = 10;
 			this.number_navdestinationgrid.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.number_navdestinationgrid_KeyPress);
 			// 
 			// number_navcurrentgrid
 			// 
-			this.number_navcurrentgrid.Location = new System.Drawing.Point(33, 71);
+			this.number_navcurrentgrid.Location = new System.Drawing.Point(33, 70);
 			this.number_navcurrentgrid.Name = "number_navcurrentgrid";
-			this.number_navcurrentgrid.Size = new System.Drawing.Size(197, 31);
+			this.number_navcurrentgrid.Size = new System.Drawing.Size(196, 31);
 			this.number_navcurrentgrid.TabIndex = 9;
 			// 
 			// status_navbearing
 			// 
 			this.status_navbearing.AutoSize = true;
-			this.status_navbearing.Location = new System.Drawing.Point(513, 71);
+			this.status_navbearing.Location = new System.Drawing.Point(513, 70);
 			this.status_navbearing.Name = "status_navbearing";
 			this.status_navbearing.Size = new System.Drawing.Size(19, 25);
 			this.status_navbearing.TabIndex = 7;
@@ -992,7 +1159,7 @@
 			// label18
 			// 
 			this.label18.AutoSize = true;
-			this.label18.Location = new System.Drawing.Point(293, 72);
+			this.label18.Location = new System.Drawing.Point(292, 72);
 			this.label18.Name = "label18";
 			this.label18.Size = new System.Drawing.Size(86, 25);
 			this.label18.TabIndex = 6;
@@ -1012,7 +1179,7 @@
 			// label16
 			// 
 			this.label16.AutoSize = true;
-			this.label16.Location = new System.Drawing.Point(29, 41);
+			this.label16.Location = new System.Drawing.Point(28, 41);
 			this.label16.Name = "label16";
 			this.label16.Size = new System.Drawing.Size(129, 25);
 			this.label16.TabIndex = 1;
@@ -1026,17 +1193,61 @@
 			this.groupBox6.Controls.Add(this.calibratePassive);
 			this.groupBox6.Controls.Add(this.button2);
 			this.groupBox6.Controls.Add(this.button1);
-			this.groupBox6.Location = new System.Drawing.Point(1453, 12);
+			this.groupBox6.Location = new System.Drawing.Point(1454, 12);
 			this.groupBox6.Name = "groupBox6";
-			this.groupBox6.Size = new System.Drawing.Size(664, 279);
+			this.groupBox6.Size = new System.Drawing.Size(664, 280);
 			this.groupBox6.TabIndex = 28;
 			this.groupBox6.TabStop = false;
 			this.groupBox6.Text = "Routines";
 			// 
+			// button5
+			// 
+			this.button5.Location = new System.Drawing.Point(258, 88);
+			this.button5.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.button5.Name = "button5";
+			this.button5.Size = new System.Drawing.Size(216, 44);
+			this.button5.TabIndex = 41;
+			this.button5.Text = "Raise pen";
+			this.button5.UseVisualStyleBackColor = true;
+			this.button5.Click += new System.EventHandler(this.button5_Click_1);
+			// 
+			// button4
+			// 
+			this.button4.Location = new System.Drawing.Point(258, 33);
+			this.button4.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.button4.Name = "button4";
+			this.button4.Size = new System.Drawing.Size(216, 44);
+			this.button4.TabIndex = 40;
+			this.button4.Text = "Drop pen";
+			this.button4.UseVisualStyleBackColor = true;
+			this.button4.Click += new System.EventHandler(this.button4_Click_1);
+			// 
+			// button3
+			// 
+			this.button3.Location = new System.Drawing.Point(22, 198);
+			this.button3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.button3.Name = "button3";
+			this.button3.Size = new System.Drawing.Size(216, 44);
+			this.button3.TabIndex = 39;
+			this.button3.Text = "Mark calibrated";
+			this.button3.UseVisualStyleBackColor = true;
+			this.button3.Click += new System.EventHandler(this.button3_Click);
+			// 
+			// calibratePassive
+			// 
+			this.calibratePassive.Location = new System.Drawing.Point(22, 145);
+			this.calibratePassive.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.calibratePassive.Name = "calibratePassive";
+			this.calibratePassive.Size = new System.Drawing.Size(216, 44);
+			this.calibratePassive.TabIndex = 38;
+			this.calibratePassive.Text = "Autocalibrate";
+			this.calibratePassive.UseVisualStyleBackColor = true;
+			this.calibratePassive.Click += new System.EventHandler(this.calibratePassive_Click);
+			// 
 			// button2
 			// 
-			this.button2.Location = new System.Drawing.Point(23, 89);
-			this.button2.Margin = new System.Windows.Forms.Padding(6);
+			this.button2.Location = new System.Drawing.Point(22, 89);
+			this.button2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(216, 44);
 			this.button2.TabIndex = 37;
@@ -1046,8 +1257,8 @@
 			// 
 			// button1
 			// 
-			this.button1.Location = new System.Drawing.Point(23, 33);
-			this.button1.Margin = new System.Windows.Forms.Padding(6);
+			this.button1.Location = new System.Drawing.Point(22, 33);
+			this.button1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(216, 44);
 			this.button1.TabIndex = 36;
@@ -1055,190 +1266,11 @@
 			this.button1.UseVisualStyleBackColor = true;
 			this.button1.Click += new System.EventHandler(this.calibrateMagnetometerSlow_click);
 			// 
-			// status_currentBearing
-			// 
-			this.status_currentBearing.AutoSize = true;
-			this.status_currentBearing.Location = new System.Drawing.Point(513, 118);
-			this.status_currentBearing.Name = "status_currentBearing";
-			this.status_currentBearing.Size = new System.Drawing.Size(19, 25);
-			this.status_currentBearing.TabIndex = 17;
-			this.status_currentBearing.Text = "-";
-			// 
-			// status_currentRawBearing
-			// 
-			this.status_currentRawBearing.AutoSize = true;
-			this.status_currentRawBearing.Location = new System.Drawing.Point(513, 167);
-			this.status_currentRawBearing.Name = "status_currentRawBearing";
-			this.status_currentRawBearing.Size = new System.Drawing.Size(19, 25);
-			this.status_currentRawBearing.TabIndex = 19;
-			this.status_currentRawBearing.Text = "-";
-			// 
-			// label34
-			// 
-			this.label34.AutoSize = true;
-			this.label34.Location = new System.Drawing.Point(293, 167);
-			this.label34.Name = "label34";
-			this.label34.Size = new System.Drawing.Size(211, 25);
-			this.label34.TabIndex = 18;
-			this.label34.Text = "Current Raw Bearing";
-			// 
-			// label19
-			// 
-			this.label19.AutoSize = true;
-			this.label19.Location = new System.Drawing.Point(705, 36);
-			this.label19.Name = "label19";
-			this.label19.Size = new System.Drawing.Size(121, 25);
-			this.label19.TabIndex = 31;
-			this.label19.Text = "Mag YMAX";
-			// 
-			// label33
-			// 
-			this.label33.AutoSize = true;
-			this.label33.Location = new System.Drawing.Point(705, 69);
-			this.label33.Name = "label33";
-			this.label33.Size = new System.Drawing.Size(113, 25);
-			this.label33.TabIndex = 32;
-			this.label33.Text = "Mag YMIN";
-			// 
-			// label35
-			// 
-			this.label35.AutoSize = true;
-			this.label35.Location = new System.Drawing.Point(705, 145);
-			this.label35.Name = "label35";
-			this.label35.Size = new System.Drawing.Size(112, 25);
-			this.label35.TabIndex = 33;
-			this.label35.Text = "Mag XMIN";
-			// 
-			// label36
-			// 
-			this.label36.AutoSize = true;
-			this.label36.Location = new System.Drawing.Point(703, 106);
-			this.label36.Name = "label36";
-			this.label36.Size = new System.Drawing.Size(120, 25);
-			this.label36.TabIndex = 34;
-			this.label36.Text = "Mag XMAX";
-			// 
-			// magymax
-			// 
-			this.magymax.AutoSize = true;
-			this.magymax.Location = new System.Drawing.Point(879, 36);
-			this.magymax.Name = "magymax";
-			this.magymax.Size = new System.Drawing.Size(19, 25);
-			this.magymax.TabIndex = 35;
-			this.magymax.Text = "-";
-			// 
-			// magymin
-			// 
-			this.magymin.AutoSize = true;
-			this.magymin.Location = new System.Drawing.Point(879, 72);
-			this.magymin.Name = "magymin";
-			this.magymin.Size = new System.Drawing.Size(19, 25);
-			this.magymin.TabIndex = 36;
-			this.magymin.Text = "-";
-			// 
-			// magxmax
-			// 
-			this.magxmax.AutoSize = true;
-			this.magxmax.Location = new System.Drawing.Point(879, 105);
-			this.magxmax.Name = "magxmax";
-			this.magxmax.Size = new System.Drawing.Size(19, 25);
-			this.magxmax.TabIndex = 37;
-			this.magxmax.Text = "-";
-			// 
-			// magxmin
-			// 
-			this.magxmin.AutoSize = true;
-			this.magxmin.Location = new System.Drawing.Point(879, 144);
-			this.magxmin.Name = "magxmin";
-			this.magxmin.Size = new System.Drawing.Size(19, 25);
-			this.magxmin.TabIndex = 38;
-			this.magxmin.Text = "-";
-			// 
-			// calibratePassive
-			// 
-			this.calibratePassive.Location = new System.Drawing.Point(23, 145);
-			this.calibratePassive.Margin = new System.Windows.Forms.Padding(6);
-			this.calibratePassive.Name = "calibratePassive";
-			this.calibratePassive.Size = new System.Drawing.Size(216, 44);
-			this.calibratePassive.TabIndex = 38;
-			this.calibratePassive.Text = "Autocalibrate";
-			this.calibratePassive.UseVisualStyleBackColor = true;
-			this.calibratePassive.Click += new System.EventHandler(this.calibratePassive_Click);
-			// 
-			// label37
-			// 
-			this.label37.AutoSize = true;
-			this.label37.Location = new System.Drawing.Point(705, 182);
-			this.label37.Name = "label37";
-			this.label37.Size = new System.Drawing.Size(98, 25);
-			this.label37.TabIndex = 39;
-			this.label37.Text = "Mag MIN";
-			// 
-			// label38
-			// 
-			this.label38.AutoSize = true;
-			this.label38.Location = new System.Drawing.Point(705, 219);
-			this.label38.Name = "label38";
-			this.label38.Size = new System.Drawing.Size(106, 25);
-			this.label38.TabIndex = 40;
-			this.label38.Text = "Mag MAX";
-			// 
-			// magmin
-			// 
-			this.magmin.AutoSize = true;
-			this.magmin.Location = new System.Drawing.Point(879, 176);
-			this.magmin.Name = "magmin";
-			this.magmin.Size = new System.Drawing.Size(19, 25);
-			this.magmin.TabIndex = 41;
-			this.magmin.Text = "-";
-			// 
-			// magmax
-			// 
-			this.magmax.AutoSize = true;
-			this.magmax.Location = new System.Drawing.Point(879, 219);
-			this.magmax.Name = "magmax";
-			this.magmax.Size = new System.Drawing.Size(19, 25);
-			this.magmax.TabIndex = 42;
-			this.magmax.Text = "-";
-			// 
-			// button3
-			// 
-			this.button3.Location = new System.Drawing.Point(23, 199);
-			this.button3.Margin = new System.Windows.Forms.Padding(6);
-			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(216, 44);
-			this.button3.TabIndex = 39;
-			this.button3.Text = "Mark calibrated";
-			this.button3.UseVisualStyleBackColor = true;
-			this.button3.Click += new System.EventHandler(this.button3_Click);
-			// 
-			// button4
-			// 
-			this.button4.Location = new System.Drawing.Point(258, 33);
-			this.button4.Margin = new System.Windows.Forms.Padding(6);
-			this.button4.Name = "button4";
-			this.button4.Size = new System.Drawing.Size(216, 44);
-			this.button4.TabIndex = 40;
-			this.button4.Text = "Drop pen";
-			this.button4.UseVisualStyleBackColor = true;
-			this.button4.Click += new System.EventHandler(this.button4_Click_1);
-			// 
-			// button5
-			// 
-			this.button5.Location = new System.Drawing.Point(258, 88);
-			this.button5.Margin = new System.Windows.Forms.Padding(6);
-			this.button5.Name = "button5";
-			this.button5.Size = new System.Drawing.Size(216, 44);
-			this.button5.TabIndex = 41;
-			this.button5.Text = "Raise pen";
-			this.button5.UseVisualStyleBackColor = true;
-			this.button5.Click += new System.EventHandler(this.button5_Click_1);
-			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(2144, 1215);
+			this.ClientSize = new System.Drawing.Size(1914, 1083);
 			this.Controls.Add(this.groupBox6);
 			this.Controls.Add(this.groupBox5);
 			this.Controls.Add(this.textbox_error);
@@ -1247,7 +1279,7 @@
 			this.Controls.Add(this.groupBox3);
 			this.Controls.Add(this.groupBox1);
 			this.KeyPreview = true;
-			this.Margin = new System.Windows.Forms.Padding(6);
+			this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
 			this.Name = "Form1";
 			this.Text = "2nd Year Challenge - Example";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -1267,6 +1299,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.servo1Override)).EndInit();
 			this.groupBox5.ResumeLayout(false);
 			this.groupBox5.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.moveDistanceCM)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.moveRotation)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.moveDistance)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.number_navdestinationgrid)).EndInit();
@@ -1376,13 +1409,14 @@
 		private System.Windows.Forms.Label label33;
 		private System.Windows.Forms.Label label19;
 		private System.Windows.Forms.Button calibratePassive;
-		private System.Windows.Forms.Label magmax;
-		private System.Windows.Forms.Label magmin;
-		private System.Windows.Forms.Label label38;
-		private System.Windows.Forms.Label label37;
 		private System.Windows.Forms.Button button3;
 		private System.Windows.Forms.Button button5;
 		private System.Windows.Forms.Button button4;
-	}
+        private System.Windows.Forms.NumericUpDown moveDistanceCM;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Button BtnDrawTriangle;
+        private System.Windows.Forms.Button BtnRotateCircle;
+        private System.Windows.Forms.Button BtnDrawLine;
+    }
 }
 
