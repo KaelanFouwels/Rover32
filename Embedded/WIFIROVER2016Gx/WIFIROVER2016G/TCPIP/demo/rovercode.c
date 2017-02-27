@@ -13,6 +13,7 @@
 // Include functions specific to this stack application
 #include "MainDemo.h"
 #include "i2c.h"
+#include <math.h>
 
 #define versionhigh 2
 #define versionlow 1
@@ -62,6 +63,9 @@
 
 #define CMDGetIsMovingForward 203
 #define CMDMoveForward 204
+#define CMDMagAngle 205
+
+#define CMDMoveBearing 206
 
 
 
@@ -133,6 +137,22 @@ volatile int MotorrightV = 0;
 volatile int ForwardDistanceRemaining = 0;
 volatile char isFowardDistanceBackwards = 0;
 
+//magnetometer
+
+volatile int MagXMin = 999999;
+volatile int MagXMax = -999999;
+volatile int MagYMin = 999999;
+volatile int MagYMax = -999999;
+volatile int MagX = 0;
+volatile int MagY = 0;
+volatile int MagZ = 0;
+volatile int MagHasValue = 0;
+volatile float MagAngle = 0;
+volatile int MagHasAngle = 0;
+
+volatile int MagRotationTicksRemaining = 0;
+volatile int MagHasFlipped = 0;
+
 #define RXBUFFERsize 256
 volatile unsigned char RX1[RXBUFFERsize];
 volatile int RxHead1, RxTail1;
@@ -192,6 +212,68 @@ int testU2(void) {
     nchars = RxHead2 = RxTail2;
     if (nchars < 0) nchars += RXBUFFERsize;
     return (nchars);
+}
+
+void getMagnetometer(void) {
+
+    int i;
+
+    char values[6];
+
+    I2S();
+    I2send(0x1c);
+    I2send(0);
+    I2SR();
+    I2send(0x1d);
+    if ((I2GET(0) & 0x8) == 0) {
+        POSTTCPhead(0, CMDMag);
+        I2P();
+    } else {
+        I2P();
+        POSTTCPhead(6, CMDMag);
+        I2S();
+        I2send(0x1c);
+        I2send(1);
+        I2SR();
+        I2send(0x1d);
+        for (i = 1; i <= 6; i++) {
+            values[i - 1] = I2GET(i != 6);
+        }
+        I2P();
+    }
+
+    MagX = values[1] | values[0] << 8;
+    MagY = values[3] | values[2] << 8;
+    MagZ = values[5] | values[4] << 8;
+
+    MagXMin = MagX < MagXMin ? MagX : MagXMin;
+    MagYMin = MagY < MagYMin ? MagY : MagYMin;
+
+    MagXMax = MagX > MagXMax ? MagX : MagXMax;
+    MagYMax = MagY > MagYMax ? MagY : MagYMax;
+
+    MagHasValue = 1;
+
+}
+
+void getMagnetometerAngle(void) {
+    if (MagXMax == MagXMin) {
+        return;
+    }
+    if (MagYMax == MagYMin) {
+        return;
+    }
+
+    float sx = (float) ((MagX - MagXMin) / (MagXMax - MagXMin)) - 0.5;
+    float sy = (float) ((MagY - MagYMin) / (MagYMax - MagYMin)) - 0.5;
+
+    float newMagAngle = atan2f(sy, sx);
+    if (!(newMagAngle * MagAngle >= 0.0f)) {
+        MagHasFlipped = 1;
+        //Account for overflow from -180 + 1 to 180
+    }
+    MagAngle = newMagAngle;
+    MagHasAngle = 1;
 }
 
 unsigned char readU2() {
@@ -431,6 +513,8 @@ void __attribute((interrupt(ipl3), vector(_ADC_VECTOR), nomips16)) _ADCInterrupt
     }
 
     IFS1bits.AD1IF = 0;
+
+    getMagnetometer();
 }
 
 int delta1 = 0;
@@ -658,14 +742,43 @@ void setspeed(int newspeed1, int newspeed2) // routine sets speed of motors
 
 int bptag = 0;
 
+void rotateBearing(float radians) {
+    if (!MagHasValue) {
+        return;
+    }
+    getMagnetometerAngle();
+    if (!MagHasAngle) {
+        return;
+    }
+    if (radians > MagAngle) {
+        if (!MagHasFlipped) {
+            setspeed(400, -400);
+        } else {
+            setspeed(-400, 400);
+        }
+
+    } else {
+        if (!MagHasFlipped) {
+            setspeed(-400, 400);
+        } else {
+            setspeed(400, -400);
+        }
+    }
+}
+
+//union {
+//    float fval;
+//    char bval[4];
+//} floatAsBytes;
+
 void processcommand(void) // the main routine which processes commands
 {
     int i, j;
+    float f;
     unsigned char temparray[10];
     unsigned char Blow, Bhigh;
 
     int temphead;
-
 
     switch (nextcommand[0]) // sort on command id (each case is for a different command)
     {
@@ -692,6 +805,7 @@ void processcommand(void) // the main routine which processes commands
             POSTTCPchar(REQCOUNT & 0xff);
             REQCOUNT++;
             break;
+
         case CMDGETversion:POSTTCPhead(2, CMDGETversion); // get version
             POSTTCPchar(versionhigh);
             POSTTCPchar(versionlow);
@@ -710,7 +824,14 @@ void processcommand(void) // the main routine which processes commands
             POSTTCPchar(0);
             break;
 
+        case CMDMoveBearing:
 
+            i = (int) ((int) nextcommand[1] << 8 | (int) nextcommand[2]);
+            f = i / 1000.0;
+
+            rotateBearing(f);
+
+            break;
 
         case CMDSETMOTOR1:if (commandlen == 1) // set motor1
             {
@@ -1030,6 +1151,19 @@ void processcommand(void) // the main routine which processes commands
                 }
             }
             break;
+
+        case CMDMagAngle:
+            if (commandlen == 0) {
+                if (MagHasAngle == 0) {
+                    POSTTCPhead(0, CMDMagAngle);
+                } else {
+                    i = (int) (MagAngle * 1000.00);
+                    POSTTCPhead(2, CMDMagAngle);
+                    POSTTCPchar(i >> 8);
+                    POSTTCPchar(i);
+                }
+            }
+            break;
         case CMDdoSTEP:
             if (commandlen == 2) //do Step
             {
@@ -1279,12 +1413,9 @@ void ProcessIO(void) {
 
     if (PeriodA > 512) CspeedA = 0x8000000 / PeriodA;
     if (PeriodB > 512) CspeedB = 0x8000000 / PeriodB;
-    // if ((TickGet()-lasticA)>(TICK_SECOND/10))
-    //   if (PeriodA<0x2000000) PeriodA*=2;
-    //if ((TickGet()-lasticB)>(TICK_SECOND/10))
-    //  if (PeriodB<0x2000000) PeriodB*=2;
     if (CLflag) doclosedloop();
 
+    // Movement
     if (ForwardDistanceRemaining - ((pos2 - pos2Zero) + (pos1 - pos1Zero)) / 2 <= 0) {
         if (ForwardDistanceRemaining != -1) {
             setspeed(0, 0);
@@ -1297,6 +1428,15 @@ void ProcessIO(void) {
             moveForward();
         }
     }
+
+    // Rotation
+    if (MagRotationTicksRemaining != 0) {
+        rotateBearing();
+        MagRotationTicksRemaining--;
+    }
+
+    //Gyro
+
     if (yescomsdata()) {
         if (commandstate < 0) {
             if ((unsigned char) getcomsdata() == 0xff) {

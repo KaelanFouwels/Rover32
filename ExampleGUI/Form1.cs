@@ -110,12 +110,8 @@ namespace Comms
 				magymax.Text = roverData.Instance.magnetometerYMax.ToString();
 				magymin.Text = roverData.Instance.magnetometerYMin.ToString();
 
-				if (roverStatus.Instance.magnetometerCalibration == calibrationStatus.calibrated)
-				{
-					var angle = Magnetometer.get360Angle();
-					status_currentBearing.Text = angle.ToString();
-					status_currentRawBearing.Text = Magnetometer.getAngle().ToString();
-				}
+				var angle = roverData.Instance.magnetAngle;
+				status_currentBearing.Text = angle.ToString();
 			}
 
 			if (roverStatus.Instance.gyroscope == sensorStatus.ok)

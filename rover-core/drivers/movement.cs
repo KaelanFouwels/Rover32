@@ -83,5 +83,11 @@ namespace rover_core.drivers
 			roverData.Instance.rawencoderRightOffset = roverData.Instance.rawencoderRight;
 			roverData.Instance.rawencoderLeftOffset = roverData.Instance.rawencoderLeft;
 		}
+
+		public void rotateBearing(float radians)
+		{
+			int radiansShifted = (int) radians * 1000;
+			_tcpClient.SendData(CommandID.CMDMoveBearing, new byte[] { (byte)(radiansShifted >> 8), (byte)radiansShifted });
+		}
 	}
 }

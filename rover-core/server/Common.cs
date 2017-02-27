@@ -47,5 +47,7 @@ namespace CommsLib
 		SetServoPower = 21,
 		SetServo1 = 22,
 		SetServo2 = 23,
+		CMDMagAngle = 205,
+		CMDMoveBearing = 206
 	};
 }

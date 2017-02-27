@@ -78,7 +78,8 @@ namespace rover_core
 			//myClient.SendData(CommandID.GetLEDandSwitchStatus); //this type needs no payload
 			myClient.SendData(CommandID.MotorPosition);
 			//myClient.SendData(CommandID.GetAccelValue);
-			myClient.SendData(CommandID.GetMagnetValue);
+			//myClient.SendData(CommandID.GetMagnetValue);
+			myClient.SendData(CommandID.CMDMagAngle);
 			//myClient.SendData(CommandID.CMDGyroPosition);
 			//myClient.SendData(CommandID.GetGyroValue);
 			//myClient.SendData(CommandID.CMDGetIsMovingForward);
@@ -197,6 +198,20 @@ namespace rover_core
 					roverStatus.Instance.isMoving = movementStatus.novalue;
 				}
 			}
+			if (e.RawMessage[3] == (byte)CommandID.CMDMagAngle)
+			{
+				short messageLength = (short)(e.RawMessage[1]);
+				if (messageLength == 2)
+				{
+					roverData.Instance.magnetAngle = (short)((uint)e.RawMessage[5] | ((uint)e.RawMessage[4] << 8));
+					roverStatus.Instance.magnetometer = sensorStatus.ok;
+				}
+				else
+				{
+					roverStatus.Instance.magnetometer = sensorStatus.novalue;
+				}
+			}
+
 		}
 	}
 }
