@@ -152,6 +152,8 @@ volatile int MagHasAngle = 0;
 
 volatile int MagRotationTicksRemaining = 0;
 volatile int MagHasFlipped = 0;
+volatile int MagLastDirection = 0;
+volatile float MagCurrentBearingTarget = 0.0;
 
 #define RXBUFFERsize 256
 volatile unsigned char RX1[RXBUFFERsize];
@@ -743,6 +745,9 @@ void setspeed(int newspeed1, int newspeed2) // routine sets speed of motors
 int bptag = 0;
 
 void rotateBearing(float radians) {
+
+    int newDirection = 0;
+
     if (!MagHasValue) {
         return;
     }
@@ -752,17 +757,27 @@ void rotateBearing(float radians) {
     }
     if (radians > MagAngle) {
         if (!MagHasFlipped) {
-            setspeed(400, -400);
+            newDirection = 1;
         } else {
-            setspeed(-400, 400);
+            newDirection = 0;
         }
 
     } else {
         if (!MagHasFlipped) {
-            setspeed(-400, 400);
+            newDirection = 0;
         } else {
-            setspeed(400, -400);
+            newDirection = 1;
         }
+    }
+
+    if (newDirection == 1) {
+        setspeed(400, -400);
+    } else {
+        setspeed(-400, 400);
+    }
+
+    if (newDirection != MagLastDirection) {
+        MagRotationTicksRemaining--;
     }
 }
 
@@ -829,7 +844,8 @@ void processcommand(void) // the main routine which processes commands
             i = (int) ((int) nextcommand[1] << 8 | (int) nextcommand[2]);
             f = i / 1000.0;
 
-            rotateBearing(f);
+            MagCurrentBearingTarget = f;
+            MagRotationTicksRemaining = 10;
 
             break;
 
@@ -1431,8 +1447,7 @@ void ProcessIO(void) {
 
     // Rotation
     if (MagRotationTicksRemaining != 0) {
-        rotateBearing();
-        MagRotationTicksRemaining--;
+        rotateBearing(MagCurrentBearingTarget);
     }
 
     //Gyro
