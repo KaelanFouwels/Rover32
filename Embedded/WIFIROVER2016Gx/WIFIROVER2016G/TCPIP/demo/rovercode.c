@@ -228,11 +228,11 @@ void getMagnetometer(void) {
     I2SR();
     I2send(0x1d);
     if ((I2GET(0) & 0x8) == 0) {
-        POSTTCPhead(0, CMDMag);
+        //POSTTCPhead(0, CMDMag);
         I2P();
     } else {
         I2P();
-        POSTTCPhead(6, CMDMag);
+        //POSTTCPhead(6, CMDMag);
         I2S();
         I2send(0x1c);
         I2send(1);
@@ -259,6 +259,7 @@ void getMagnetometer(void) {
 }
 
 void getMagnetometerAngle(void) {
+
     if (MagXMax == MagXMin) {
         return;
     }
@@ -515,8 +516,6 @@ void __attribute((interrupt(ipl3), vector(_ADC_VECTOR), nomips16)) _ADCInterrupt
     }
 
     IFS1bits.AD1IF = 0;
-
-    getMagnetometer();
 }
 
 int delta1 = 0;
@@ -751,6 +750,7 @@ void rotateBearing(float radians) {
     if (!MagHasValue) {
         return;
     }
+    getMagnetometer();
     getMagnetometerAngle();
     if (!MagHasAngle) {
         return;
@@ -1170,12 +1170,16 @@ void processcommand(void) // the main routine which processes commands
 
         case CMDMagAngle:
             if (commandlen == 0) {
+                if (MagHasValue == 0) {
+                    POSTTCPhead(0, CMDMagAngle);
+                }
+                getMagnetometerAngle();
                 if (MagHasAngle == 0) {
                     POSTTCPhead(0, CMDMagAngle);
                 } else {
-                    i = (int) (MagAngle * 1000.00);
-                    POSTTCPhead(2, CMDMagAngle);
-                    POSTTCPchar(i >> 8);
+                    f = MagAngle;
+                    i = (char) f;
+                    POSTTCPhead(1, CMDMagAngle);
                     POSTTCPchar(i);
                 }
             }
@@ -1430,6 +1434,8 @@ void ProcessIO(void) {
     if (PeriodA > 512) CspeedA = 0x8000000 / PeriodA;
     if (PeriodB > 512) CspeedB = 0x8000000 / PeriodB;
     if (CLflag) doclosedloop();
+
+    //getMagnetometer();
 
     // Movement
     if (ForwardDistanceRemaining - ((pos2 - pos2Zero) + (pos1 - pos1Zero)) / 2 <= 0) {

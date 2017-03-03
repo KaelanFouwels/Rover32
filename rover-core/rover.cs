@@ -75,11 +75,11 @@ namespace rover_core
 			if (!myClient.isConnected) return; //if no connection, don't do anything
 
 			//we will request the status of the LEDs on a regular basis
-			//myClient.SendData(CommandID.GetLEDandSwitchStatus); //this type needs no payload
+			myClient.SendData(CommandID.GetLEDandSwitchStatus); //this type needs no payload
 			myClient.SendData(CommandID.MotorPosition);
-			//myClient.SendData(CommandID.GetAccelValue);
+			myClient.SendData(CommandID.GetAccelValue);
 			//myClient.SendData(CommandID.GetMagnetValue);
-			myClient.SendData(CommandID.CMDMagAngle);
+			//myClient.SendData(CommandID.CMDMagAngle);
 			//myClient.SendData(CommandID.CMDGyroPosition);
 			//myClient.SendData(CommandID.GetGyroValue);
 			//myClient.SendData(CommandID.CMDGetIsMovingForward);
@@ -138,23 +138,6 @@ namespace rover_core
 				}
 			}
 
-			if (e.RawMessage[3] == (byte)CommandID.GetMagnetValue)
-			{
-				short messageLength = (short)(e.RawMessage[1]);
-				if (messageLength == 0x8)
-				{
-					roverData.Instance.magnetX = (short)((uint)e.RawMessage[5] | ((uint)e.RawMessage[4] << 8));
-					roverData.Instance.magnetY = (short)((uint)e.RawMessage[7] | ((uint)e.RawMessage[6] << 8));
-					roverData.Instance.magnetZ = (short)((uint)e.RawMessage[9] | ((uint)e.RawMessage[8] << 8));
-
-					roverStatus.Instance.magnetometer = sensorStatus.ok;
-				}
-				else
-				{
-					roverStatus.Instance.magnetometer = sensorStatus.novalue;
-				}
-			}
-
 			if (e.RawMessage[3] == (byte)CommandID.GetGyroValue)
 			{
 				short messageLength = (short)(e.RawMessage[1]);
@@ -201,9 +184,9 @@ namespace rover_core
 			if (e.RawMessage[3] == (byte)CommandID.CMDMagAngle)
 			{
 				short messageLength = (short)(e.RawMessage[1]);
-				if (messageLength == 2)
+				if (messageLength == 3)
 				{
-					roverData.Instance.magnetAngle = (short)((uint)e.RawMessage[5] | ((uint)e.RawMessage[4] << 8));
+					roverData.Instance.magnetAngle = (short)e.RawMessage[4];
 					roverStatus.Instance.magnetometer = sensorStatus.ok;
 				}
 				else

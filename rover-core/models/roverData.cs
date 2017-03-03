@@ -41,7 +41,7 @@ namespace rover_core.models
 		public short magnetX { get; internal set; } = 0;
 		public short magnetY { get; internal set; } = 0;
 		public short magnetZ { get; internal set; } = 0;
-		public float magnetAngle { get; internal set; } = 0;
+		public short magnetAngle { get; internal set; } = 0;
 		public short gyroRadians { get; internal set; } = 0;
 		public short accellTemp { get; internal set; } = 0;
 		public short accellStatus { get; internal set; } = 0;

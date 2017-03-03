@@ -101,14 +101,14 @@ namespace Comms
 
 			if (roverStatus.Instance.magnetometer == sensorStatus.ok)
 			{
-				reading_magnetX.Text = roverData.Instance.magnetX.ToString();
-				reading_magnetY.Text = roverData.Instance.magnetY.ToString();
-				reading_magnetZ.Text = roverData.Instance.magnetZ.ToString();
+				//reading_magnetX.Text = roverData.Instance.magnetX.ToString();
+				//reading_magnetY.Text = roverData.Instance.magnetY.ToString();
+				//reading_magnetZ.Text = roverData.Instance.magnetZ.ToString();
 
-				magxmax.Text = roverData.Instance.magnetometerXMax.ToString();
-				magxmin.Text = roverData.Instance.magnetometerXMin.ToString();
-				magymax.Text = roverData.Instance.magnetometerYMax.ToString();
-				magymin.Text = roverData.Instance.magnetometerYMin.ToString();
+				//magxmax.Text = roverData.Instance.magnetometerXMax.ToString();
+				//magxmin.Text = roverData.Instance.magnetometerXMin.ToString();
+				//magymax.Text = roverData.Instance.magnetometerYMax.ToString();
+				//magymin.Text = roverData.Instance.magnetometerYMin.ToString();
 
 				var angle = roverData.Instance.magnetAngle;
 				status_currentBearing.Text = angle.ToString();
