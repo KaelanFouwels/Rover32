@@ -186,7 +186,8 @@ namespace rover_core
 				short messageLength = (short)(e.RawMessage[1]);
 				if (messageLength == 3)
 				{
-					roverData.Instance.magnetAngle = (short)e.RawMessage[4];
+					float angle = System.BitConverter.ToSingle(e.RawMessage, 4);
+					roverData.Instance.magnetAngle = angle;
 					roverStatus.Instance.magnetometer = sensorStatus.ok;
 				}
 				else

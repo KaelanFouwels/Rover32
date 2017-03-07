@@ -86,8 +86,8 @@ namespace rover_core.drivers
 
 		public void rotateBearing(float radians)
 		{
-			int radiansShifted = (int) radians * 1000;
-			_tcpClient.SendData(CommandID.CMDMoveBearing, new byte[] { (byte)(radiansShifted >> 8), (byte)radiansShifted });
+			short radiansShifted = (short)(radians * 10.00);
+			_tcpClient.SendData(CommandID.CMDMoveBearing, new byte[] { (byte)(radiansShifted) });
 		}
 	}
 }
