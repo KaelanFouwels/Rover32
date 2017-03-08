@@ -170,7 +170,7 @@ volatile int pos2Zero = 0;
 volatile int magnetometerFlag = 0;
 volatile int magnetometerCounter = 0;
 
-volatile int rotationTarget = 0;
+volatile float rotationTarget = 0;
 volatile int areRotating = 0;
 volatile int rotationFlag = 0;
 volatile int rotationCounter = 0;
@@ -307,11 +307,13 @@ void getMagnetometerAngle(void) {
     sx = ((MagX - MagXMin) / (MagXMax - MagXMin)) - 0.5;
     sy = ((MagY - MagYMin) / (MagYMax - MagYMin)) - 0.5;
 
-    //if (!(newMagAngle * MagAngle >= 0.0f)) {
-    //    MagHasFlipped = 1;
-    //Account for overflow from -180 + 1 to 180
-    //}
-    MagAngle = atan2f(sy, sx);
+    float newMagAngle = atan2f(sy, sx);
+
+    if (!(newMagAngle * MagAngle >= 0.0f)) {
+        MagHasFlipped = 1;
+        //Account for overflow from -180 + 1 to 180
+    }
+    MagAngle = newMagAngle;
     MagHasAngle = 1;
 }
 
@@ -407,35 +409,35 @@ void __attribute((interrupt(ipl3), vector(_ADC_VECTOR), nomips16)) _ADCInterrupt
     ledCounter++;
     if (ledCounter == 10000) {
         ledCounter = 0;
-        ledFlag = 1;
+        //ledFlag = 1;
     }
 
     //40Hz
     magnetometerCounter++;
-    if (magnetometerCounter > 1000) {
+    if (magnetometerCounter == 1000) {
         magnetometerCounter = 0;
         magnetometerFlag = 1;
     }
 
     //1Hz
     magnetometerAngleCounter++;
-    if (magnetometerAngleCounter > 40000) {
+    if (magnetometerAngleCounter == 40000) {
         magnetometerAngleCounter = 0;
         magnetometerAngleFlag = 1;
     }
 
-    //100Hz
+    //10Hz
     rotationCounter++;
-    if (rotationCounter > 400) {
+    if (rotationCounter == 4000) {
         rotationCounter = 0;
-        //rotationFlag = 1;
+        rotationFlag = 1;
     }
 
     //100Hz
     movementCounter++;
-    if (movementCounter > 400) {
+    if (movementCounter == 400) {
         movementCounter = 0;
-        //movementFlag = 1;
+        movementFlag = 1;
     }
 
 
@@ -820,8 +822,6 @@ int bptag = 0;
 
 void checkRotation() {
 
-    //getMagnetometerAngle();
-
     int newDirection = 0;
 
     if (!MagHasAngle) {
@@ -910,8 +910,8 @@ void processcommand(void) // the main routine which processes commands
 
         case CMDMoveBearing:
 
-            i = (int) nextcommand[1];
-            f = i / 10.00;
+            i = nextcommand[2] | (nextcommand[1] << 8);
+            f = ((float) i) / 1000.00;
 
             rotationTarget = f;
             areRotating = 1;

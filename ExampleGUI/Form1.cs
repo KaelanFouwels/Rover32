@@ -413,7 +413,9 @@ namespace Comms
         private async void moveRotation_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			if (e.KeyChar != (char)Keys.Enter) return;
-			await Task.Run(() => rover_core.routines.MoveDegrees.Run(rover, Convert.ToDouble(moveRotation.Value)));
+			float value = (float) moveRotation.Value;
+			float radians = (value / 360) * 2 * (float) Math.PI;
+			await Task.Run(() => rover.Movement.rotateBearing(radians));
 		}
 
 		private void motorSpeedOverride_TextChanged(object sender, EventArgs e)
