@@ -38,8 +38,8 @@ namespace rover_core.models
 		}
 		public bool ledGreen { get; internal set; } = false;
 		public bool ledRed { get; internal set; } = false;
-		public short magnetX { get; internal set; } = 0;
-		public short magnetY { get; internal set; } = 0;
+		public float magnetX { get; internal set; } = 0;
+		public float magnetY { get; internal set; } = 0;
 		public short magnetZ { get; internal set; } = 0;
 		public float magnetAngle { get; internal set; } = 0;
 		public short gyroRadians { get; internal set; } = 0;

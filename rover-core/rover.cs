@@ -79,7 +79,7 @@ namespace rover_core
 			myClient.SendData(CommandID.MotorPosition);
 			myClient.SendData(CommandID.GetAccelValue);
 			//myClient.SendData(CommandID.GetMagnetValue);
-			//myClient.SendData(CommandID.CMDMagAngle);
+			myClient.SendData(CommandID.CMDMagAngle);
 			//myClient.SendData(CommandID.CMDGyroPosition);
 			//myClient.SendData(CommandID.GetGyroValue);
 			//myClient.SendData(CommandID.CMDGetIsMovingForward);
@@ -184,10 +184,12 @@ namespace rover_core
 			if (e.RawMessage[3] == (byte)CommandID.CMDMagAngle)
 			{
 				short messageLength = (short)(e.RawMessage[1]);
-				if (messageLength == 3)
+				if (messageLength == 14)
 				{
-					float angle = System.BitConverter.ToSingle(e.RawMessage, 4);
-					roverData.Instance.magnetAngle = angle;
+					roverData.Instance.magnetAngle = System.BitConverter.ToSingle(e.RawMessage, 4);
+					roverData.Instance.magnetX = System.BitConverter.ToSingle(e.RawMessage, 8);
+					roverData.Instance.magnetY = System.BitConverter.ToSingle(e.RawMessage, 12);
+					
 					roverStatus.Instance.magnetometer = sensorStatus.ok;
 				}
 				else

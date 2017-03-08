@@ -139,13 +139,13 @@ volatile char isFowardDistanceBackwards = 0;
 
 //magnetometer
 
-volatile int MagXMin = 999999;
-volatile int MagXMax = -999999;
-volatile int MagYMin = 999999;
-volatile int MagYMax = -999999;
-volatile int MagX = 0;
-volatile int MagY = 0;
-volatile int MagZ = 0;
+volatile float MagXMin = 999999;
+volatile float MagXMax = -999999;
+volatile float MagYMin = 999999;
+volatile float MagYMax = -999999;
+volatile float MagX = 0;
+volatile float MagY = 0;
+volatile float MagZ = 0;
 volatile int MagHasValue = 0;
 volatile float MagAngle = 0;
 volatile int MagHasAngle = 0;
@@ -154,6 +154,9 @@ volatile int MagRotationTicksRemaining = 0;
 volatile int MagHasFlipped = 0;
 volatile int MagLastDirection = 0;
 volatile float MagCurrentBearingTarget = 0.0;
+
+volatile float sx = 0;
+volatile float sy = 0;
 
 #define RXBUFFERsize 256
 volatile unsigned char RX1[RXBUFFERsize];
@@ -174,6 +177,12 @@ volatile int rotationCounter = 0;
 
 volatile int movementFlag = 0;
 volatile int movementCounter = 0;
+
+volatile int magnetometerAngleFlag = 0;
+volatile int magnetometerAngleCounter = 0;
+
+volatile int ledCounter = 0;
+volatile int ledFlag = 0;
 
 volatile int isMoving = 0;
 
@@ -236,9 +245,13 @@ int testU2(void) {
 
 void getMagnetometer(void) {
 
+    float A = 0.9;
+
     int i;
 
-    char values[6];
+    unsigned short values[6];
+
+    int success = 1;
 
     I2S();
     I2send(0x1c);
@@ -246,11 +259,10 @@ void getMagnetometer(void) {
     I2SR();
     I2send(0x1d);
     if ((I2GET(0) & 0x8) == 0) {
-        //POSTTCPhead(0, CMDMag);
+        success = 0;
         I2P();
     } else {
         I2P();
-        //POSTTCPhead(6, CMDMag);
         I2S();
         I2send(0x1c);
         I2send(1);
@@ -262,17 +274,24 @@ void getMagnetometer(void) {
         I2P();
     }
 
-    MagX = values[1] | values[0] << 8;
-    MagY = values[3] | values[2] << 8;
-    MagZ = values[5] | values[4] << 8;
+    if (success) {
 
-    MagXMin = MagX < MagXMin ? MagX : MagXMin;
-    MagYMin = MagY < MagYMin ? MagY : MagYMin;
+        float MagXn = (short) (values[1] | values[0] << 8);
+        float MagYn = (short) (values[3] | values[2] << 8);
+        float MagZn = (short) (values[5] | values[4] << 8);
 
-    MagXMax = MagX > MagXMax ? MagX : MagXMax;
-    MagYMax = MagY > MagYMax ? MagY : MagYMax;
+        MagX = A * MagXn + (1 - A) * MagX;
+        MagY = A * MagYn + (1 - A) * MagY;
 
-    MagHasValue = 1;
+        MagXMin = MagX < MagXMin ? MagX : MagXMin;
+        MagYMin = MagY < MagYMin ? MagY : MagYMin;
+
+        MagXMax = MagX > MagXMax ? MagX : MagXMax;
+        MagYMax = MagY > MagYMax ? MagY : MagYMax;
+
+        MagHasValue = 1;
+    }
+
 
 }
 
@@ -285,15 +304,14 @@ void getMagnetometerAngle(void) {
         return;
     }
 
-    float sx = (float) ((MagX - MagXMin) / (MagXMax - MagXMin)) - 0.5;
-    float sy = (float) ((MagY - MagYMin) / (MagYMax - MagYMin)) - 0.5;
+    sx = ((MagX - MagXMin) / (MagXMax - MagXMin)) - 0.5;
+    sy = ((MagY - MagYMin) / (MagYMax - MagYMin)) - 0.5;
 
-    float newMagAngle = atan2f(sy, sx);
-    if (!(newMagAngle * MagAngle >= 0.0f)) {
-        MagHasFlipped = 1;
-        //Account for overflow from -180 + 1 to 180
-    }
-    MagAngle = newMagAngle;
+    //if (!(newMagAngle * MagAngle >= 0.0f)) {
+    //    MagHasFlipped = 1;
+    //Account for overflow from -180 + 1 to 180
+    //}
+    MagAngle = atan2f(sy, sx);
     MagHasAngle = 1;
 }
 
@@ -383,22 +401,41 @@ volatile unsigned char setLineLed = 0;
 
 void __attribute((interrupt(ipl3), vector(_ADC_VECTOR), nomips16)) _ADCInterrupt(void) {
 
+
+
+    //4Hz
+    ledCounter++;
+    if (ledCounter == 10000) {
+        ledCounter = 0;
+        ledFlag = 1;
+    }
+
+    //40Hz
     magnetometerCounter++;
-    if (magnetometerCounter > 10) {
+    if (magnetometerCounter > 1000) {
         magnetometerCounter = 0;
         magnetometerFlag = 1;
     }
 
-    rotationCounter++;
-    if (rotationCounter > 10) {
-        rotationCounter = 0;
-        rotationFlag = 1;
+    //1Hz
+    magnetometerAngleCounter++;
+    if (magnetometerAngleCounter > 40000) {
+        magnetometerAngleCounter = 0;
+        magnetometerAngleFlag = 1;
     }
 
+    //100Hz
+    rotationCounter++;
+    if (rotationCounter > 400) {
+        rotationCounter = 0;
+        //rotationFlag = 1;
+    }
+
+    //100Hz
     movementCounter++;
-    if (movementCounter > 10) {
+    if (movementCounter > 400) {
         movementCounter = 0;
-        movementFlag = 1;
+        //movementFlag = 1;
     }
 
 
@@ -783,7 +820,7 @@ int bptag = 0;
 
 void checkRotation() {
 
-    getMagnetometerAngle();
+    //getMagnetometerAngle();
 
     int newDirection = 0;
 
@@ -1204,14 +1241,24 @@ void processcommand(void) // the main routine which processes commands
                 if (MagHasValue == 0) {
                     POSTTCPhead(0, CMDMagAngle);
                 }
-                getMagnetometerAngle();
                 if (MagHasAngle == 0) {
                     POSTTCPhead(0, CMDMagAngle);
                 } else {
+
                     f = MagAngle;
 
                     myfloatUnion.f = f;
-                    POSTTCPhead(1, CMDMagAngle);
+                    POSTTCPhead(12, CMDMagAngle);
+                    POSTTCPchar(myfloatUnion.s[0]);
+                    POSTTCPchar(myfloatUnion.s[1]);
+                    POSTTCPchar(myfloatUnion.s[2]);
+                    POSTTCPchar(myfloatUnion.s[3]);
+                    myfloatUnion.f = sx;
+                    POSTTCPchar(myfloatUnion.s[0]);
+                    POSTTCPchar(myfloatUnion.s[1]);
+                    POSTTCPchar(myfloatUnion.s[2]);
+                    POSTTCPchar(myfloatUnion.s[3]);
+                    myfloatUnion.f = sy;
                     POSTTCPchar(myfloatUnion.s[0]);
                     POSTTCPchar(myfloatUnion.s[1]);
                     POSTTCPchar(myfloatUnion.s[2]);
@@ -1466,9 +1513,22 @@ void ProcessIO(void) {
         getMagnetometer();
     }
 
+    if (ledFlag == 1) {
+        ledFlag = 0;
+        if (LED1_IO == 1) {
+            LED1_IO = 0;
+        } else {
+            LED1_IO = 1;
+        }
+    }
+
     if (PeriodA > 512) CspeedA = 0x8000000 / PeriodA;
     if (PeriodB > 512) CspeedB = 0x8000000 / PeriodB;
     if (CLflag) doclosedloop();
+
+    if (magnetometerAngleFlag) {
+        getMagnetometerAngle();
+    }
 
     // Movement
     if (isMoving && movementFlag) {
@@ -1486,7 +1546,7 @@ void ProcessIO(void) {
     }
 
     // Rotation
-    if (rotationFlag == 1) {
+    if (areRotating && rotationFlag == 1) {
         checkRotation();
         rotationFlag = 0;
     }

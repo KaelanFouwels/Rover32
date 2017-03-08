@@ -101,8 +101,8 @@ namespace Comms
 
 			if (roverStatus.Instance.magnetometer == sensorStatus.ok)
 			{
-				//reading_magnetX.Text = roverData.Instance.magnetX.ToString();
-				//reading_magnetY.Text = roverData.Instance.magnetY.ToString();
+				reading_magnetX.Text = roverData.Instance.magnetX.ToString();
+				reading_magnetY.Text = roverData.Instance.magnetY.ToString();
 				//reading_magnetZ.Text = roverData.Instance.magnetZ.ToString();
 
 				//magxmax.Text = roverData.Instance.magnetometerXMax.ToString();
@@ -290,15 +290,6 @@ namespace Comms
 		private void number_navdestinationgrid_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			if (e.KeyChar != (char)Keys.Enter) return;
-
-			var currentgrid = number_navcurrentgrid.Value;
-			var destinationgrid = number_navcurrentgrid.Value;
-
-			if (currentgrid % 2 != 0 || destinationgrid % 2 != 0)
-			{
-				textbox_error.Text = "Grid references must be 6, or 8, or other even figures.";
-				return;
-			}
 		}
 
 		private void label20_Click(object sender, EventArgs e)
