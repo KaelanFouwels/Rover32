@@ -109,23 +109,6 @@
 			this.label78 = new System.Windows.Forms.Label();
 			this.motorSpeedOverride = new System.Windows.Forms.TextBox();
 			this.textbox_error = new System.Windows.Forms.TextBox();
-			this.groupBox5 = new System.Windows.Forms.GroupBox();
-			this.label39 = new System.Windows.Forms.Label();
-			this.moveDistanceCM = new System.Windows.Forms.NumericUpDown();
-			this.status_currentRawBearing = new System.Windows.Forms.Label();
-			this.label34 = new System.Windows.Forms.Label();
-			this.status_currentBearing = new System.Windows.Forms.Label();
-			this.label32 = new System.Windows.Forms.Label();
-			this.label31 = new System.Windows.Forms.Label();
-			this.moveRotation = new System.Windows.Forms.NumericUpDown();
-			this.moveDistance = new System.Windows.Forms.NumericUpDown();
-			this.label20 = new System.Windows.Forms.Label();
-			this.number_navdestinationgrid = new System.Windows.Forms.NumericUpDown();
-			this.number_navcurrentgrid = new System.Windows.Forms.NumericUpDown();
-			this.status_navbearing = new System.Windows.Forms.Label();
-			this.label18 = new System.Windows.Forms.Label();
-			this.label17 = new System.Windows.Forms.Label();
-			this.label16 = new System.Windows.Forms.Label();
 			this.groupBox6 = new System.Windows.Forms.GroupBox();
 			this.button5 = new System.Windows.Forms.Button();
 			this.button4 = new System.Windows.Forms.Button();
@@ -133,19 +116,26 @@
 			this.calibratePassive = new System.Windows.Forms.Button();
 			this.button2 = new System.Windows.Forms.Button();
 			this.button1 = new System.Windows.Forms.Button();
+			this.label20 = new System.Windows.Forms.Label();
+			this.moveDistance = new System.Windows.Forms.NumericUpDown();
+			this.moveRotation = new System.Windows.Forms.NumericUpDown();
+			this.label31 = new System.Windows.Forms.Label();
+			this.label32 = new System.Windows.Forms.Label();
+			this.status_currentBearing = new System.Windows.Forms.Label();
+			this.moveDistanceCM = new System.Windows.Forms.NumericUpDown();
+			this.label39 = new System.Windows.Forms.Label();
+			this.groupBox5 = new System.Windows.Forms.GroupBox();
 			this.groupBox1.SuspendLayout();
 			this.groupBox3.SuspendLayout();
 			this.groupBox4.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.servo2Override)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.servo1Override)).BeginInit();
-			this.groupBox5.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.moveDistanceCM)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.moveRotation)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.moveDistance)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.number_navdestinationgrid)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.number_navcurrentgrid)).BeginInit();
 			this.groupBox6.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.moveDistance)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.moveRotation)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.moveDistanceCM)).BeginInit();
+			this.groupBox5.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// groupBox1
@@ -154,9 +144,9 @@
 			this.groupBox1.Controls.Add(this.txtIP);
 			this.groupBox1.Controls.Add(this.label1);
 			this.groupBox1.Location = new System.Drawing.Point(24, 23);
-			this.groupBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.groupBox1.Margin = new System.Windows.Forms.Padding(6);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.groupBox1.Padding = new System.Windows.Forms.Padding(6);
 			this.groupBox1.Size = new System.Drawing.Size(342, 269);
 			this.groupBox1.TabIndex = 0;
 			this.groupBox1.TabStop = false;
@@ -165,7 +155,7 @@
 			// btnCon
 			// 
 			this.btnCon.Location = new System.Drawing.Point(96, 155);
-			this.btnCon.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.btnCon.Margin = new System.Windows.Forms.Padding(6);
 			this.btnCon.Name = "btnCon";
 			this.btnCon.Size = new System.Drawing.Size(150, 44);
 			this.btnCon.TabIndex = 2;
@@ -176,7 +166,7 @@
 			// txtIP
 			// 
 			this.txtIP.Location = new System.Drawing.Point(96, 58);
-			this.txtIP.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.txtIP.Margin = new System.Windows.Forms.Padding(6);
 			this.txtIP.Name = "txtIP";
 			this.txtIP.Size = new System.Drawing.Size(192, 31);
 			this.txtIP.TabIndex = 1;
@@ -217,7 +207,7 @@
 			// btnToggleRed
 			// 
 			this.btnToggleRed.Location = new System.Drawing.Point(20, 92);
-			this.btnToggleRed.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.btnToggleRed.Margin = new System.Windows.Forms.Padding(6);
 			this.btnToggleRed.Name = "btnToggleRed";
 			this.btnToggleRed.Size = new System.Drawing.Size(216, 44);
 			this.btnToggleRed.TabIndex = 0;
@@ -228,7 +218,7 @@
 			// btnToggleGreen
 			// 
 			this.btnToggleGreen.Location = new System.Drawing.Point(20, 36);
-			this.btnToggleGreen.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.btnToggleGreen.Margin = new System.Windows.Forms.Padding(6);
 			this.btnToggleGreen.Name = "btnToggleGreen";
 			this.btnToggleGreen.Size = new System.Drawing.Size(216, 44);
 			this.btnToggleGreen.TabIndex = 0;
@@ -279,7 +269,7 @@
 			// reading_accelX
 			// 
 			this.reading_accelX.Location = new System.Drawing.Point(184, 41);
-			this.reading_accelX.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.reading_accelX.Margin = new System.Windows.Forms.Padding(6);
 			this.reading_accelX.Name = "reading_accelX";
 			this.reading_accelX.Size = new System.Drawing.Size(196, 31);
 			this.reading_accelX.TabIndex = 3;
@@ -288,7 +278,7 @@
 			// reading_accelY
 			// 
 			this.reading_accelY.Location = new System.Drawing.Point(184, 91);
-			this.reading_accelY.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.reading_accelY.Margin = new System.Windows.Forms.Padding(6);
 			this.reading_accelY.Name = "reading_accelY";
 			this.reading_accelY.Size = new System.Drawing.Size(196, 31);
 			this.reading_accelY.TabIndex = 4;
@@ -297,7 +287,7 @@
 			// reading_accelZ
 			// 
 			this.reading_accelZ.Location = new System.Drawing.Point(184, 141);
-			this.reading_accelZ.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.reading_accelZ.Margin = new System.Windows.Forms.Padding(6);
 			this.reading_accelZ.Name = "reading_accelZ";
 			this.reading_accelZ.Size = new System.Drawing.Size(196, 31);
 			this.reading_accelZ.TabIndex = 5;
@@ -306,7 +296,7 @@
 			// reading_tilt
 			// 
 			this.reading_tilt.Location = new System.Drawing.Point(184, 188);
-			this.reading_tilt.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.reading_tilt.Margin = new System.Windows.Forms.Padding(6);
 			this.reading_tilt.Name = "reading_tilt";
 			this.reading_tilt.Size = new System.Drawing.Size(196, 31);
 			this.reading_tilt.TabIndex = 6;
@@ -440,7 +430,7 @@
 			// reading_pitch
 			// 
 			this.reading_pitch.Location = new System.Drawing.Point(184, 231);
-			this.reading_pitch.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.reading_pitch.Margin = new System.Windows.Forms.Padding(6);
 			this.reading_pitch.Name = "reading_pitch";
 			this.reading_pitch.Size = new System.Drawing.Size(196, 31);
 			this.reading_pitch.TabIndex = 22;
@@ -704,7 +694,7 @@
 			// reading_gyro2
 			// 
 			this.reading_gyro2.Location = new System.Drawing.Point(183, 467);
-			this.reading_gyro2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.reading_gyro2.Margin = new System.Windows.Forms.Padding(6);
 			this.reading_gyro2.Name = "reading_gyro2";
 			this.reading_gyro2.Size = new System.Drawing.Size(196, 31);
 			this.reading_gyro2.TabIndex = 33;
@@ -714,7 +704,7 @@
 			// reading_gyro1
 			// 
 			this.reading_gyro1.Location = new System.Drawing.Point(183, 417);
-			this.reading_gyro1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.reading_gyro1.Margin = new System.Windows.Forms.Padding(6);
 			this.reading_gyro1.Name = "reading_gyro1";
 			this.reading_gyro1.Size = new System.Drawing.Size(196, 31);
 			this.reading_gyro1.TabIndex = 32;
@@ -724,7 +714,7 @@
 			// reading_gyro3
 			// 
 			this.reading_gyro3.Location = new System.Drawing.Point(183, 517);
-			this.reading_gyro3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.reading_gyro3.Margin = new System.Windows.Forms.Padding(6);
 			this.reading_gyro3.Name = "reading_gyro3";
 			this.reading_gyro3.Size = new System.Drawing.Size(196, 31);
 			this.reading_gyro3.TabIndex = 34;
@@ -764,7 +754,7 @@
 			// reading_magnetY
 			// 
 			this.reading_magnetY.Location = new System.Drawing.Point(184, 323);
-			this.reading_magnetY.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.reading_magnetY.Margin = new System.Windows.Forms.Padding(6);
 			this.reading_magnetY.Name = "reading_magnetY";
 			this.reading_magnetY.Size = new System.Drawing.Size(196, 31);
 			this.reading_magnetY.TabIndex = 26;
@@ -773,7 +763,7 @@
 			// reading_magnetX
 			// 
 			this.reading_magnetX.Location = new System.Drawing.Point(184, 273);
-			this.reading_magnetX.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.reading_magnetX.Margin = new System.Windows.Forms.Padding(6);
 			this.reading_magnetX.Name = "reading_magnetX";
 			this.reading_magnetX.Size = new System.Drawing.Size(196, 31);
 			this.reading_magnetX.TabIndex = 25;
@@ -782,7 +772,7 @@
 			// reading_magnetZ
 			// 
 			this.reading_magnetZ.Location = new System.Drawing.Point(184, 373);
-			this.reading_magnetZ.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.reading_magnetZ.Margin = new System.Windows.Forms.Padding(6);
 			this.reading_magnetZ.Name = "reading_magnetZ";
 			this.reading_magnetZ.Size = new System.Drawing.Size(196, 31);
 			this.reading_magnetZ.TabIndex = 27;
@@ -843,7 +833,7 @@
 			// BtnDrawTriangle
 			// 
 			this.BtnDrawTriangle.Location = new System.Drawing.Point(20, 478);
-			this.BtnDrawTriangle.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.BtnDrawTriangle.Margin = new System.Windows.Forms.Padding(6);
 			this.BtnDrawTriangle.Name = "BtnDrawTriangle";
 			this.BtnDrawTriangle.Size = new System.Drawing.Size(216, 44);
 			this.BtnDrawTriangle.TabIndex = 39;
@@ -854,7 +844,7 @@
 			// BtnRotateCircle
 			// 
 			this.BtnRotateCircle.Location = new System.Drawing.Point(20, 422);
-			this.BtnRotateCircle.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.BtnRotateCircle.Margin = new System.Windows.Forms.Padding(6);
 			this.BtnRotateCircle.Name = "BtnRotateCircle";
 			this.BtnRotateCircle.Size = new System.Drawing.Size(216, 44);
 			this.BtnRotateCircle.TabIndex = 38;
@@ -865,7 +855,7 @@
 			// BtnDrawLine
 			// 
 			this.BtnDrawLine.Location = new System.Drawing.Point(20, 366);
-			this.BtnDrawLine.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.BtnDrawLine.Margin = new System.Windows.Forms.Padding(6);
 			this.BtnDrawLine.Name = "BtnDrawLine";
 			this.BtnDrawLine.Size = new System.Drawing.Size(216, 44);
 			this.BtnDrawLine.TabIndex = 37;
@@ -876,7 +866,7 @@
 			// servo2PowerButton
 			// 
 			this.servo2PowerButton.Location = new System.Drawing.Point(20, 266);
-			this.servo2PowerButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.servo2PowerButton.Margin = new System.Windows.Forms.Padding(6);
 			this.servo2PowerButton.Name = "servo2PowerButton";
 			this.servo2PowerButton.Size = new System.Drawing.Size(216, 44);
 			this.servo2PowerButton.TabIndex = 35;
@@ -887,7 +877,7 @@
 			// servo1PowerButton
 			// 
 			this.servo1PowerButton.Location = new System.Drawing.Point(20, 209);
-			this.servo1PowerButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.servo1PowerButton.Margin = new System.Windows.Forms.Padding(6);
 			this.servo1PowerButton.Name = "servo1PowerButton";
 			this.servo1PowerButton.Size = new System.Drawing.Size(216, 44);
 			this.servo1PowerButton.TabIndex = 34;
@@ -960,7 +950,7 @@
 			// button_zeroencoders
 			// 
 			this.button_zeroencoders.Location = new System.Drawing.Point(20, 148);
-			this.button_zeroencoders.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.button_zeroencoders.Margin = new System.Windows.Forms.Padding(6);
 			this.button_zeroencoders.Name = "button_zeroencoders";
 			this.button_zeroencoders.Size = new System.Drawing.Size(216, 44);
 			this.button_zeroencoders.TabIndex = 27;
@@ -998,193 +988,6 @@
 			this.textbox_error.Size = new System.Drawing.Size(1404, 44);
 			this.textbox_error.TabIndex = 26;
 			// 
-			// groupBox5
-			// 
-			this.groupBox5.Controls.Add(this.label39);
-			this.groupBox5.Controls.Add(this.moveDistanceCM);
-			this.groupBox5.Controls.Add(this.status_currentRawBearing);
-			this.groupBox5.Controls.Add(this.label34);
-			this.groupBox5.Controls.Add(this.status_currentBearing);
-			this.groupBox5.Controls.Add(this.label32);
-			this.groupBox5.Controls.Add(this.label31);
-			this.groupBox5.Controls.Add(this.moveRotation);
-			this.groupBox5.Controls.Add(this.moveDistance);
-			this.groupBox5.Controls.Add(this.label20);
-			this.groupBox5.Controls.Add(this.number_navdestinationgrid);
-			this.groupBox5.Controls.Add(this.number_navcurrentgrid);
-			this.groupBox5.Controls.Add(this.status_navbearing);
-			this.groupBox5.Controls.Add(this.label18);
-			this.groupBox5.Controls.Add(this.label17);
-			this.groupBox5.Controls.Add(this.label16);
-			this.groupBox5.Location = new System.Drawing.Point(1395, 312);
-			this.groupBox5.Name = "groupBox5";
-			this.groupBox5.Size = new System.Drawing.Size(722, 822);
-			this.groupBox5.TabIndex = 27;
-			this.groupBox5.TabStop = false;
-			this.groupBox5.Text = "Navigation";
-			this.groupBox5.Enter += new System.EventHandler(this.groupBox5_Enter);
-			// 
-			// label39
-			// 
-			this.label39.AutoSize = true;
-			this.label39.Location = new System.Drawing.Point(272, 227);
-			this.label39.Name = "label39";
-			this.label39.Size = new System.Drawing.Size(192, 25);
-			this.label39.TabIndex = 21;
-			this.label39.Text = "Move distance mm";
-			// 
-			// moveDistanceCM
-			// 
-			this.moveDistanceCM.Location = new System.Drawing.Point(278, 255);
-			this.moveDistanceCM.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-			this.moveDistanceCM.Name = "moveDistanceCM";
-			this.moveDistanceCM.Size = new System.Drawing.Size(195, 31);
-			this.moveDistanceCM.TabIndex = 20;
-			this.moveDistanceCM.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.moveDistanceCM_KeyPress);
-			// 
-			// status_currentRawBearing
-			// 
-			this.status_currentRawBearing.AutoSize = true;
-			this.status_currentRawBearing.Location = new System.Drawing.Point(513, 167);
-			this.status_currentRawBearing.Name = "status_currentRawBearing";
-			this.status_currentRawBearing.Size = new System.Drawing.Size(19, 25);
-			this.status_currentRawBearing.TabIndex = 19;
-			this.status_currentRawBearing.Text = "-";
-			// 
-			// label34
-			// 
-			this.label34.AutoSize = true;
-			this.label34.Location = new System.Drawing.Point(292, 167);
-			this.label34.Name = "label34";
-			this.label34.Size = new System.Drawing.Size(211, 25);
-			this.label34.TabIndex = 18;
-			this.label34.Text = "Current Raw Bearing";
-			// 
-			// status_currentBearing
-			// 
-			this.status_currentBearing.AutoSize = true;
-			this.status_currentBearing.Location = new System.Drawing.Point(513, 119);
-			this.status_currentBearing.Name = "status_currentBearing";
-			this.status_currentBearing.Size = new System.Drawing.Size(19, 25);
-			this.status_currentBearing.TabIndex = 17;
-			this.status_currentBearing.Text = "-";
-			// 
-			// label32
-			// 
-			this.label32.AutoSize = true;
-			this.label32.Location = new System.Drawing.Point(28, 314);
-			this.label32.Name = "label32";
-			this.label32.Size = new System.Drawing.Size(218, 25);
-			this.label32.TabIndex = 16;
-			this.label32.Text = "Do rotation (Degrees)";
-			// 
-			// label31
-			// 
-			this.label31.AutoSize = true;
-			this.label31.Location = new System.Drawing.Point(28, 227);
-			this.label31.Name = "label31";
-			this.label31.Size = new System.Drawing.Size(152, 25);
-			this.label31.TabIndex = 15;
-			this.label31.Text = "Move distance";
-			// 
-			// moveRotation
-			// 
-			this.moveRotation.Location = new System.Drawing.Point(34, 342);
-			this.moveRotation.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-			this.moveRotation.Minimum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            -2147483648});
-			this.moveRotation.Name = "moveRotation";
-			this.moveRotation.Size = new System.Drawing.Size(195, 31);
-			this.moveRotation.TabIndex = 14;
-			this.moveRotation.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.moveRotation_KeyPress);
-			// 
-			// moveDistance
-			// 
-			this.moveDistance.Location = new System.Drawing.Point(34, 255);
-			this.moveDistance.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-			this.moveDistance.Name = "moveDistance";
-			this.moveDistance.Size = new System.Drawing.Size(195, 31);
-			this.moveDistance.TabIndex = 13;
-			this.moveDistance.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.moveDistance_KeyPress);
-			// 
-			// label20
-			// 
-			this.label20.AutoSize = true;
-			this.label20.Location = new System.Drawing.Point(292, 119);
-			this.label20.Name = "label20";
-			this.label20.Size = new System.Drawing.Size(163, 25);
-			this.label20.TabIndex = 11;
-			this.label20.Text = "Current Bearing";
-			this.label20.Click += new System.EventHandler(this.label20_Click);
-			// 
-			// number_navdestinationgrid
-			// 
-			this.number_navdestinationgrid.Location = new System.Drawing.Point(32, 159);
-			this.number_navdestinationgrid.Name = "number_navdestinationgrid";
-			this.number_navdestinationgrid.Size = new System.Drawing.Size(196, 31);
-			this.number_navdestinationgrid.TabIndex = 10;
-			this.number_navdestinationgrid.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.number_navdestinationgrid_KeyPress);
-			// 
-			// number_navcurrentgrid
-			// 
-			this.number_navcurrentgrid.Location = new System.Drawing.Point(33, 70);
-			this.number_navcurrentgrid.Name = "number_navcurrentgrid";
-			this.number_navcurrentgrid.Size = new System.Drawing.Size(196, 31);
-			this.number_navcurrentgrid.TabIndex = 9;
-			// 
-			// status_navbearing
-			// 
-			this.status_navbearing.AutoSize = true;
-			this.status_navbearing.Location = new System.Drawing.Point(513, 70);
-			this.status_navbearing.Name = "status_navbearing";
-			this.status_navbearing.Size = new System.Drawing.Size(19, 25);
-			this.status_navbearing.TabIndex = 7;
-			this.status_navbearing.Text = "-";
-			// 
-			// label18
-			// 
-			this.label18.AutoSize = true;
-			this.label18.Location = new System.Drawing.Point(292, 72);
-			this.label18.Name = "label18";
-			this.label18.Size = new System.Drawing.Size(86, 25);
-			this.label18.TabIndex = 6;
-			this.label18.Text = "Bearing";
-			this.label18.Click += new System.EventHandler(this.label18_Click);
-			// 
-			// label17
-			// 
-			this.label17.AutoSize = true;
-			this.label17.Location = new System.Drawing.Point(26, 128);
-			this.label17.Name = "label17";
-			this.label17.Size = new System.Drawing.Size(166, 25);
-			this.label17.TabIndex = 3;
-			this.label17.Text = "Destination Grid";
-			this.label17.Click += new System.EventHandler(this.label17_Click);
-			// 
-			// label16
-			// 
-			this.label16.AutoSize = true;
-			this.label16.Location = new System.Drawing.Point(28, 41);
-			this.label16.Name = "label16";
-			this.label16.Size = new System.Drawing.Size(129, 25);
-			this.label16.TabIndex = 1;
-			this.label16.Text = "Current Grid";
-			// 
 			// groupBox6
 			// 
 			this.groupBox6.Controls.Add(this.button5);
@@ -1203,7 +1006,7 @@
 			// button5
 			// 
 			this.button5.Location = new System.Drawing.Point(258, 88);
-			this.button5.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.button5.Margin = new System.Windows.Forms.Padding(6);
 			this.button5.Name = "button5";
 			this.button5.Size = new System.Drawing.Size(216, 44);
 			this.button5.TabIndex = 41;
@@ -1214,7 +1017,7 @@
 			// button4
 			// 
 			this.button4.Location = new System.Drawing.Point(258, 33);
-			this.button4.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.button4.Margin = new System.Windows.Forms.Padding(6);
 			this.button4.Name = "button4";
 			this.button4.Size = new System.Drawing.Size(216, 44);
 			this.button4.TabIndex = 40;
@@ -1225,7 +1028,7 @@
 			// button3
 			// 
 			this.button3.Location = new System.Drawing.Point(22, 198);
-			this.button3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.button3.Margin = new System.Windows.Forms.Padding(6);
 			this.button3.Name = "button3";
 			this.button3.Size = new System.Drawing.Size(216, 44);
 			this.button3.TabIndex = 39;
@@ -1236,7 +1039,7 @@
 			// calibratePassive
 			// 
 			this.calibratePassive.Location = new System.Drawing.Point(22, 145);
-			this.calibratePassive.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.calibratePassive.Margin = new System.Windows.Forms.Padding(6);
 			this.calibratePassive.Name = "calibratePassive";
 			this.calibratePassive.Size = new System.Drawing.Size(216, 44);
 			this.calibratePassive.TabIndex = 38;
@@ -1247,7 +1050,7 @@
 			// button2
 			// 
 			this.button2.Location = new System.Drawing.Point(22, 89);
-			this.button2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.button2.Margin = new System.Windows.Forms.Padding(6);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(216, 44);
 			this.button2.TabIndex = 37;
@@ -1258,7 +1061,7 @@
 			// button1
 			// 
 			this.button1.Location = new System.Drawing.Point(22, 33);
-			this.button1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.button1.Margin = new System.Windows.Forms.Padding(6);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(216, 44);
 			this.button1.TabIndex = 36;
@@ -1266,11 +1069,119 @@
 			this.button1.UseVisualStyleBackColor = true;
 			this.button1.Click += new System.EventHandler(this.calibrateMagnetometerSlow_click);
 			// 
+			// label20
+			// 
+			this.label20.AutoSize = true;
+			this.label20.Location = new System.Drawing.Point(17, 36);
+			this.label20.Name = "label20";
+			this.label20.Size = new System.Drawing.Size(163, 25);
+			this.label20.TabIndex = 11;
+			this.label20.Text = "Current Bearing";
+			this.label20.Click += new System.EventHandler(this.label20_Click);
+			// 
+			// moveDistance
+			// 
+			this.moveDistance.Location = new System.Drawing.Point(22, 109);
+			this.moveDistance.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+			this.moveDistance.Name = "moveDistance";
+			this.moveDistance.Size = new System.Drawing.Size(195, 31);
+			this.moveDistance.TabIndex = 13;
+			this.moveDistance.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.moveDistance_KeyPress);
+			// 
+			// moveRotation
+			// 
+			this.moveRotation.Location = new System.Drawing.Point(22, 196);
+			this.moveRotation.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+			this.moveRotation.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
+			this.moveRotation.Name = "moveRotation";
+			this.moveRotation.Size = new System.Drawing.Size(195, 31);
+			this.moveRotation.TabIndex = 14;
+			this.moveRotation.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.moveRotation_KeyPress);
+			// 
+			// label31
+			// 
+			this.label31.AutoSize = true;
+			this.label31.Location = new System.Drawing.Point(16, 81);
+			this.label31.Name = "label31";
+			this.label31.Size = new System.Drawing.Size(152, 25);
+			this.label31.TabIndex = 15;
+			this.label31.Text = "Move distance";
+			// 
+			// label32
+			// 
+			this.label32.AutoSize = true;
+			this.label32.Location = new System.Drawing.Point(16, 168);
+			this.label32.Name = "label32";
+			this.label32.Size = new System.Drawing.Size(218, 25);
+			this.label32.TabIndex = 16;
+			this.label32.Text = "Do rotation (Degrees)";
+			// 
+			// status_currentBearing
+			// 
+			this.status_currentBearing.AutoSize = true;
+			this.status_currentBearing.Location = new System.Drawing.Point(238, 36);
+			this.status_currentBearing.Name = "status_currentBearing";
+			this.status_currentBearing.Size = new System.Drawing.Size(19, 25);
+			this.status_currentBearing.TabIndex = 17;
+			this.status_currentBearing.Text = "-";
+			// 
+			// moveDistanceCM
+			// 
+			this.moveDistanceCM.Location = new System.Drawing.Point(21, 275);
+			this.moveDistanceCM.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+			this.moveDistanceCM.Name = "moveDistanceCM";
+			this.moveDistanceCM.Size = new System.Drawing.Size(195, 31);
+			this.moveDistanceCM.TabIndex = 20;
+			this.moveDistanceCM.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.moveDistanceCM_KeyPress);
+			// 
+			// label39
+			// 
+			this.label39.AutoSize = true;
+			this.label39.Location = new System.Drawing.Point(16, 247);
+			this.label39.Name = "label39";
+			this.label39.Size = new System.Drawing.Size(192, 25);
+			this.label39.TabIndex = 21;
+			this.label39.Text = "Move distance mm";
+			// 
+			// groupBox5
+			// 
+			this.groupBox5.Controls.Add(this.label39);
+			this.groupBox5.Controls.Add(this.moveDistanceCM);
+			this.groupBox5.Controls.Add(this.status_currentBearing);
+			this.groupBox5.Controls.Add(this.label32);
+			this.groupBox5.Controls.Add(this.label31);
+			this.groupBox5.Controls.Add(this.moveRotation);
+			this.groupBox5.Controls.Add(this.moveDistance);
+			this.groupBox5.Controls.Add(this.label20);
+			this.groupBox5.Location = new System.Drawing.Point(1395, 312);
+			this.groupBox5.Name = "groupBox5";
+			this.groupBox5.Size = new System.Drawing.Size(722, 759);
+			this.groupBox5.TabIndex = 27;
+			this.groupBox5.TabStop = false;
+			this.groupBox5.Text = "Navigation";
+			this.groupBox5.Enter += new System.EventHandler(this.groupBox5_Enter);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1914, 1083);
+			this.ClientSize = new System.Drawing.Size(2398, 1083);
 			this.Controls.Add(this.groupBox6);
 			this.Controls.Add(this.groupBox5);
 			this.Controls.Add(this.textbox_error);
@@ -1279,7 +1190,7 @@
 			this.Controls.Add(this.groupBox3);
 			this.Controls.Add(this.groupBox1);
 			this.KeyPreview = true;
-			this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+			this.Margin = new System.Windows.Forms.Padding(6);
 			this.Name = "Form1";
 			this.Text = "2nd Year Challenge - Example";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -1297,14 +1208,12 @@
 			this.groupBox2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.servo2Override)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.servo1Override)).EndInit();
+			this.groupBox6.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.moveDistance)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.moveRotation)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.moveDistanceCM)).EndInit();
 			this.groupBox5.ResumeLayout(false);
 			this.groupBox5.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.moveDistanceCM)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.moveRotation)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.moveDistance)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.number_navdestinationgrid)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.number_navcurrentgrid)).EndInit();
-			this.groupBox6.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -1358,14 +1267,6 @@
 		private System.Windows.Forms.TextBox motorSpeedOverride;
 		private System.Windows.Forms.TextBox textbox_error;
 		private System.Windows.Forms.Button button_zeroencoders;
-		private System.Windows.Forms.GroupBox groupBox5;
-		private System.Windows.Forms.Label label16;
-		private System.Windows.Forms.Label label17;
-		private System.Windows.Forms.Label label18;
-		private System.Windows.Forms.Label status_navbearing;
-		private System.Windows.Forms.NumericUpDown number_navdestinationgrid;
-		private System.Windows.Forms.NumericUpDown number_navcurrentgrid;
-		private System.Windows.Forms.Label label20;
 		private System.Windows.Forms.Label label21;
 		private System.Windows.Forms.Label status_gyroscope;
 		private System.Windows.Forms.TextBox reading_gyro2;
@@ -1393,13 +1294,6 @@
 		private System.Windows.Forms.GroupBox groupBox6;
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button button1;
-		private System.Windows.Forms.Label label32;
-		private System.Windows.Forms.Label label31;
-		private System.Windows.Forms.NumericUpDown moveRotation;
-		private System.Windows.Forms.NumericUpDown moveDistance;
-		private System.Windows.Forms.Label status_currentBearing;
-		private System.Windows.Forms.Label status_currentRawBearing;
-		private System.Windows.Forms.Label label34;
 		private System.Windows.Forms.Label magxmin;
 		private System.Windows.Forms.Label magxmax;
 		private System.Windows.Forms.Label magymin;
@@ -1412,11 +1306,18 @@
 		private System.Windows.Forms.Button button3;
 		private System.Windows.Forms.Button button5;
 		private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.NumericUpDown moveDistanceCM;
-        private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Button BtnDrawTriangle;
         private System.Windows.Forms.Button BtnRotateCircle;
         private System.Windows.Forms.Button BtnDrawLine;
-    }
+		private System.Windows.Forms.Label label20;
+		private System.Windows.Forms.NumericUpDown moveDistance;
+		private System.Windows.Forms.NumericUpDown moveRotation;
+		private System.Windows.Forms.Label label31;
+		private System.Windows.Forms.Label label32;
+		private System.Windows.Forms.Label status_currentBearing;
+		private System.Windows.Forms.NumericUpDown moveDistanceCM;
+		private System.Windows.Forms.Label label39;
+		private System.Windows.Forms.GroupBox groupBox5;
+	}
 }
 

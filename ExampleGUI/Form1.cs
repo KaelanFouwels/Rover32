@@ -103,12 +103,12 @@ namespace Comms
 			{
 				reading_magnetX.Text = roverData.Instance.magnetX.ToString();
 				reading_magnetY.Text = roverData.Instance.magnetY.ToString();
-				reading_magnetZ.Text = roverData.Instance.magnetZ.ToString();
+				//reading_magnetZ.Text = roverData.Instance.magnetZ.ToString();
 
-				magxmax.Text = roverData.Instance.magnetometerXMax.ToString();
-				magxmin.Text = roverData.Instance.magnetometerXMin.ToString();
-				magymax.Text = roverData.Instance.magnetometerYMax.ToString();
-				magymin.Text = roverData.Instance.magnetometerYMin.ToString();
+				//magxmax.Text = roverData.Instance.magnetometerXMax.ToString();
+				//magxmin.Text = roverData.Instance.magnetometerXMin.ToString();
+				//magymax.Text = roverData.Instance.magnetometerYMax.ToString();
+				//magymin.Text = roverData.Instance.magnetometerYMin.ToString();
 
 				var angle = roverData.Instance.magnetAngle;
 				status_currentBearing.Text = angle.ToString();
@@ -290,15 +290,6 @@ namespace Comms
 		private void number_navdestinationgrid_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			if (e.KeyChar != (char)Keys.Enter) return;
-
-			var currentgrid = number_navcurrentgrid.Value;
-			var destinationgrid = number_navcurrentgrid.Value;
-
-			if (currentgrid % 2 != 0 || destinationgrid % 2 != 0)
-			{
-				textbox_error.Text = "Grid references must be 6, or 8, or other even figures.";
-				return;
-			}
 		}
 
 		private void label20_Click(object sender, EventArgs e)
@@ -422,7 +413,9 @@ namespace Comms
         private async void moveRotation_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			if (e.KeyChar != (char)Keys.Enter) return;
-			await Task.Run(() => rover_core.routines.MoveDegrees.Run(rover, Convert.ToDouble(moveRotation.Value)));
+			float value = (float) moveRotation.Value;
+			float radians = (value / 360) * 2 * (float) Math.PI;
+			await Task.Run(() => rover.Movement.rotateBearing(radians));
 		}
 
 		private void motorSpeedOverride_TextChanged(object sender, EventArgs e)
