@@ -838,7 +838,9 @@ void checkRotation() {
         newDirection = 0;
     }
 
-    if (newDirection == 1) {
+    if (areRotating = 0) {
+        setspeed(0, 0);
+    } else if (newDirection == 1) {
         setspeed(400, -400);
     } else {
         setspeed(-400, 400);
