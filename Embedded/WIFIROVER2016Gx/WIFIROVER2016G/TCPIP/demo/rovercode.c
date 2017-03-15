@@ -403,13 +403,11 @@ volatile unsigned char setLineLed = 0;
 
 void __attribute((interrupt(ipl3), vector(_ADC_VECTOR), nomips16)) _ADCInterrupt(void) {
 
-
-
     //4Hz
     ledCounter++;
     if (ledCounter == 10000) {
         ledCounter = 0;
-        //ledFlag = 1;
+        ledFlag = 1;
     }
 
     //40Hz
@@ -439,7 +437,6 @@ void __attribute((interrupt(ipl3), vector(_ADC_VECTOR), nomips16)) _ADCInterrupt
         movementCounter = 0;
         movementFlag = 1;
     }
-
 
     int v;
     MotorPWMcount++;
@@ -1448,8 +1445,7 @@ void processcommand(void) // the main routine which processes commands
 
         case CMDMoveForward:
             if (commandlen == 3) {
-                i = (char) (nextcommand[1]);
-                i = (i << 8) | nextcommand[2];
+                i = (int) ((nextcommand[1] << 8) | nextcommand[2]);
 
                 ForwardDistanceRemaining = i;
                 isMoving = 1;
