@@ -410,17 +410,13 @@ void doclosedloop(void) {
 
 void getAccelerometerUp(void) {
     // if cache full, return;
-    if (accelerometerCachePointer >= accelerometerCacheSize) {
+    if (accelerometerCachePointer >= accelerometerCacheSize - 1) {
         return;
     }
 
     int i;
     int a;
     int b;
-
-    int x;
-    int y;
-    int z;
 
     I2S();
     I2send(0x38);
@@ -448,11 +444,11 @@ void getAccelerometerUp(void) {
         b = I2GET(0);
         accelerometerZ = a << 8 || b;
 
-        accelerometerCache[accelerometerCounter] = accelerometerZ;
-        accelerometerCounter++;
+        accelerometerCache[accelerometerCachePointer] = accelerometerZ;
+        accelerometerCachePointer++;
 
         I2P();
-    } else POSTTCPhead(0, CMDRDMMA8452);
+    }
 
 
 }
@@ -477,9 +473,9 @@ void __attribute((interrupt(ipl3), vector(_ADC_VECTOR), nomips16)) _ADCInterrupt
         magnetometerFlag = 1;
     }
 
-    //1Hz
+    //10Hz
     magnetometerAngleCounter++;
-    if (magnetometerAngleCounter == 40000) {
+    if (magnetometerAngleCounter == 4000) {
         magnetometerAngleCounter = 0;
         magnetometerAngleFlag = 1;
     }
@@ -892,20 +888,21 @@ void checkRotation() {
         return;
     }
 
-    if (rotationTarget >= 0 && MagAngle + 0.18 >= rotationTarget) {
+    float offset = 0.10;
+
+    if (rotationTarget >= 0 && MagAngle >= rotationTarget - offset) {
         areRotating = 0;
-    } else if (rotationTarget < 0 && MagAngle - 0.18 <= rotationTarget) {
+    } else if (rotationTarget < 0 && MagAngle <= rotationTarget + offset) {
         areRotating = 0;
     }
 
     if (rotationTarget > MagAngle) {
         newDirection = 1;
-
     } else {
         newDirection = 0;
     }
 
-    if (areRotating = 0) {
+    if (areRotating == 0) {
         setspeed(0, 0);
     } else if (newDirection == 1) {
         setspeed(400, -400);
@@ -976,10 +973,11 @@ void processcommand(void) // the main routine which processes commands
 
         case CMDMoveBearing:
 
-            i = nextcommand[2] | (nextcommand[1] << 8);
-            f = ((float) i) / 1000.00;
-
-            rotationTarget = f;
+            myfloatUnion.s[1] = nextcommand[1];
+            myfloatUnion.s[2] = nextcommand[2];
+            myfloatUnion.s[3] = nextcommand[3];
+            myfloatUnion.s[4] = nextcommand[4];
+            rotationTarget = myfloatUnion.f;
             areRotating = 1;
             break;
 
@@ -1091,8 +1089,9 @@ void processcommand(void) // the main routine which processes commands
                 break;
             }
 
-            POSTTCPhead(accelerometerCacheSize * 2, accelerometerCacheSize);
-            for (int i = 0; i < accelerometerCacheSize * 2; i++) {
+            POSTTCPhead(accelerometerCacheSize * 2, CMDGetAcceleromterCache);
+            i = 0;
+            for (i; i < accelerometerCacheSize * 2; i++) {
                 POSTTCPchar(accelerometerCache[i] >> 8);
                 POSTTCPchar(accelerometerCache[i]);
             }
@@ -1585,17 +1584,6 @@ void moveBackwards(void) {
 //Process packets
 
 void ProcessIO(void) {
-
-    if (magnetometerFlag == 1) {
-        magnetometerFlag = 0;
-        getMagnetometer();
-    }
-
-    if (accelerometerFlag == 1) {
-        accelerometerFlag = 0;
-        getAccelerometerUp();
-    }
-
     if (ledFlag == 1) {
         ledFlag = 0;
         if (LED1_IO == 1) {
@@ -1605,13 +1593,34 @@ void ProcessIO(void) {
         }
     }
 
+    if (magnetometerFlag) {
+        magnetometerFlag = 0;
+        getMagnetometer();
+    }
+
+    if (accelerometerFlag) {
+        accelerometerFlag = 0;
+        getAccelerometerUp();
+    }
+
+    if (magnetometerAngleFlag) {
+        magnetometerAngleFlag = 0;
+        getMagnetometerAngle();
+    }
+
+
+    // Rotation
+    if (areRotating && rotationFlag) {
+        rotationFlag = 0;
+        checkRotation();
+    }
+
+
     if (PeriodA > 512) CspeedA = 0x8000000 / PeriodA;
     if (PeriodB > 512) CspeedB = 0x8000000 / PeriodB;
     if (CLflag) doclosedloop();
 
-    if (magnetometerAngleFlag) {
-        getMagnetometerAngle();
-    }
+
 
     // Movement
     if (isMoving && movementFlag) {
@@ -1626,12 +1635,6 @@ void ProcessIO(void) {
                 moveForward();
             }
         }
-    }
-
-    // Rotation
-    if (areRotating && rotationFlag == 1) {
-        checkRotation();
-        rotationFlag = 0;
     }
 
     //Gyro
