@@ -67,6 +67,8 @@
 
 #define CMDMoveBearing 206
 
+#define CMDGetAcceleromterCache 207
+
 
 
 void initi2Cs(void);
@@ -185,6 +187,15 @@ volatile int ledCounter = 0;
 volatile int ledFlag = 0;
 
 volatile int isMoving = 0;
+
+#define accelerometerCacheSize 100
+volatile int accelerometerCache[accelerometerCacheSize];
+volatile int accelerometerCachePointer = 0;
+volatile int accelerometerFlag = 0;
+volatile int accelerometerCounter = 0;
+volatile int accelerometerX = 0;
+volatile int accelerometerY = 0;
+volatile int accelerometerZ = 0;
 
 INT16 gyroRotationRadians = 0;
 
@@ -397,6 +408,55 @@ void doclosedloop(void) {
     CLflag = 0;
 }
 
+void getAccelerometerUp(void) {
+    // if cache full, return;
+    if (accelerometerCachePointer >= accelerometerCacheSize) {
+        return;
+    }
+
+    int i;
+    int a;
+    int b;
+
+    int x;
+    int y;
+    int z;
+
+    I2S();
+    I2send(0x38);
+    I2send(0x00);
+    I2SR();
+    I2send(0x39);
+    i = I2GET(0);
+    I2P();
+    if (i & 8) {
+        I2S();
+        I2send(0x38);
+        I2send(0x01);
+        I2SR();
+        I2send(0x39);
+
+        a = I2GET(1);
+        b = I2GET(1);
+        accelerometerX = a << 8 || b;
+
+        a = I2GET(1);
+        b = I2GET(1);
+        accelerometerY = a << 8 || b;
+
+        a = I2GET(1);
+        b = I2GET(0);
+        accelerometerZ = a << 8 || b;
+
+        accelerometerCache[accelerometerCounter] = accelerometerZ;
+        accelerometerCounter++;
+
+        I2P();
+    } else POSTTCPhead(0, CMDRDMMA8452);
+
+
+}
+
 
 
 volatile unsigned char setLineLed = 0;
@@ -436,6 +496,13 @@ void __attribute((interrupt(ipl3), vector(_ADC_VECTOR), nomips16)) _ADCInterrupt
     if (movementCounter == 400) {
         movementCounter = 0;
         movementFlag = 1;
+    }
+
+    //100Hz
+    accelerometerCounter++;
+    if (accelerometerCounter == 400) {
+        accelerometerCounter = 0;
+        accelerometerFlag = 1;
     }
 
     int v;
@@ -1018,6 +1085,19 @@ void processcommand(void) // the main routine which processes commands
             }
             break;
 
+        case CMDGetAcceleromterCache:
+            if (accelerometerCachePointer < accelerometerCacheSize - 1) {
+                POSTTCPhead(0, CMDGetAcceleromterCache);
+                break;
+            }
+
+            POSTTCPhead(accelerometerCacheSize * 2, accelerometerCacheSize);
+            for (int i = 0; i < accelerometerCacheSize * 2; i++) {
+                POSTTCPchar(accelerometerCache[i] >> 8);
+                POSTTCPchar(accelerometerCache[i]);
+            }
+            accelerometerCachePointer = 0;
+            break;
 
         case CMDPOWERREADAD0:
             if (commandlen == 0) //POWER READ AD0
@@ -1509,6 +1589,11 @@ void ProcessIO(void) {
     if (magnetometerFlag == 1) {
         magnetometerFlag = 0;
         getMagnetometer();
+    }
+
+    if (accelerometerFlag == 1) {
+        accelerometerFlag = 0;
+        getAccelerometerUp();
     }
 
     if (ledFlag == 1) {
