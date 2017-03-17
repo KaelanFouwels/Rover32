@@ -128,14 +128,16 @@
 			this.moveDistanceCM = new System.Windows.Forms.NumericUpDown();
 			this.label39 = new System.Windows.Forms.Label();
 			this.groupBox5 = new System.Windows.Forms.GroupBox();
-			this.button_freqStart = new System.Windows.Forms.Button();
-			this.groupBox7 = new System.Windows.Forms.GroupBox();
+			this.status_degrees = new System.Windows.Forms.Label();
+			this.label34 = new System.Windows.Forms.Label();
+			this.TaBContainer = new System.Windows.Forms.TabControl();
+			this.tabPage1 = new System.Windows.Forms.TabPage();
+			this.tabPage2 = new System.Windows.Forms.TabPage();
 			this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
 			this.label17 = new System.Windows.Forms.Label();
 			this.label16 = new System.Windows.Forms.Label();
 			this.button_freqStop = new System.Windows.Forms.Button();
-			this.status_degrees = new System.Windows.Forms.Label();
-			this.label34 = new System.Windows.Forms.Label();
+			this.button_freqStart = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			this.groupBox3.SuspendLayout();
 			this.groupBox4.SuspendLayout();
@@ -147,7 +149,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.moveRotation)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.moveDistanceCM)).BeginInit();
 			this.groupBox5.SuspendLayout();
-			this.groupBox7.SuspendLayout();
+			this.TaBContainer.SuspendLayout();
+			this.tabPage1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -1193,76 +1196,6 @@
 			this.groupBox5.Text = "Navigation";
 			this.groupBox5.Enter += new System.EventHandler(this.groupBox5_Enter);
 			// 
-			// button_freqStart
-			// 
-			this.button_freqStart.Location = new System.Drawing.Point(1351, 30);
-			this.button_freqStart.Name = "button_freqStart";
-			this.button_freqStart.Size = new System.Drawing.Size(253, 44);
-			this.button_freqStart.TabIndex = 40;
-			this.button_freqStart.Text = "Start";
-			this.button_freqStart.UseVisualStyleBackColor = true;
-			this.button_freqStart.Click += new System.EventHandler(this.button_freqStart_Click);
-			// 
-			// groupBox7
-			// 
-			this.groupBox7.Controls.Add(this.chart1);
-			this.groupBox7.Controls.Add(this.label17);
-			this.groupBox7.Controls.Add(this.label16);
-			this.groupBox7.Controls.Add(this.button_freqStop);
-			this.groupBox7.Controls.Add(this.button_freqStart);
-			this.groupBox7.Location = new System.Drawing.Point(38, 1021);
-			this.groupBox7.Name = "groupBox7";
-			this.groupBox7.Size = new System.Drawing.Size(1833, 738);
-			this.groupBox7.TabIndex = 41;
-			this.groupBox7.TabStop = false;
-			this.groupBox7.Text = "Frequency Analysis";
-			// 
-			// chart1
-			// 
-			chartArea1.AxisX.Title = "Time (ms)";
-			chartArea1.AxisY.Title = "Magnitude";
-			chartArea1.Name = "ChartArea1";
-			this.chart1.ChartAreas.Add(chartArea1);
-			legend1.Name = "Legend1";
-			this.chart1.Legends.Add(legend1);
-			this.chart1.Location = new System.Drawing.Point(14, 30);
-			this.chart1.Name = "chart1";
-			series1.ChartArea = "ChartArea1";
-			series1.Legend = "Legend1";
-			series1.Name = "Primary";
-			this.chart1.Series.Add(series1);
-			this.chart1.Size = new System.Drawing.Size(1316, 303);
-			this.chart1.TabIndex = 44;
-			this.chart1.Text = "Magnitude/Time";
-			// 
-			// label17
-			// 
-			this.label17.AutoSize = true;
-			this.label17.Location = new System.Drawing.Point(1350, 172);
-			this.label17.Name = "label17";
-			this.label17.Size = new System.Drawing.Size(169, 25);
-			this.label17.TabIndex = 43;
-			this.label17.Text = "100Hz Sampling";
-			// 
-			// label16
-			// 
-			this.label16.AutoSize = true;
-			this.label16.Location = new System.Drawing.Point(1350, 142);
-			this.label16.Name = "label16";
-			this.label16.Size = new System.Drawing.Size(140, 25);
-			this.label16.TabIndex = 42;
-			this.label16.Text = "T = 1 Second";
-			// 
-			// button_freqStop
-			// 
-			this.button_freqStop.Location = new System.Drawing.Point(1351, 83);
-			this.button_freqStop.Name = "button_freqStop";
-			this.button_freqStop.Size = new System.Drawing.Size(253, 44);
-			this.button_freqStop.TabIndex = 41;
-			this.button_freqStop.Text = "Stop";
-			this.button_freqStop.UseVisualStyleBackColor = true;
-			this.button_freqStop.Click += new System.EventHandler(this.button_freqStop_Click);
-			// 
 			// status_degrees
 			// 
 			this.status_degrees.AutoSize = true;
@@ -1281,12 +1214,101 @@
 			this.label34.TabIndex = 22;
 			this.label34.Text = "Current Deg";
 			// 
+			// TaBContainer
+			// 
+			this.TaBContainer.Controls.Add(this.tabPage1);
+			this.TaBContainer.Controls.Add(this.tabPage2);
+			this.TaBContainer.Location = new System.Drawing.Point(38, 1010);
+			this.TaBContainer.Name = "TaBContainer";
+			this.TaBContainer.SelectedIndex = 0;
+			this.TaBContainer.Size = new System.Drawing.Size(1838, 778);
+			this.TaBContainer.TabIndex = 42;
+			// 
+			// tabPage1
+			// 
+			this.tabPage1.Controls.Add(this.chart1);
+			this.tabPage1.Controls.Add(this.label17);
+			this.tabPage1.Controls.Add(this.label16);
+			this.tabPage1.Controls.Add(this.button_freqStop);
+			this.tabPage1.Controls.Add(this.button_freqStart);
+			this.tabPage1.Location = new System.Drawing.Point(8, 39);
+			this.tabPage1.Name = "tabPage1";
+			this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPage1.Size = new System.Drawing.Size(1822, 731);
+			this.tabPage1.TabIndex = 0;
+			this.tabPage1.Text = "Frequency Analysis";
+			this.tabPage1.UseVisualStyleBackColor = true;
+			// 
+			// tabPage2
+			// 
+			this.tabPage2.Location = new System.Drawing.Point(8, 39);
+			this.tabPage2.Name = "tabPage2";
+			this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPage2.Size = new System.Drawing.Size(1822, 731);
+			this.tabPage2.TabIndex = 1;
+			this.tabPage2.Text = "Light Measurement";
+			this.tabPage2.UseVisualStyleBackColor = true;
+			// 
+			// chart1
+			// 
+			chartArea1.AxisX.Title = "Time (ms)";
+			chartArea1.AxisY.Title = "Magnitude";
+			chartArea1.Name = "ChartArea1";
+			this.chart1.ChartAreas.Add(chartArea1);
+			legend1.Name = "Legend1";
+			this.chart1.Legends.Add(legend1);
+			this.chart1.Location = new System.Drawing.Point(6, 6);
+			this.chart1.Name = "chart1";
+			series1.ChartArea = "ChartArea1";
+			series1.Legend = "Legend1";
+			series1.Name = "Primary";
+			this.chart1.Series.Add(series1);
+			this.chart1.Size = new System.Drawing.Size(1513, 719);
+			this.chart1.TabIndex = 49;
+			this.chart1.Text = "Magnitude/Time";
+			// 
+			// label17
+			// 
+			this.label17.AutoSize = true;
+			this.label17.Location = new System.Drawing.Point(1536, 178);
+			this.label17.Name = "label17";
+			this.label17.Size = new System.Drawing.Size(169, 25);
+			this.label17.TabIndex = 48;
+			this.label17.Text = "100Hz Sampling";
+			// 
+			// label16
+			// 
+			this.label16.AutoSize = true;
+			this.label16.Location = new System.Drawing.Point(1536, 148);
+			this.label16.Name = "label16";
+			this.label16.Size = new System.Drawing.Size(140, 25);
+			this.label16.TabIndex = 47;
+			this.label16.Text = "T = 1 Second";
+			// 
+			// button_freqStop
+			// 
+			this.button_freqStop.Location = new System.Drawing.Point(1537, 89);
+			this.button_freqStop.Name = "button_freqStop";
+			this.button_freqStop.Size = new System.Drawing.Size(253, 44);
+			this.button_freqStop.TabIndex = 46;
+			this.button_freqStop.Text = "Stop";
+			this.button_freqStop.UseVisualStyleBackColor = true;
+			// 
+			// button_freqStart
+			// 
+			this.button_freqStart.Location = new System.Drawing.Point(1537, 36);
+			this.button_freqStart.Name = "button_freqStart";
+			this.button_freqStart.Size = new System.Drawing.Size(253, 44);
+			this.button_freqStart.TabIndex = 45;
+			this.button_freqStart.Text = "Start";
+			this.button_freqStart.UseVisualStyleBackColor = true;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(2460, 1863);
-			this.Controls.Add(this.groupBox7);
+			this.Controls.Add(this.TaBContainer);
 			this.Controls.Add(this.groupBox6);
 			this.Controls.Add(this.groupBox5);
 			this.Controls.Add(this.textbox_error);
@@ -1319,8 +1341,9 @@
 			((System.ComponentModel.ISupportInitialize)(this.moveDistanceCM)).EndInit();
 			this.groupBox5.ResumeLayout(false);
 			this.groupBox5.PerformLayout();
-			this.groupBox7.ResumeLayout(false);
-			this.groupBox7.PerformLayout();
+			this.TaBContainer.ResumeLayout(false);
+			this.tabPage1.ResumeLayout(false);
+			this.tabPage1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -1426,14 +1449,16 @@
 		private System.Windows.Forms.NumericUpDown moveDistanceCM;
 		private System.Windows.Forms.Label label39;
 		private System.Windows.Forms.GroupBox groupBox5;
-		private System.Windows.Forms.Button button_freqStart;
-		private System.Windows.Forms.GroupBox groupBox7;
-		private System.Windows.Forms.Button button_freqStop;
+		private System.Windows.Forms.Label status_degrees;
+		private System.Windows.Forms.Label label34;
+		private System.Windows.Forms.TabControl TaBContainer;
+		private System.Windows.Forms.TabPage tabPage1;
 		private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
 		private System.Windows.Forms.Label label17;
 		private System.Windows.Forms.Label label16;
-		private System.Windows.Forms.Label status_degrees;
-		private System.Windows.Forms.Label label34;
+		private System.Windows.Forms.Button button_freqStop;
+		private System.Windows.Forms.Button button_freqStart;
+		private System.Windows.Forms.TabPage tabPage2;
 	}
 }
 
