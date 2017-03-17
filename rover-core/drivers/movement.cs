@@ -86,6 +86,7 @@ namespace rover_core.drivers
 
 		public void rotateBearing(float radians)
 		{
+<<<<<<< HEAD
 			byte[] bytes = BitConverter.GetBytes(radians);
 			_tcpClient.SendData(CommandID.CMDMoveBearing, new byte[] {
 			bytes[0],
@@ -93,6 +94,15 @@ namespace rover_core.drivers
 			bytes[2],
 			bytes[3]
 			});
+=======
+
+            byte[] radiansArray = BitConverter.GetBytes(radians);
+            
+            _tcpClient.SendData(CommandID.CMDMoveBearing, radiansArray);
+>>>>>>> 27b8fb7e3529d08afbc482f4bac2312bcc4e13f2
 		}
+
+
+
 	}
 }

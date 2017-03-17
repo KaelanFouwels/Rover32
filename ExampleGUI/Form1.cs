@@ -422,8 +422,8 @@ namespace Comms
 		{
 			if (e.KeyChar != (char)Keys.Enter) return;
 			float value = (float) moveRotation.Value;
-			float radians = (value / 360) * 2 * (float) Math.PI;
-			await Task.Run(() => rover.Movement.rotateBearing(radians));
+			//float radians = (value / 360) * 2 * (float) Math.PI;
+			await Task.Run(() => rover.Movement.rotateBearing(value));
 		}
 
 		private void motorSpeedOverride_TextChanged(object sender, EventArgs e)
