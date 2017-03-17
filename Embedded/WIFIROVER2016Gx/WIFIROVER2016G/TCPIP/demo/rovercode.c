@@ -475,14 +475,14 @@ void __attribute((interrupt(ipl3), vector(_ADC_VECTOR), nomips16)) _ADCInterrupt
 
     //10Hz
     magnetometerAngleCounter++;
-    if (magnetometerAngleCounter == 4000) {
+    if (magnetometerAngleCounter == 1000) {
         magnetometerAngleCounter = 0;
         magnetometerAngleFlag = 1;
     }
 
-    //10Hz
+    //40Hz
     rotationCounter++;
-    if (rotationCounter == 4000) {
+    if (rotationCounter == 1000) {
         rotationCounter = 0;
         rotationFlag = 1;
     }
@@ -888,26 +888,30 @@ void checkRotation() {
         return;
     }
 
-    float offset = 0.10;
+    float offset = 0.05;
 
-    if (rotationTarget >= 0 && MagAngle >= rotationTarget - offset) {
+    if (rotationTarget >= 0 && MagAngle >= rotationTarget - offset && MagAngle <= rotationTarget) {
         areRotating = 0;
-    } else if (rotationTarget < 0 && MagAngle <= rotationTarget + offset) {
+    } else if (rotationTarget < 0 && MagAngle <= rotationTarget + offset && MagAngle >= rotationTarget) {
         areRotating = 0;
     }
 
-    if (rotationTarget > MagAngle) {
-        newDirection = 1;
-    } else {
+    if (rotationTarget < 0 && MagAngle > rotationTarget) {
         newDirection = 0;
+    } else if (rotationTarget < 0 && MagAngle < rotationTarget) {
+        newDirection = 1;
+    } else if (rotationTarget >= 0 && MagAngle > rotationTarget) {
+        newDirection = 0;
+    } else if (rotationTarget >= 0 && MagAngle < rotationTarget) {
+        newDirection = 1;
     }
 
     if (areRotating == 0) {
         setspeed(0, 0);
     } else if (newDirection == 1) {
-        setspeed(400, -400);
+        setspeed(800, -800);
     } else {
-        setspeed(-400, 400);
+        setspeed(-800, 800);
     }
 }
 
@@ -973,10 +977,10 @@ void processcommand(void) // the main routine which processes commands
 
         case CMDMoveBearing:
 
-            myfloatUnion.s[1] = nextcommand[1];
-            myfloatUnion.s[2] = nextcommand[2];
-            myfloatUnion.s[3] = nextcommand[3];
-            myfloatUnion.s[4] = nextcommand[4];
+            myfloatUnion.s[0] = nextcommand[1];
+            myfloatUnion.s[1] = nextcommand[2];
+            myfloatUnion.s[2] = nextcommand[3];
+            myfloatUnion.s[3] = nextcommand[4];
             rotationTarget = myfloatUnion.f;
             areRotating = 1;
             break;
