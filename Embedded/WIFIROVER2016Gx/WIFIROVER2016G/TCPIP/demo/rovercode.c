@@ -415,8 +415,8 @@ void getAccelerometerUp(void) {
     }
 
     int i;
-    int a;
-    int b;
+    char a;
+    char b;
 
     I2S();
     I2send(0x38);
@@ -434,15 +434,15 @@ void getAccelerometerUp(void) {
 
         a = I2GET(1);
         b = I2GET(1);
-        accelerometerX = a << 8 || b;
+        accelerometerX = (a << 8) | b;
 
         a = I2GET(1);
         b = I2GET(1);
-        accelerometerY = a << 8 || b;
+        accelerometerY = (a << 8) | b;
 
         a = I2GET(1);
         b = I2GET(0);
-        accelerometerZ = a << 8 || b;
+        accelerometerZ = (a << 8) | b;
 
         accelerometerCache[accelerometerCachePointer] = accelerometerZ;
         accelerometerCachePointer++;
@@ -1093,9 +1093,10 @@ void processcommand(void) // the main routine which processes commands
                 break;
             }
 
-            POSTTCPhead(accelerometerCacheSize * 2, CMDGetAcceleromterCache);
+            int size = accelerometerCacheSize;
+            POSTTCPhead(size * 2, CMDGetAcceleromterCache);
             i = 0;
-            for (i; i < accelerometerCacheSize * 2; i++) {
+            for (i; i < size; i++) {
                 POSTTCPchar(accelerometerCache[i] >> 8);
                 POSTTCPchar(accelerometerCache[i]);
             }
