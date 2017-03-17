@@ -422,7 +422,7 @@ namespace Comms
 		{
 			if (e.KeyChar != (char)Keys.Enter) return;
 			float value = (float) moveRotation.Value;
-			//float radians = (value / 360) * 2 * (float) Math.PI;
+			float radians = (value / 360) * 2 * (float) Math.PI;
 			await Task.Run(() => rover.Movement.rotateBearing(value));
 		}
 
@@ -489,12 +489,12 @@ namespace Comms
             Task.Run(() => rover_core.routines.Drawing.ASyncDrawTriangle(rover));
         }
 
-		private void button_freqStart_Click(object sender, EventArgs e)
+		private void button_freqStart_Click_1(object sender, EventArgs e)
 		{
 			roverStatus.Instance.frequencyAnalysisStatus = toggleStatus.on;
 		}
 
-		private void button_freqStop_Click(object sender, EventArgs e)
+		private void button_freqStop_Click_1(object sender, EventArgs e)
 		{
 			roverStatus.Instance.frequencyAnalysisStatus = toggleStatus.off;
 		}

@@ -37,7 +37,7 @@ namespace rover_core
 			myClient.OnMessageReceived += new ClientBase.ClientMessageReceivedEvent(myClient_OnMessageReceived);
 
 			myRequestTimer = new Timer();
-			myRequestTimer.Interval = 100; //every x ms
+			myRequestTimer.Interval = 500; //every x ms
 			myRequestTimer.Elapsed += new ElapsedEventHandler(myRequestTimer_Tick);
 			myRequestTimer.Start();
 		}
@@ -77,7 +77,7 @@ namespace rover_core
 			//we will request the status of the LEDs on a regular basis
 			//myClient.SendData(CommandID.GetLEDandSwitchStatus); //this type needs no payload
 			myClient.SendData(CommandID.MotorPosition);
-			myClient.SendData(CommandID.GetAccelValue);
+			//myClient.SendData(CommandID.GetAccelValue);
 			//myClient.SendData(CommandID.GetMagnetValue);
 			myClient.SendData(CommandID.CMDMagAngle);
 			//myClient.SendData(CommandID.CMDGyroPosition);
