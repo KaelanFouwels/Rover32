@@ -67,6 +67,8 @@
 
 #define CMDMoveBearing 206
 
+#define CMDGetAcceleromterCache 207
+
 
 
 void initi2Cs(void);
@@ -185,6 +187,15 @@ volatile int ledCounter = 0;
 volatile int ledFlag = 0;
 
 volatile int isMoving = 0;
+
+#define accelerometerCacheSize 100
+volatile int accelerometerCache[accelerometerCacheSize];
+volatile int accelerometerCachePointer = 0;
+volatile int accelerometerFlag = 0;
+volatile int accelerometerCounter = 0;
+volatile int accelerometerX = 0;
+volatile int accelerometerY = 0;
+volatile int accelerometerZ = 0;
 
 INT16 gyroRotationRadians = 0;
 
@@ -397,6 +408,51 @@ void doclosedloop(void) {
     CLflag = 0;
 }
 
+void getAccelerometerUp(void) {
+    // if cache full, return;
+    if (accelerometerCachePointer >= accelerometerCacheSize - 1) {
+        return;
+    }
+
+    int i;
+    int a;
+    int b;
+
+    I2S();
+    I2send(0x38);
+    I2send(0x00);
+    I2SR();
+    I2send(0x39);
+    i = I2GET(0);
+    I2P();
+    if (i & 8) {
+        I2S();
+        I2send(0x38);
+        I2send(0x01);
+        I2SR();
+        I2send(0x39);
+
+        a = I2GET(1);
+        b = I2GET(1);
+        accelerometerX = a << 8 || b;
+
+        a = I2GET(1);
+        b = I2GET(1);
+        accelerometerY = a << 8 || b;
+
+        a = I2GET(1);
+        b = I2GET(0);
+        accelerometerZ = a << 8 || b;
+
+        accelerometerCache[accelerometerCachePointer] = accelerometerZ;
+        accelerometerCachePointer++;
+
+        I2P();
+    }
+
+
+}
+
 
 
 volatile unsigned char setLineLed = 0;
@@ -417,9 +473,9 @@ void __attribute((interrupt(ipl3), vector(_ADC_VECTOR), nomips16)) _ADCInterrupt
         magnetometerFlag = 1;
     }
 
-    //1Hz
+    //10Hz
     magnetometerAngleCounter++;
-    if (magnetometerAngleCounter == 40000) {
+    if (magnetometerAngleCounter == 4000) {
         magnetometerAngleCounter = 0;
         magnetometerAngleFlag = 1;
     }
@@ -436,6 +492,13 @@ void __attribute((interrupt(ipl3), vector(_ADC_VECTOR), nomips16)) _ADCInterrupt
     if (movementCounter == 400) {
         movementCounter = 0;
         movementFlag = 1;
+    }
+
+    //100Hz
+    accelerometerCounter++;
+    if (accelerometerCounter == 400) {
+        accelerometerCounter = 0;
+        accelerometerFlag = 1;
     }
 
     int v;
@@ -825,20 +888,21 @@ void checkRotation() {
         return;
     }
 
-    if (rotationTarget >= 0 && MagAngle + 0.18 >= rotationTarget) {
+    float offset = 0.10;
+
+    if (rotationTarget >= 0 && MagAngle >= rotationTarget - offset) {
         areRotating = 0;
-    } else if (rotationTarget < 0 && MagAngle - 0.18 <= rotationTarget) {
+    } else if (rotationTarget < 0 && MagAngle <= rotationTarget + offset) {
         areRotating = 0;
     }
 
     if (rotationTarget > MagAngle) {
         newDirection = 1;
-
     } else {
         newDirection = 0;
     }
 
-    if (areRotating = 0) {
+    if (areRotating == 0) {
         setspeed(0, 0);
     } else if (newDirection == 1) {
         setspeed(400, -400);
@@ -909,10 +973,11 @@ void processcommand(void) // the main routine which processes commands
 
         case CMDMoveBearing:
 
-            i = nextcommand[2] | (nextcommand[1] << 8);
-            f = ((float) i) / 1000.00;
-
-            rotationTarget = f;
+            myfloatUnion.s[1] = nextcommand[1];
+            myfloatUnion.s[2] = nextcommand[2];
+            myfloatUnion.s[3] = nextcommand[3];
+            myfloatUnion.s[4] = nextcommand[4];
+            rotationTarget = myfloatUnion.f;
             areRotating = 1;
             break;
 
@@ -1018,6 +1083,20 @@ void processcommand(void) // the main routine which processes commands
             }
             break;
 
+        case CMDGetAcceleromterCache:
+            if (accelerometerCachePointer < accelerometerCacheSize - 1) {
+                POSTTCPhead(0, CMDGetAcceleromterCache);
+                break;
+            }
+
+            POSTTCPhead(accelerometerCacheSize * 2, CMDGetAcceleromterCache);
+            i = 0;
+            for (i; i < accelerometerCacheSize * 2; i++) {
+                POSTTCPchar(accelerometerCache[i] >> 8);
+                POSTTCPchar(accelerometerCache[i]);
+            }
+            accelerometerCachePointer = 0;
+            break;
 
         case CMDPOWERREADAD0:
             if (commandlen == 0) //POWER READ AD0
@@ -1505,12 +1584,6 @@ void moveBackwards(void) {
 //Process packets
 
 void ProcessIO(void) {
-
-    if (magnetometerFlag == 1) {
-        magnetometerFlag = 0;
-        getMagnetometer();
-    }
-
     if (ledFlag == 1) {
         ledFlag = 0;
         if (LED1_IO == 1) {
@@ -1520,13 +1593,34 @@ void ProcessIO(void) {
         }
     }
 
+    if (magnetometerFlag) {
+        magnetometerFlag = 0;
+        getMagnetometer();
+    }
+
+    if (accelerometerFlag) {
+        accelerometerFlag = 0;
+        getAccelerometerUp();
+    }
+
+    if (magnetometerAngleFlag) {
+        magnetometerAngleFlag = 0;
+        getMagnetometerAngle();
+    }
+
+
+    // Rotation
+    if (areRotating && rotationFlag) {
+        rotationFlag = 0;
+        checkRotation();
+    }
+
+
     if (PeriodA > 512) CspeedA = 0x8000000 / PeriodA;
     if (PeriodB > 512) CspeedB = 0x8000000 / PeriodB;
     if (CLflag) doclosedloop();
 
-    if (magnetometerAngleFlag) {
-        getMagnetometerAngle();
-    }
+
 
     // Movement
     if (isMoving && movementFlag) {
@@ -1541,12 +1635,6 @@ void ProcessIO(void) {
                 moveForward();
             }
         }
-    }
-
-    // Rotation
-    if (areRotating && rotationFlag == 1) {
-        checkRotation();
-        rotationFlag = 0;
     }
 
     //Gyro

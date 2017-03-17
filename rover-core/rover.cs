@@ -75,7 +75,7 @@ namespace rover_core
 			if (!myClient.isConnected) return; //if no connection, don't do anything
 
 			//we will request the status of the LEDs on a regular basis
-			myClient.SendData(CommandID.GetLEDandSwitchStatus); //this type needs no payload
+			//myClient.SendData(CommandID.GetLEDandSwitchStatus); //this type needs no payload
 			myClient.SendData(CommandID.MotorPosition);
 			myClient.SendData(CommandID.GetAccelValue);
 			//myClient.SendData(CommandID.GetMagnetValue);
@@ -83,6 +83,11 @@ namespace rover_core
 			//myClient.SendData(CommandID.CMDGyroPosition);
 			//myClient.SendData(CommandID.GetGyroValue);
 			//myClient.SendData(CommandID.CMDGetIsMovingForward);
+
+			if (roverStatus.Instance.frequencyAnalysisStatus == toggleStatus.on)
+			{
+				myClient.SendData(CommandID.CMDACCCACHE);
+			}
 		}
 
 		void myClient_OnMessageReceived(Client_Message_EventArgs e)
@@ -197,7 +202,22 @@ namespace rover_core
 					roverStatus.Instance.magnetometer = sensorStatus.novalue;
 				}
 			}
+			if (e.RawMessage[3] == (byte)CommandID.CMDACCCACHE)
+			{
+				int index = 0;
+				int value = 0;
+				short messageLength = (short)(e.RawMessage[1]);
+				if (messageLength == 202)
+				{
+					roverData.Instance.acceleromterArray = new int[100];
 
+					for (int i = 0; i < 200; i += 2) {
+						index = i + 4;
+						value = (short)((uint)e.RawMessage[index + 1] | ((uint)e.RawMessage[index] << 8));
+						roverData.Instance.acceleromterArray[i / 2] = value;
+					}
+				}
+			}
 		}
 	}
 }

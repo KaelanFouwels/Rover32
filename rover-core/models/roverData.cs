@@ -57,5 +57,6 @@ namespace rover_core.models
 		public double magnetometerYMax { get; internal set; } = -9999999;
 		public double magnetometerangleMin { get; set; } = 9999999;
 		public double magnetometerangleMax { get; set; } = -9999999;
+		public int[] acceleromterArray { get; set; } = new int[12];
 	}
 }
