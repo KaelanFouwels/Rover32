@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+			System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+			System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.btnCon = new System.Windows.Forms.Button();
 			this.txtIP = new System.Windows.Forms.TextBox();
@@ -94,7 +97,9 @@
 			this.label13 = new System.Windows.Forms.Label();
 			this.label14 = new System.Windows.Forms.Label();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.button5 = new System.Windows.Forms.Button();
 			this.BtnDrawTriangle = new System.Windows.Forms.Button();
+			this.button4 = new System.Windows.Forms.Button();
 			this.BtnRotateCircle = new System.Windows.Forms.Button();
 			this.BtnDrawLine = new System.Windows.Forms.Button();
 			this.servo2PowerButton = new System.Windows.Forms.Button();
@@ -110,8 +115,6 @@
 			this.motorSpeedOverride = new System.Windows.Forms.TextBox();
 			this.textbox_error = new System.Windows.Forms.TextBox();
 			this.groupBox6 = new System.Windows.Forms.GroupBox();
-			this.button5 = new System.Windows.Forms.Button();
-			this.button4 = new System.Windows.Forms.Button();
 			this.button3 = new System.Windows.Forms.Button();
 			this.calibratePassive = new System.Windows.Forms.Button();
 			this.button2 = new System.Windows.Forms.Button();
@@ -125,6 +128,14 @@
 			this.moveDistanceCM = new System.Windows.Forms.NumericUpDown();
 			this.label39 = new System.Windows.Forms.Label();
 			this.groupBox5 = new System.Windows.Forms.GroupBox();
+			this.button_freqStart = new System.Windows.Forms.Button();
+			this.groupBox7 = new System.Windows.Forms.GroupBox();
+			this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+			this.label17 = new System.Windows.Forms.Label();
+			this.label16 = new System.Windows.Forms.Label();
+			this.button_freqStop = new System.Windows.Forms.Button();
+			this.status_degrees = new System.Windows.Forms.Label();
+			this.label34 = new System.Windows.Forms.Label();
 			this.groupBox1.SuspendLayout();
 			this.groupBox3.SuspendLayout();
 			this.groupBox4.SuspendLayout();
@@ -136,6 +147,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.moveRotation)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.moveDistanceCM)).BeginInit();
 			this.groupBox5.SuspendLayout();
+			this.groupBox7.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// groupBox1
@@ -147,7 +160,7 @@
 			this.groupBox1.Margin = new System.Windows.Forms.Padding(6);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Padding = new System.Windows.Forms.Padding(6);
-			this.groupBox1.Size = new System.Drawing.Size(342, 269);
+			this.groupBox1.Size = new System.Drawing.Size(342, 280);
 			this.groupBox1.TabIndex = 0;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Communications";
@@ -170,7 +183,7 @@
 			this.txtIP.Name = "txtIP";
 			this.txtIP.Size = new System.Drawing.Size(192, 31);
 			this.txtIP.TabIndex = 1;
-			this.txtIP.Text = "10.215.2.35";
+			this.txtIP.Text = "10.215.2.30";
 			// 
 			// label1
 			// 
@@ -469,7 +482,7 @@
 			this.groupBox3.Controls.Add(this.status_leds);
 			this.groupBox3.Location = new System.Drawing.Point(387, 12);
 			this.groupBox3.Name = "groupBox3";
-			this.groupBox3.Size = new System.Drawing.Size(1018, 280);
+			this.groupBox3.Size = new System.Drawing.Size(981, 291);
 			this.groupBox3.TabIndex = 23;
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "Status";
@@ -686,7 +699,7 @@
 			this.groupBox4.Controls.Add(this.label2);
 			this.groupBox4.Location = new System.Drawing.Point(38, 322);
 			this.groupBox4.Name = "groupBox4";
-			this.groupBox4.Size = new System.Drawing.Size(678, 812);
+			this.groupBox4.Size = new System.Drawing.Size(678, 682);
 			this.groupBox4.TabIndex = 24;
 			this.groupBox4.TabStop = false;
 			this.groupBox4.Text = "Readings";
@@ -807,7 +820,9 @@
 			// 
 			// groupBox2
 			// 
+			this.groupBox2.Controls.Add(this.button5);
 			this.groupBox2.Controls.Add(this.BtnDrawTriangle);
+			this.groupBox2.Controls.Add(this.button4);
 			this.groupBox2.Controls.Add(this.BtnRotateCircle);
 			this.groupBox2.Controls.Add(this.BtnDrawLine);
 			this.groupBox2.Controls.Add(this.servo2PowerButton);
@@ -825,10 +840,21 @@
 			this.groupBox2.Controls.Add(this.btnToggleRed);
 			this.groupBox2.Location = new System.Drawing.Point(734, 312);
 			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(634, 822);
+			this.groupBox2.Size = new System.Drawing.Size(634, 692);
 			this.groupBox2.TabIndex = 25;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Actions";
+			// 
+			// button5
+			// 
+			this.button5.Location = new System.Drawing.Point(20, 589);
+			this.button5.Margin = new System.Windows.Forms.Padding(6);
+			this.button5.Name = "button5";
+			this.button5.Size = new System.Drawing.Size(216, 44);
+			this.button5.TabIndex = 41;
+			this.button5.Text = "Raise pen";
+			this.button5.UseVisualStyleBackColor = true;
+			this.button5.Click += new System.EventHandler(this.button5_Click_1);
 			// 
 			// BtnDrawTriangle
 			// 
@@ -840,6 +866,17 @@
 			this.BtnDrawTriangle.Text = "Draw triangle";
 			this.BtnDrawTriangle.UseVisualStyleBackColor = true;
 			this.BtnDrawTriangle.Click += new System.EventHandler(this.BtnDrawTriangle_Click);
+			// 
+			// button4
+			// 
+			this.button4.Location = new System.Drawing.Point(20, 534);
+			this.button4.Margin = new System.Windows.Forms.Padding(6);
+			this.button4.Name = "button4";
+			this.button4.Size = new System.Drawing.Size(216, 44);
+			this.button4.TabIndex = 40;
+			this.button4.Text = "Drop pen";
+			this.button4.UseVisualStyleBackColor = true;
+			this.button4.Click += new System.EventHandler(this.button4_Click_1);
 			// 
 			// BtnRotateCircle
 			// 
@@ -982,48 +1019,25 @@
 			this.textbox_error.BackColor = System.Drawing.Color.Black;
 			this.textbox_error.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
 			this.textbox_error.ForeColor = System.Drawing.Color.White;
-			this.textbox_error.Location = new System.Drawing.Point(2, 1164);
+			this.textbox_error.Location = new System.Drawing.Point(3, 1814);
 			this.textbox_error.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.textbox_error.Name = "textbox_error";
-			this.textbox_error.Size = new System.Drawing.Size(1404, 44);
+			this.textbox_error.Size = new System.Drawing.Size(2456, 44);
 			this.textbox_error.TabIndex = 26;
+			this.textbox_error.Text = "Status: OK";
 			// 
 			// groupBox6
 			// 
-			this.groupBox6.Controls.Add(this.button5);
-			this.groupBox6.Controls.Add(this.button4);
 			this.groupBox6.Controls.Add(this.button3);
 			this.groupBox6.Controls.Add(this.calibratePassive);
 			this.groupBox6.Controls.Add(this.button2);
 			this.groupBox6.Controls.Add(this.button1);
-			this.groupBox6.Location = new System.Drawing.Point(1454, 12);
+			this.groupBox6.Location = new System.Drawing.Point(1385, 23);
 			this.groupBox6.Name = "groupBox6";
 			this.groupBox6.Size = new System.Drawing.Size(664, 280);
 			this.groupBox6.TabIndex = 28;
 			this.groupBox6.TabStop = false;
 			this.groupBox6.Text = "Routines";
-			// 
-			// button5
-			// 
-			this.button5.Location = new System.Drawing.Point(258, 88);
-			this.button5.Margin = new System.Windows.Forms.Padding(6);
-			this.button5.Name = "button5";
-			this.button5.Size = new System.Drawing.Size(216, 44);
-			this.button5.TabIndex = 41;
-			this.button5.Text = "Raise pen";
-			this.button5.UseVisualStyleBackColor = true;
-			this.button5.Click += new System.EventHandler(this.button5_Click_1);
-			// 
-			// button4
-			// 
-			this.button4.Location = new System.Drawing.Point(258, 33);
-			this.button4.Margin = new System.Windows.Forms.Padding(6);
-			this.button4.Name = "button4";
-			this.button4.Size = new System.Drawing.Size(216, 44);
-			this.button4.TabIndex = 40;
-			this.button4.Text = "Drop pen";
-			this.button4.UseVisualStyleBackColor = true;
-			this.button4.Click += new System.EventHandler(this.button4_Click_1);
 			// 
 			// button3
 			// 
@@ -1081,7 +1095,7 @@
 			// 
 			// moveDistance
 			// 
-			this.moveDistance.Location = new System.Drawing.Point(22, 109);
+			this.moveDistance.Location = new System.Drawing.Point(23, 149);
 			this.moveDistance.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -1094,7 +1108,7 @@
 			// 
 			// moveRotation
 			// 
-			this.moveRotation.Location = new System.Drawing.Point(22, 196);
+			this.moveRotation.Location = new System.Drawing.Point(23, 236);
 			this.moveRotation.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -1113,7 +1127,7 @@
 			// label31
 			// 
 			this.label31.AutoSize = true;
-			this.label31.Location = new System.Drawing.Point(16, 81);
+			this.label31.Location = new System.Drawing.Point(17, 121);
 			this.label31.Name = "label31";
 			this.label31.Size = new System.Drawing.Size(152, 25);
 			this.label31.TabIndex = 15;
@@ -1122,7 +1136,7 @@
 			// label32
 			// 
 			this.label32.AutoSize = true;
-			this.label32.Location = new System.Drawing.Point(16, 168);
+			this.label32.Location = new System.Drawing.Point(17, 208);
 			this.label32.Name = "label32";
 			this.label32.Size = new System.Drawing.Size(218, 25);
 			this.label32.TabIndex = 16;
@@ -1139,7 +1153,7 @@
 			// 
 			// moveDistanceCM
 			// 
-			this.moveDistanceCM.Location = new System.Drawing.Point(21, 275);
+			this.moveDistanceCM.Location = new System.Drawing.Point(22, 315);
 			this.moveDistanceCM.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -1153,7 +1167,7 @@
 			// label39
 			// 
 			this.label39.AutoSize = true;
-			this.label39.Location = new System.Drawing.Point(16, 247);
+			this.label39.Location = new System.Drawing.Point(17, 287);
 			this.label39.Name = "label39";
 			this.label39.Size = new System.Drawing.Size(192, 25);
 			this.label39.TabIndex = 21;
@@ -1161,6 +1175,8 @@
 			// 
 			// groupBox5
 			// 
+			this.groupBox5.Controls.Add(this.status_degrees);
+			this.groupBox5.Controls.Add(this.label34);
 			this.groupBox5.Controls.Add(this.label39);
 			this.groupBox5.Controls.Add(this.moveDistanceCM);
 			this.groupBox5.Controls.Add(this.status_currentBearing);
@@ -1169,19 +1185,108 @@
 			this.groupBox5.Controls.Add(this.moveRotation);
 			this.groupBox5.Controls.Add(this.moveDistance);
 			this.groupBox5.Controls.Add(this.label20);
-			this.groupBox5.Location = new System.Drawing.Point(1395, 312);
+			this.groupBox5.Location = new System.Drawing.Point(1385, 312);
 			this.groupBox5.Name = "groupBox5";
-			this.groupBox5.Size = new System.Drawing.Size(722, 759);
+			this.groupBox5.Size = new System.Drawing.Size(486, 692);
 			this.groupBox5.TabIndex = 27;
 			this.groupBox5.TabStop = false;
 			this.groupBox5.Text = "Navigation";
 			this.groupBox5.Enter += new System.EventHandler(this.groupBox5_Enter);
 			// 
+			// button_freqStart
+			// 
+			this.button_freqStart.Location = new System.Drawing.Point(1351, 30);
+			this.button_freqStart.Name = "button_freqStart";
+			this.button_freqStart.Size = new System.Drawing.Size(253, 44);
+			this.button_freqStart.TabIndex = 40;
+			this.button_freqStart.Text = "Start";
+			this.button_freqStart.UseVisualStyleBackColor = true;
+			this.button_freqStart.Click += new System.EventHandler(this.button_freqStart_Click);
+			// 
+			// groupBox7
+			// 
+			this.groupBox7.Controls.Add(this.chart1);
+			this.groupBox7.Controls.Add(this.label17);
+			this.groupBox7.Controls.Add(this.label16);
+			this.groupBox7.Controls.Add(this.button_freqStop);
+			this.groupBox7.Controls.Add(this.button_freqStart);
+			this.groupBox7.Location = new System.Drawing.Point(38, 1021);
+			this.groupBox7.Name = "groupBox7";
+			this.groupBox7.Size = new System.Drawing.Size(1833, 738);
+			this.groupBox7.TabIndex = 41;
+			this.groupBox7.TabStop = false;
+			this.groupBox7.Text = "Frequency Analysis";
+			// 
+			// chart1
+			// 
+			chartArea1.AxisX.Title = "Time (ms)";
+			chartArea1.AxisY.Title = "Magnitude";
+			chartArea1.Name = "ChartArea1";
+			this.chart1.ChartAreas.Add(chartArea1);
+			legend1.Name = "Legend1";
+			this.chart1.Legends.Add(legend1);
+			this.chart1.Location = new System.Drawing.Point(14, 30);
+			this.chart1.Name = "chart1";
+			series1.ChartArea = "ChartArea1";
+			series1.Legend = "Legend1";
+			series1.Name = "Primary";
+			this.chart1.Series.Add(series1);
+			this.chart1.Size = new System.Drawing.Size(1316, 303);
+			this.chart1.TabIndex = 44;
+			this.chart1.Text = "Magnitude/Time";
+			// 
+			// label17
+			// 
+			this.label17.AutoSize = true;
+			this.label17.Location = new System.Drawing.Point(1350, 172);
+			this.label17.Name = "label17";
+			this.label17.Size = new System.Drawing.Size(169, 25);
+			this.label17.TabIndex = 43;
+			this.label17.Text = "100Hz Sampling";
+			// 
+			// label16
+			// 
+			this.label16.AutoSize = true;
+			this.label16.Location = new System.Drawing.Point(1350, 142);
+			this.label16.Name = "label16";
+			this.label16.Size = new System.Drawing.Size(140, 25);
+			this.label16.TabIndex = 42;
+			this.label16.Text = "T = 1 Second";
+			// 
+			// button_freqStop
+			// 
+			this.button_freqStop.Location = new System.Drawing.Point(1351, 83);
+			this.button_freqStop.Name = "button_freqStop";
+			this.button_freqStop.Size = new System.Drawing.Size(253, 44);
+			this.button_freqStop.TabIndex = 41;
+			this.button_freqStop.Text = "Stop";
+			this.button_freqStop.UseVisualStyleBackColor = true;
+			this.button_freqStop.Click += new System.EventHandler(this.button_freqStop_Click);
+			// 
+			// status_degrees
+			// 
+			this.status_degrees.AutoSize = true;
+			this.status_degrees.Location = new System.Drawing.Point(239, 67);
+			this.status_degrees.Name = "status_degrees";
+			this.status_degrees.Size = new System.Drawing.Size(19, 25);
+			this.status_degrees.TabIndex = 23;
+			this.status_degrees.Text = "-";
+			// 
+			// label34
+			// 
+			this.label34.AutoSize = true;
+			this.label34.Location = new System.Drawing.Point(18, 67);
+			this.label34.Name = "label34";
+			this.label34.Size = new System.Drawing.Size(128, 25);
+			this.label34.TabIndex = 22;
+			this.label34.Text = "Current Deg";
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(2398, 1083);
+			this.ClientSize = new System.Drawing.Size(2460, 1863);
+			this.Controls.Add(this.groupBox7);
 			this.Controls.Add(this.groupBox6);
 			this.Controls.Add(this.groupBox5);
 			this.Controls.Add(this.textbox_error);
@@ -1214,6 +1319,9 @@
 			((System.ComponentModel.ISupportInitialize)(this.moveDistanceCM)).EndInit();
 			this.groupBox5.ResumeLayout(false);
 			this.groupBox5.PerformLayout();
+			this.groupBox7.ResumeLayout(false);
+			this.groupBox7.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -1318,6 +1426,14 @@
 		private System.Windows.Forms.NumericUpDown moveDistanceCM;
 		private System.Windows.Forms.Label label39;
 		private System.Windows.Forms.GroupBox groupBox5;
+		private System.Windows.Forms.Button button_freqStart;
+		private System.Windows.Forms.GroupBox groupBox7;
+		private System.Windows.Forms.Button button_freqStop;
+		private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+		private System.Windows.Forms.Label label17;
+		private System.Windows.Forms.Label label16;
+		private System.Windows.Forms.Label status_degrees;
+		private System.Windows.Forms.Label label34;
 	}
 }
 
