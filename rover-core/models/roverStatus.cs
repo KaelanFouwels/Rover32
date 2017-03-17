@@ -24,6 +24,7 @@ namespace rover_core.models
 		public powerStatus servo1 { get; internal set; } = powerStatus.off;
 		public powerStatus servo2 { get; internal set; } = powerStatus.off;
 		public calibrationStatus magnetometerCalibration { get; set; } = calibrationStatus.uncalibrated;
+		public toggleStatus frequencyAnalysisStatus { get; set; } = toggleStatus.off;
 	}
 
 	public enum powerStatus
@@ -37,6 +38,12 @@ namespace rover_core.models
 		calibrated = 0,
 		uncalibrated = 1,
 		stale = 2
+	}
+
+	public enum toggleStatus
+	{
+		on = 0,
+		off = 1
 	}
 
 	public enum sensorStatus

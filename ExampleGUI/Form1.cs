@@ -112,6 +112,7 @@ namespace Comms
 
 				var angle = roverData.Instance.magnetAngle;
 				status_currentBearing.Text = angle.ToString();
+				status_degrees.Text = (angle / (2 * Math.PI) * 360).ToString();
 			}
 
 			if (roverStatus.Instance.gyroscope == sensorStatus.ok)
@@ -120,6 +121,13 @@ namespace Comms
 				reading_gyro2.Text = roverData.Instance.gyro2.ToString();
 				reading_gyro3.Text = roverData.Instance.gyro3.ToString();
 			}
+
+			chart1.Series["Primary"].Points.Clear();
+			for (int x = 0; x < roverData.Instance.acceleromterArray.Length; x++)
+			{
+				chart1.Series["Primary"].Points.AddXY(x,roverData.Instance.acceleromterArray[x]);
+			}
+
 		}
 
 		private void btnToggleGreen_Click(object sender, EventArgs e)
@@ -414,8 +422,8 @@ namespace Comms
 		{
 			if (e.KeyChar != (char)Keys.Enter) return;
 			float value = (float) moveRotation.Value;
-			float radians = (value / 360) * 2 * (float) Math.PI;
-			await Task.Run(() => rover.Movement.rotateBearing(radians));
+			//float radians = (value / 360) * 2 * (float) Math.PI;
+			await Task.Run(() => rover.Movement.rotateBearing(value));
 		}
 
 		private void motorSpeedOverride_TextChanged(object sender, EventArgs e)
@@ -480,6 +488,16 @@ namespace Comms
         {
             Task.Run(() => rover_core.routines.Drawing.ASyncDrawTriangle(rover));
         }
-    }
+
+		private void button_freqStart_Click(object sender, EventArgs e)
+		{
+			roverStatus.Instance.frequencyAnalysisStatus = toggleStatus.on;
+		}
+
+		private void button_freqStop_Click(object sender, EventArgs e)
+		{
+			roverStatus.Instance.frequencyAnalysisStatus = toggleStatus.off;
+		}
+	}
 }
  
