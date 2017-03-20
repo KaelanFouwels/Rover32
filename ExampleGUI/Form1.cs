@@ -19,6 +19,7 @@ namespace Comms
 	{
 		Rover rover;
 		Timer myInterfaceUpdateTimer;
+        int X = 0;
 
 		public Form1()
 		{
@@ -30,8 +31,9 @@ namespace Comms
 			myInterfaceUpdateTimer.Interval = 1; //60 times a second
 			myInterfaceUpdateTimer.Tick += new EventHandler(myInterfaceUpdateTimer_Tick);
 			myInterfaceUpdateTimer.Start();
+            chart1.Series["Primary"].Points.Clear();
 
-		}
+        }
 
 		private async void btnCon_Click(object sender, EventArgs e)
 		{
@@ -64,7 +66,7 @@ namespace Comms
 
 		void drawInterface()
 		{
-
+            
 			//- Draw statuses
 			status_accelerometer.Text = roverStatus.Instance.accelerometer.ToString();
 			status_conn.Text = roverStatus.Instance.connection.ToString();
@@ -76,9 +78,10 @@ namespace Comms
 			status_magcalibration.Text = roverStatus.Instance.magnetometerCalibration.ToString();
 			status_servo1.Text = roverStatus.Instance.servo1.ToString();
 			status_servo2.Text = roverStatus.Instance.servo2.ToString();
+            status_Vortex.Text = roverStatus.Instance.vortexSpin.ToString();
 
-			//- Draw values
-			if (roverStatus.Instance.position == sensorStatus.ok)
+            //- Draw values
+            if (roverStatus.Instance.position == sensorStatus.ok)
 			{
 				reading_positionLeft.Text = roverData.Instance.encoderLeft.ToString();
 				readingPositionRight.Text = roverData.Instance.encoderRight.ToString();
@@ -121,12 +124,22 @@ namespace Comms
 				reading_gyro2.Text = roverData.Instance.gyro2.ToString();
 				reading_gyro3.Text = roverData.Instance.gyro3.ToString();
 			}
+            if (roverStatus.Instance.lightSensor == sensorStatus.ok && roverStatus.Instance.lighAnalysisStatus == toggleStatus.on)
+            {
+                reading_Light.Text = roverData.Instance.lightSensorVal.ToString();
+                reading_Light_Temp.Text = roverData.Instance.lightSensorAmbient.ToString();
+                chart1.Series["Primary"].Points.AddXY((double)(int)(roverData.Instance.encoderLeft / roverData.Instance.milliMtoClick), roverData.Instance.lightSensorVal);
+                X++;
+            }
 
-			chart1.Series["Primary"].Points.Clear();
-			for (int x = 0; x < roverData.Instance.acceleromterArray.Length; x++)
-			{
-				chart1.Series["Primary"].Points.AddXY(x,roverData.Instance.acceleromterArray[x]);
-			}
+            if (roverStatus.Instance.vortexSpin == toggleStatus.on)
+            {
+                LblRotation.Text = roverData.Instance.rotations.ToString();
+               
+            }
+
+			
+		
 
 		}
 
@@ -420,9 +433,9 @@ namespace Comms
 
         private async void moveRotation_KeyPress(object sender, KeyPressEventArgs e)
 		{
-			if (e.KeyChar != (char)Keys.Enter) return;
+		if (e.KeyChar != (char)Keys.Enter) return;
 			float value = (float) moveRotation.Value;
-			float radians = (value / 360) * 2 * (float) Math.PI;
+			//float radians = (value / 360) * 2 * (float) Math.PI;
 			await Task.Run(() => rover.Movement.rotateBearing(value));
 		}
 
@@ -463,10 +476,10 @@ namespace Comms
         private void moveDistanceCM_KeyPress(object sender, KeyPressEventArgs e)
         {
             double DistanceClicks = 0;
-            double multiplier = 0.913037002; //contant for conversion of clicks to CM
+          
 
             if (e.KeyChar != (char)Keys.Enter) return;
-            DistanceClicks = multiplier * Convert.ToDouble(moveDistanceCM.Value); //converts clicks to CM
+            DistanceClicks = roverData.Instance.milliMtoClick * Convert.ToDouble(moveDistanceCM.Value); //converts clicks to CM
             rover.Movement.moveForward(Convert.ToInt16(DistanceClicks));
 
         }
@@ -491,13 +504,50 @@ namespace Comms
 
 		private void button_freqStart_Click_1(object sender, EventArgs e)
 		{
-			roverStatus.Instance.frequencyAnalysisStatus = toggleStatus.on;
+            rover.Movement.moveForward(2000);
+			roverStatus.Instance.lighAnalysisStatus = toggleStatus.on;
 		}
 
 		private void button_freqStop_Click_1(object sender, EventArgs e)
 		{
-			roverStatus.Instance.frequencyAnalysisStatus = toggleStatus.off;
+			roverStatus.Instance.lighAnalysisStatus = toggleStatus.off;
 		}
-	}
+
+        private void textBox1_TextChanged_2(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label37_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void moveDistanceCM_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chart1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnStop_Click(object sender, EventArgs e)
+        {
+            roverStatus.Instance.lighAnalysisStatus = toggleStatus.off;
+        }
+
+        private async void BtnStartVortex_Click(object sender, EventArgs e)
+        {
+            await Task.Run(() => rover_core.routines.SpacialVortex.CalcRotation(rover));
+        }
+
+        private void label38_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
 }
+
  

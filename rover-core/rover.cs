@@ -37,7 +37,7 @@ namespace rover_core
 			myClient.OnMessageReceived += new ClientBase.ClientMessageReceivedEvent(myClient_OnMessageReceived);
 
 			myRequestTimer = new Timer();
-			myRequestTimer.Interval = 500; //every x ms
+			myRequestTimer.Interval = 100; //every x ms
 			myRequestTimer.Elapsed += new ElapsedEventHandler(myRequestTimer_Tick);
 			myRequestTimer.Start();
 		}
@@ -77,17 +77,20 @@ namespace rover_core
 			//we will request the status of the LEDs on a regular basis
 			//myClient.SendData(CommandID.GetLEDandSwitchStatus); //this type needs no payload
 			myClient.SendData(CommandID.MotorPosition);
-			//myClient.SendData(CommandID.GetAccelValue);
+            myClient.SendData(CommandID.getLightValues);
+            myClient.SendData(CommandID.MotorPosition);
+            myClient.SendData(CommandID.getLightValues);
+            myClient.SendData(CommandID.GetAccelValue);
 			//myClient.SendData(CommandID.GetMagnetValue);
 			myClient.SendData(CommandID.CMDMagAngle);
 			//myClient.SendData(CommandID.CMDGyroPosition);
 			//myClient.SendData(CommandID.GetGyroValue);
 			//myClient.SendData(CommandID.CMDGetIsMovingForward);
 
-			if (roverStatus.Instance.frequencyAnalysisStatus == toggleStatus.on)
+			/*if (roverStatus.Instance.frequencyAnalysisStatus == toggleStatus.on)
 			{
 				myClient.SendData(CommandID.CMDACCCACHE);
-			}
+			}*/
 		}
 
 		void myClient_OnMessageReceived(Client_Message_EventArgs e)
@@ -105,7 +108,20 @@ namespace rover_core
 				roverStatus.Instance.leds = sensorStatus.ok;
 			}
 
-			if (e.RawMessage[3] == (byte)CommandID.MotorPosition)
+            if (e.RawMessage[3] == (byte)CommandID.getLightValues)
+            {
+                var light = (short)((uint)e.RawMessage[5] | ((uint)e.RawMessage[4] << 8));
+                var temp = (short)((uint)e.RawMessage[7] | ((uint)e.RawMessage[6] << 8));
+
+                roverData.Instance.lightSensorVal = light;
+
+                roverData.Instance.lightSensorAmbient = temp;
+
+                roverStatus.Instance.lightSensor = sensorStatus.ok;
+            }
+
+
+            if (e.RawMessage[3] == (byte)CommandID.MotorPosition)
 			{
 
 				var left = (short)((uint)e.RawMessage[6] | ((uint)e.RawMessage[5] << 8));
@@ -191,11 +207,13 @@ namespace rover_core
 				short messageLength = (short)(e.RawMessage[1]);
 				if (messageLength == 14)
 				{
-					roverData.Instance.magnetAngle = System.BitConverter.ToSingle(e.RawMessage, 4);
-					roverData.Instance.magnetX = System.BitConverter.ToSingle(e.RawMessage, 8);
+                    roverData.Instance.magnetAngle = System.BitConverter.ToSingle(e.RawMessage, 4);
+                    roverData.Instance.magnetX = System.BitConverter.ToSingle(e.RawMessage, 8);
 					roverData.Instance.magnetY = System.BitConverter.ToSingle(e.RawMessage, 12);
-					
-					roverStatus.Instance.magnetometer = sensorStatus.ok;
+                    //roverData.Instance.magnetAngle = (float)Math.Atan2((double)roverData.Instance.magnetY,(double) roverData.Instance.magnetX);
+                    
+
+                    roverStatus.Instance.magnetometer = sensorStatus.ok;
 				}
 				else
 				{

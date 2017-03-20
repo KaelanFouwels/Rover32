@@ -24,7 +24,9 @@ namespace rover_core.models
 		public powerStatus servo1 { get; internal set; } = powerStatus.off;
 		public powerStatus servo2 { get; internal set; } = powerStatus.off;
 		public calibrationStatus magnetometerCalibration { get; set; } = calibrationStatus.uncalibrated;
-		public toggleStatus frequencyAnalysisStatus { get; set; } = toggleStatus.off;
+		public toggleStatus lighAnalysisStatus { get; set; } = toggleStatus.off;
+        public sensorStatus lightSensor { get; internal set; } = sensorStatus.waiting;
+        public toggleStatus vortexSpin { get; internal set; } = toggleStatus.off;
 	}
 
 	public enum powerStatus

@@ -66,10 +66,10 @@ namespace rover_core.drivers
 
 		public void moveForward(Int16 distance)
 		{
-			byte isNegative = distance < 0 ? (byte)1 : (byte)0;
+            byte isNegative = 0;
             //isNegative = 0;
 
-			distance = Math.Abs(distance);
+			//distance = Math.Abs(distance);
 			byte[] payload = new byte[3] {
 				(byte)(distance >> 8),
 				(byte)(distance),
