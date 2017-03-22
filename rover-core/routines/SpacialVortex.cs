@@ -21,7 +21,7 @@ namespace rover_core.routines
 
 
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 500; i++)
             {
 
                 currentAngle = roverData.Instance.magnetAngle;
@@ -32,7 +32,7 @@ namespace rover_core.routines
 
                 roverData.Instance.rotations = rotations/2;
                 
-                await Task.Delay(100);
+                await Task.Delay(20);
 
                 prevAngle = currentAngle;
             }

@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnCon = new System.Windows.Forms.Button();
             this.txtIP = new System.Windows.Forms.TextBox();
@@ -136,17 +136,35 @@
             this.label34 = new System.Windows.Forms.Label();
             this.TaBContainer = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.BtnStop = new System.Windows.Forms.Button();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.button_freqStart = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.BtnStop = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.BtnStartVortex = new System.Windows.Forms.Button();
-            this.LblRotation = new System.Windows.Forms.Label();
-            this.status_Vortex = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
+            this.status_Vortex = new System.Windows.Forms.Label();
+            this.LblRotation = new System.Windows.Forms.Label();
+            this.BtnStartVortex = new System.Windows.Forms.Button();
+            this.label38 = new System.Windows.Forms.Label();
+            this.reading_emfs = new System.Windows.Forms.TextBox();
+            this.label41 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
+            this.label44 = new System.Windows.Forms.Label();
+            this.label45 = new System.Windows.Forms.Label();
+            this.weight_object1 = new System.Windows.Forms.TextBox();
+            this.weight_object5 = new System.Windows.Forms.TextBox();
+            this.weight_object4 = new System.Windows.Forms.TextBox();
+            this.weight_object3 = new System.Windows.Forms.TextBox();
+            this.weight_object2 = new System.Windows.Forms.TextBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.Score1 = new System.Windows.Forms.Label();
+            this.Score2 = new System.Windows.Forms.Label();
+            this.Score3 = new System.Windows.Forms.Label();
+            this.Score4 = new System.Windows.Forms.Label();
+            this.Score5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -161,6 +179,7 @@
             this.TaBContainer.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -718,6 +737,8 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.label38);
+            this.groupBox4.Controls.Add(this.reading_emfs);
             this.groupBox4.Controls.Add(this.label37);
             this.groupBox4.Controls.Add(this.label18);
             this.groupBox4.Controls.Add(this.reading_Light_Temp);
@@ -1353,6 +1374,7 @@
             this.TaBContainer.Controls.Add(this.tabPage1);
             this.TaBContainer.Controls.Add(this.tabPage2);
             this.TaBContainer.Controls.Add(this.tabPage3);
+            this.TaBContainer.Controls.Add(this.tabPage4);
             this.TaBContainer.Location = new System.Drawing.Point(11, 414);
             this.TaBContainer.Margin = new System.Windows.Forms.Padding(2);
             this.TaBContainer.Name = "TaBContainer";
@@ -1376,21 +1398,33 @@
             this.tabPage1.Text = "Light tunnel";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // BtnStop
+            // 
+            this.BtnStop.Location = new System.Drawing.Point(1025, 55);
+            this.BtnStop.Margin = new System.Windows.Forms.Padding(2);
+            this.BtnStop.Name = "BtnStop";
+            this.BtnStop.Size = new System.Drawing.Size(169, 28);
+            this.BtnStop.TabIndex = 50;
+            this.BtnStop.Text = "Stop";
+            this.BtnStop.UseVisualStyleBackColor = true;
+            this.BtnStop.Click += new System.EventHandler(this.BtnStop_Click_1);
+            // 
             // chart1
             // 
-            chartArea4.AxisX.Title = "Distance (mm)";
-            chartArea4.AxisY.Title = "Magnitude";
-            chartArea4.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chart1.Legends.Add(legend4);
+            chartArea2.AxisX.Title = "Distance (mm)";
+            chartArea2.AxisY.Title = "Magnitude";
+            chartArea2.CursorX.IsUserSelectionEnabled = true;
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart1.Legends.Add(legend2);
             this.chart1.Location = new System.Drawing.Point(4, 4);
             this.chart1.Margin = new System.Windows.Forms.Padding(2);
             this.chart1.Name = "chart1";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Primary";
-            this.chart1.Series.Add(series4);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Primary";
+            this.chart1.Series.Add(series2);
             this.chart1.Size = new System.Drawing.Size(1009, 460);
             this.chart1.TabIndex = 49;
             this.chart1.Text = "Magnitude/Time";
@@ -1429,24 +1463,29 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.Score5);
+            this.tabPage2.Controls.Add(this.Score4);
+            this.tabPage2.Controls.Add(this.Score3);
+            this.tabPage2.Controls.Add(this.Score2);
+            this.tabPage2.Controls.Add(this.Score1);
+            this.tabPage2.Controls.Add(this.weight_object2);
+            this.tabPage2.Controls.Add(this.weight_object3);
+            this.tabPage2.Controls.Add(this.weight_object4);
+            this.tabPage2.Controls.Add(this.weight_object5);
+            this.tabPage2.Controls.Add(this.weight_object1);
+            this.tabPage2.Controls.Add(this.label45);
+            this.tabPage2.Controls.Add(this.label44);
+            this.tabPage2.Controls.Add(this.label43);
+            this.tabPage2.Controls.Add(this.label42);
+            this.tabPage2.Controls.Add(this.label41);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
             this.tabPage2.Size = new System.Drawing.Size(1217, 469);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Light Measurement";
+            this.tabPage2.Text = "Object collection";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // BtnStop
-            // 
-            this.BtnStop.Location = new System.Drawing.Point(1025, 55);
-            this.BtnStop.Margin = new System.Windows.Forms.Padding(2);
-            this.BtnStop.Name = "BtnStop";
-            this.BtnStop.Size = new System.Drawing.Size(169, 28);
-            this.BtnStop.TabIndex = 50;
-            this.BtnStop.Text = "Stop";
-            this.BtnStop.UseVisualStyleBackColor = true;
             // 
             // tabPage3
             // 
@@ -1462,26 +1501,15 @@
             this.tabPage3.Text = "Spacial vortex";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // BtnStartVortex
+            // label40
             // 
-            this.BtnStartVortex.Location = new System.Drawing.Point(20, 65);
-            this.BtnStartVortex.Margin = new System.Windows.Forms.Padding(2);
-            this.BtnStartVortex.Name = "BtnStartVortex";
-            this.BtnStartVortex.Size = new System.Drawing.Size(169, 28);
-            this.BtnStartVortex.TabIndex = 46;
-            this.BtnStartVortex.Text = "Start";
-            this.BtnStartVortex.UseVisualStyleBackColor = true;
-            this.BtnStartVortex.Click += new System.EventHandler(this.BtnStartVortex_Click);
-            // 
-            // LblRotation
-            // 
-            this.LblRotation.Font = new System.Drawing.Font("Microsoft Sans Serif", 127.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblRotation.Location = new System.Drawing.Point(229, 34);
-            this.LblRotation.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.LblRotation.Name = "LblRotation";
-            this.LblRotation.Size = new System.Drawing.Size(533, 268);
-            this.LblRotation.TabIndex = 42;
-            this.LblRotation.Text = "0";
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(17, 217);
+            this.label40.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(52, 17);
+            this.label40.TabIndex = 42;
+            this.label40.Text = "Status:";
             // 
             // status_Vortex
             // 
@@ -1494,15 +1522,189 @@
             this.status_Vortex.Text = "-";
             this.status_Vortex.Click += new System.EventHandler(this.label38_Click);
             // 
-            // label40
+            // LblRotation
             // 
-            this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(17, 217);
-            this.label40.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(52, 17);
-            this.label40.TabIndex = 42;
-            this.label40.Text = "Status:";
+            this.LblRotation.Font = new System.Drawing.Font("Microsoft Sans Serif", 127.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblRotation.Location = new System.Drawing.Point(229, 34);
+            this.LblRotation.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LblRotation.Name = "LblRotation";
+            this.LblRotation.Size = new System.Drawing.Size(533, 268);
+            this.LblRotation.TabIndex = 42;
+            this.LblRotation.Text = "0";
+            // 
+            // BtnStartVortex
+            // 
+            this.BtnStartVortex.Location = new System.Drawing.Point(20, 65);
+            this.BtnStartVortex.Margin = new System.Windows.Forms.Padding(2);
+            this.BtnStartVortex.Name = "BtnStartVortex";
+            this.BtnStartVortex.Size = new System.Drawing.Size(169, 28);
+            this.BtnStartVortex.TabIndex = 46;
+            this.BtnStartVortex.Text = "Start";
+            this.BtnStartVortex.UseVisualStyleBackColor = true;
+            this.BtnStartVortex.Click += new System.EventHandler(this.BtnStartVortex_Click);
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(285, 127);
+            this.label38.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(43, 17);
+            this.label38.TabIndex = 43;
+            this.label38.Text = "EMFs";
+            // 
+            // reading_emfs
+            // 
+            this.reading_emfs.Location = new System.Drawing.Point(288, 148);
+            this.reading_emfs.Margin = new System.Windows.Forms.Padding(4);
+            this.reading_emfs.Name = "reading_emfs";
+            this.reading_emfs.Size = new System.Drawing.Size(132, 22);
+            this.reading_emfs.TabIndex = 42;
+            this.reading_emfs.Text = "-";
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(118, 103);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(61, 17);
+            this.label41.TabIndex = 0;
+            this.label41.Text = "Object 1";
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(583, 103);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(61, 17);
+            this.label42.TabIndex = 1;
+            this.label42.Text = "Object 5";
+            this.label42.Click += new System.EventHandler(this.label42_Click);
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(472, 103);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(61, 17);
+            this.label43.TabIndex = 2;
+            this.label43.Text = "Object 4";
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(351, 103);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(61, 17);
+            this.label44.TabIndex = 3;
+            this.label44.Text = "Object 3";
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(229, 103);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(61, 17);
+            this.label45.TabIndex = 4;
+            this.label45.Text = "Object 2";
+            // 
+            // weight_object1
+            // 
+            this.weight_object1.Location = new System.Drawing.Point(119, 133);
+            this.weight_object1.Margin = new System.Windows.Forms.Padding(4);
+            this.weight_object1.Name = "weight_object1";
+            this.weight_object1.Size = new System.Drawing.Size(77, 22);
+            this.weight_object1.TabIndex = 39;
+            this.weight_object1.Text = "-";
+            this.weight_object1.TextChanged += new System.EventHandler(this.weight_object1_TextChanged);
+            // 
+            // weight_object5
+            // 
+            this.weight_object5.Location = new System.Drawing.Point(586, 133);
+            this.weight_object5.Margin = new System.Windows.Forms.Padding(4);
+            this.weight_object5.Name = "weight_object5";
+            this.weight_object5.Size = new System.Drawing.Size(77, 22);
+            this.weight_object5.TabIndex = 41;
+            this.weight_object5.Text = "-";
+            // 
+            // weight_object4
+            // 
+            this.weight_object4.Location = new System.Drawing.Point(475, 133);
+            this.weight_object4.Margin = new System.Windows.Forms.Padding(4);
+            this.weight_object4.Name = "weight_object4";
+            this.weight_object4.Size = new System.Drawing.Size(77, 22);
+            this.weight_object4.TabIndex = 42;
+            this.weight_object4.Text = "-";
+            // 
+            // weight_object3
+            // 
+            this.weight_object3.Location = new System.Drawing.Point(354, 133);
+            this.weight_object3.Margin = new System.Windows.Forms.Padding(4);
+            this.weight_object3.Name = "weight_object3";
+            this.weight_object3.Size = new System.Drawing.Size(77, 22);
+            this.weight_object3.TabIndex = 43;
+            this.weight_object3.Text = "-";
+            this.weight_object3.TextChanged += new System.EventHandler(this.textBox9_TextChanged);
+            // 
+            // weight_object2
+            // 
+            this.weight_object2.Location = new System.Drawing.Point(232, 133);
+            this.weight_object2.Margin = new System.Windows.Forms.Padding(4);
+            this.weight_object2.Name = "weight_object2";
+            this.weight_object2.Size = new System.Drawing.Size(77, 22);
+            this.weight_object2.TabIndex = 44;
+            this.weight_object2.Text = "-";
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Location = new System.Drawing.Point(4, 25);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(1217, 469);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Seismic activity";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // Score1
+            // 
+            this.Score1.AutoSize = true;
+            this.Score1.Location = new System.Drawing.Point(118, 163);
+            this.Score1.Name = "Score1";
+            this.Score1.Size = new System.Drawing.Size(0, 17);
+            this.Score1.TabIndex = 45;
+            // 
+            // Score2
+            // 
+            this.Score2.AutoSize = true;
+            this.Score2.Location = new System.Drawing.Point(232, 163);
+            this.Score2.Name = "Score2";
+            this.Score2.Size = new System.Drawing.Size(0, 17);
+            this.Score2.TabIndex = 46;
+            // 
+            // Score3
+            // 
+            this.Score3.AutoSize = true;
+            this.Score3.Location = new System.Drawing.Point(354, 163);
+            this.Score3.Name = "Score3";
+            this.Score3.Size = new System.Drawing.Size(0, 17);
+            this.Score3.TabIndex = 47;
+            // 
+            // Score4
+            // 
+            this.Score4.AutoSize = true;
+            this.Score4.Location = new System.Drawing.Point(475, 163);
+            this.Score4.Name = "Score4";
+            this.Score4.Size = new System.Drawing.Size(0, 17);
+            this.Score4.TabIndex = 48;
+            this.Score4.Click += new System.EventHandler(this.label49_Click);
+            // 
+            // Score5
+            // 
+            this.Score5.AutoSize = true;
+            this.Score5.Location = new System.Drawing.Point(586, 163);
+            this.Score5.Name = "Score5";
+            this.Score5.Size = new System.Drawing.Size(0, 17);
+            this.Score5.TabIndex = 49;
             // 
             // Form1
             // 
@@ -1546,6 +1748,8 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
@@ -1671,6 +1875,24 @@
         private System.Windows.Forms.Label LblRotation;
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.Label status_Vortex;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.TextBox reading_emfs;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.TextBox weight_object2;
+        private System.Windows.Forms.TextBox weight_object3;
+        private System.Windows.Forms.TextBox weight_object4;
+        private System.Windows.Forms.TextBox weight_object5;
+        private System.Windows.Forms.TextBox weight_object1;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.Label Score5;
+        private System.Windows.Forms.Label Score4;
+        private System.Windows.Forms.Label Score3;
+        private System.Windows.Forms.Label Score2;
+        private System.Windows.Forms.Label Score1;
     }
 }
 

@@ -83,12 +83,15 @@ namespace rover_core
             myClient.SendData(CommandID.GetAccelValue);
 			//myClient.SendData(CommandID.GetMagnetValue);
 			myClient.SendData(CommandID.CMDMagAngle);
+            myClient.SendData(CommandID.CMDreademfs);
 			//myClient.SendData(CommandID.CMDGyroPosition);
 			//myClient.SendData(CommandID.GetGyroValue);
 			//myClient.SendData(CommandID.CMDGetIsMovingForward);
 
 			/*if (roverStatus.Instance.frequencyAnalysisStatus == toggleStatus.on)
 			{
+
+
 				myClient.SendData(CommandID.CMDACCCACHE);
 			}*/
 		}
@@ -236,6 +239,16 @@ namespace rover_core
 					}
 				}
 			}
-		}
+
+            if (e.RawMessage[3] == (byte)CommandID.CMDreademfs)
+            {
+                var leftEMF = (short)((uint)e.RawMessage[5] | ((uint)e.RawMessage[4] << 8));
+                var rightEMF = (short)((uint)e.RawMessage[7] | ((uint)e.RawMessage[6] << 8));
+
+                roverStatus.Instance.EMFvalue = toggleStatus.on;
+
+                roverData.Instance.EMFs = (leftEMF + rightEMF) / 2;
+            }
+        }
 	}
 }

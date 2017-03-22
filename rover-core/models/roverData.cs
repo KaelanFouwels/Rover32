@@ -63,6 +63,7 @@ namespace rover_core.models
         public List<int> lightSensorArray { get; set; }
         public double milliMtoClick { get; internal set; } = 0.913037002;
         public int rotations { get; set; } = 0;
+        public double EMFs { get; set; } = 0;
 
 
     }

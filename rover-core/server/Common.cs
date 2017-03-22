@@ -50,6 +50,7 @@ namespace CommsLib
 		CMDMagAngle = 205,
 		CMDMoveBearing = 206,
 		CMDACCCACHE = 207,
-        getLightValues = 31
+        getLightValues = 31,
+        CMDreademfs = 30
 	};
 }

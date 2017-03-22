@@ -138,6 +138,11 @@ namespace Comms
                
             }
 
+            if(roverStatus.Instance.EMFvalue == toggleStatus.on)
+            {
+                reading_emfs.Text = roverData.Instance.EMFs.ToString();
+            }
+
 			
 		
 
@@ -175,6 +180,28 @@ namespace Comms
 		{
 			switch (e.KeyCode)
 			{
+                case Keys.NumPad1:
+                    weight_object1.Text = roverData.Instance.EMFs.ToString();
+                    doLabels();
+                    break;
+                case Keys.NumPad2:
+                    weight_object2.Text = roverData.Instance.EMFs.ToString();
+                    doLabels();
+                    break;
+                case Keys.NumPad3:
+                    weight_object3.Text = roverData.Instance.EMFs.ToString();
+                    doLabels();
+                    break;
+
+                case Keys.NumPad4:
+                    weight_object4.Text = roverData.Instance.EMFs.ToString();
+                    doLabels();
+                    break;
+                case Keys.NumPad5:
+                    weight_object5.Text = roverData.Instance.EMFs.ToString();
+                    doLabels();
+                    break;
+            
 				case Keys.Up:
 					robotIsMoving = true;
 					rover.Movement.moveUp();
@@ -197,6 +224,8 @@ namespace Comms
 					rover.Movement.moveRight();
 					e.Handled = true;
 					break;
+                
+
 
 				default:
 					e.Handled = false;
@@ -277,6 +306,14 @@ namespace Comms
 
 			rover.Movement.setSpeedRaw(Convert.ToSByte(speedLeft), Convert.ToSByte(speedRight));
 		}
+
+        /*private void objectBackEmf_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar == (char)Keys.NumPad1)
+            {
+                weight_object1.Text = roverData.Instance.EMFs.ToString();
+            }
+        }*/
 
 		private void button_zeroencoders_Click(object sender, EventArgs e)
 		{
@@ -431,6 +468,73 @@ namespace Comms
             
         }
 
+        private void doLabels()
+        {
+            var items = new SortedList<int, String>();
+
+            try {
+                items.Add(Convert.ToInt32(weight_object1.Text), "item1");
+            }
+            catch( Exception ex){  
+            }
+
+            try
+            {
+                items.Add(Convert.ToInt32(weight_object2.Text), "item2");
+            }
+            catch (Exception ex)
+            {
+            }
+
+            try
+            {
+                items.Add(Convert.ToInt32(weight_object3.Text), "item3");
+            }
+            catch (Exception ex)
+            {
+            }
+
+            try
+            {
+                items.Add(Convert.ToInt32(weight_object4.Text), "item4");
+            }
+            catch (Exception ex)
+            {
+            }
+
+            try
+            {
+                items.Add(Convert.ToInt32(weight_object5.Text), "item5");
+            }
+            catch (Exception ex)
+            {
+            }
+
+            int index = 1;
+            foreach(var item in items)
+            {
+                switch (item.Value)
+                {
+                    case "item1":
+                        Score1.Text = index.ToString();
+                        break;
+                    case "item2":
+                        Score2.Text = index.ToString();
+                        break;
+                    case "item3":
+                        Score3.Text = index.ToString();
+                        break;
+                    case "item4":
+                        Score4.Text = index.ToString();
+                        break;
+                    case "item5":
+                        Score5.Text = index.ToString();
+                        break;
+                }
+                index++;
+            }
+        }
+
         private async void moveRotation_KeyPress(object sender, KeyPressEventArgs e)
 		{
 		if (e.KeyChar != (char)Keys.Enter) return;
@@ -544,6 +648,31 @@ namespace Comms
         }
 
         private void label38_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnStop_Click_1(object sender, EventArgs e)
+        {
+            roverStatus.Instance.lighAnalysisStatus = toggleStatus.off;
+        }
+
+        private void label42_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox9_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void weight_object1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label49_Click(object sender, EventArgs e)
         {
 
         }
