@@ -66,14 +66,14 @@ namespace rover_core.drivers
 
 		public void moveForward(Int16 distance)
 		{
-            byte isNegative = 0;
+            int isNegative = distance < 0 ? 1 : 0;
             //isNegative = 0;
 
-			//distance = Math.Abs(distance);
+			distance = Math.Abs(distance);
 			byte[] payload = new byte[3] {
 				(byte)(distance >> 8),
 				(byte)(distance),
-				isNegative
+				(byte)isNegative
 			};
 			_tcpClient.SendData(CommandID.CMDMoveForward, payload);
 		}

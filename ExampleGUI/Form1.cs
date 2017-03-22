@@ -608,6 +608,7 @@ namespace Comms
 
 		private void button_freqStart_Click_1(object sender, EventArgs e)
 		{
+            chart1.Series["Primary"].Points.Clear();
             rover.Movement.moveForward(2000);
 			roverStatus.Instance.lighAnalysisStatus = toggleStatus.on;
 		}
@@ -675,6 +676,28 @@ namespace Comms
         private void label49_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            roverStatus.Instance.seismicRunning = toggleStatus.on;
+
+
+        }
+
+        private void BtnReverseTunnel_Click(object sender, EventArgs e)
+        {
+            chart1.Series["Primary"].Points.Clear();
+            rover.Movement.moveForward(-2000);
+            roverStatus.Instance.lighAnalysisStatus = toggleStatus.on;
+        
+           
+        }
+
+        private void BtnSeismicStop_Click(object sender, EventArgs e)
+        {
+            roverStatus.Instance.seismicRunning = toggleStatus.off;
+            rover.close();
         }
     }
 }

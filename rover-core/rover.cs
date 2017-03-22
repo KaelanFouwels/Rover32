@@ -14,12 +14,14 @@ namespace rover_core
     {
 		TCPClient myClient;
 		Timer myRequestTimer;
-		public drivers.Leds Leds { get; private set; }
+        Timer myRequestTimer2;
+        public drivers.Leds Leds { get; private set; }
 		public drivers.Movement Movement { get; private set; }
 		public sensors.Accelerometer Accelerometer { get; private set; }
 		public drivers.Servo Servo { get; private set; }
+        System.IO.StreamWriter file = new System.IO.StreamWriter("C:\\Users\\Ben\\Documents\\RoverSeismic\\Seismic.txt");
 
-		public Rover()
+        public Rover()
 		{
 			myClient = new TCPClient();
 
@@ -40,9 +42,23 @@ namespace rover_core
 			myRequestTimer.Interval = 100; //every x ms
 			myRequestTimer.Elapsed += new ElapsedEventHandler(myRequestTimer_Tick);
 			myRequestTimer.Start();
-		}
 
-		public async Task connect(string ip, int port)
+            myRequestTimer2 = new Timer();
+            myRequestTimer2.Interval = 25; //every x ms
+            myRequestTimer2.Elapsed += new ElapsedEventHandler(myRequestTimer2_Tick);
+            myRequestTimer2.Start();
+
+          
+        }
+
+        public void close()
+        {
+            file.Flush();
+            file.Close();
+        }
+
+
+        public async Task connect(string ip, int port)
 		{
 			roverStatus.Instance.connection = connectionStatus.connecting;
 
@@ -70,23 +86,37 @@ namespace rover_core
 			roverStatus.Instance.connection = connectionStatus.disconnected;
 		}
 
-		void myRequestTimer_Tick(object sender, EventArgs e)
+        void myRequestTimer2_Tick(object sender, EventArgs e)
+        {
+            if (roverStatus.Instance.seismicRunning == toggleStatus.on)
+            {
+                myClient.SendData(CommandID.GetAccelValue);
+            }
+        }
+
+            void myRequestTimer_Tick(object sender, EventArgs e)
 		{
 			if (!myClient.isConnected) return; //if no connection, don't do anything
 
-			//we will request the status of the LEDs on a regular basis
-			//myClient.SendData(CommandID.GetLEDandSwitchStatus); //this type needs no payload
-			myClient.SendData(CommandID.MotorPosition);
-            myClient.SendData(CommandID.getLightValues);
-            myClient.SendData(CommandID.MotorPosition);
-            myClient.SendData(CommandID.getLightValues);
-            myClient.SendData(CommandID.GetAccelValue);
-			//myClient.SendData(CommandID.GetMagnetValue);
-			myClient.SendData(CommandID.CMDMagAngle);
-            myClient.SendData(CommandID.CMDreademfs);
-			//myClient.SendData(CommandID.CMDGyroPosition);
-			//myClient.SendData(CommandID.GetGyroValue);
-			//myClient.SendData(CommandID.CMDGetIsMovingForward);
+            if (roverStatus.Instance.seismicRunning == toggleStatus.off)
+            {
+
+
+                //we will request the status of the LEDs on a regular basis
+                //myClient.SendData(CommandID.GetLEDandSwitchStatus); //this type needs no payload
+                myClient.SendData(CommandID.MotorPosition);
+                myClient.SendData(CommandID.getLightValues);
+                myClient.SendData(CommandID.MotorPosition);
+                myClient.SendData(CommandID.getLightValues);
+                myClient.SendData(CommandID.GetAccelValue);
+                //myClient.SendData(CommandID.GetMagnetValue);
+                myClient.SendData(CommandID.CMDMagAngle);
+                myClient.SendData(CommandID.CMDreademfs);
+                //myClient.SendData(CommandID.CMDGyroPosition);
+                //myClient.SendData(CommandID.GetGyroValue);
+                //myClient.SendData(CommandID.CMDGetIsMovingForward);
+            }
+
 
 			/*if (roverStatus.Instance.frequencyAnalysisStatus == toggleStatus.on)
 			{
@@ -155,6 +185,12 @@ namespace rover_core
 					roverData.Instance.accelerationZ = (short)((uint)e.RawMessage[9] | ((uint)e.RawMessage[8] << 8));
 
 					roverStatus.Instance.accelerometer = sensorStatus.ok;
+                    if (roverStatus.Instance.seismicRunning == toggleStatus.on)
+                    {
+                        
+                        file.WriteLine(roverData.Instance.accelerationZ.ToString());
+                       
+                    }
 				}
 				else
 				{

@@ -165,6 +165,9 @@
             this.Score3 = new System.Windows.Forms.Label();
             this.Score4 = new System.Windows.Forms.Label();
             this.Score5 = new System.Windows.Forms.Label();
+            this.BtnSeismic = new System.Windows.Forms.Button();
+            this.BtnReverseTunnel = new System.Windows.Forms.Button();
+            this.BtnSeismicStop = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -181,6 +184,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -1384,6 +1388,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.BtnReverseTunnel);
             this.tabPage1.Controls.Add(this.BtnStop);
             this.tabPage1.Controls.Add(this.chart1);
             this.tabPage1.Controls.Add(this.label17);
@@ -1400,7 +1405,7 @@
             // 
             // BtnStop
             // 
-            this.BtnStop.Location = new System.Drawing.Point(1025, 55);
+            this.BtnStop.Location = new System.Drawing.Point(1025, 92);
             this.BtnStop.Margin = new System.Windows.Forms.Padding(2);
             this.BtnStop.Name = "BtnStop";
             this.BtnStop.Size = new System.Drawing.Size(169, 28);
@@ -1433,7 +1438,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(1024, 114);
+            this.label17.Location = new System.Drawing.Point(1024, 151);
             this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(111, 17);
@@ -1443,7 +1448,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(1024, 95);
+            this.label16.Location = new System.Drawing.Point(1024, 132);
             this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(93, 17);
@@ -1457,7 +1462,7 @@
             this.button_freqStart.Name = "button_freqStart";
             this.button_freqStart.Size = new System.Drawing.Size(169, 28);
             this.button_freqStart.TabIndex = 45;
-            this.button_freqStart.Text = "Start";
+            this.button_freqStart.Text = "Run";
             this.button_freqStart.UseVisualStyleBackColor = true;
             this.button_freqStart.Click += new System.EventHandler(this.button_freqStart_Click_1);
             // 
@@ -1657,6 +1662,8 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.BtnSeismicStop);
+            this.tabPage4.Controls.Add(this.BtnSeismic);
             this.tabPage4.Location = new System.Drawing.Point(4, 25);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
@@ -1706,6 +1713,37 @@
             this.Score5.Size = new System.Drawing.Size(0, 17);
             this.Score5.TabIndex = 49;
             // 
+            // BtnSeismic
+            // 
+            this.BtnSeismic.Location = new System.Drawing.Point(153, 146);
+            this.BtnSeismic.Name = "BtnSeismic";
+            this.BtnSeismic.Size = new System.Drawing.Size(75, 31);
+            this.BtnSeismic.TabIndex = 0;
+            this.BtnSeismic.Text = "Start";
+            this.BtnSeismic.UseVisualStyleBackColor = true;
+            this.BtnSeismic.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // BtnReverseTunnel
+            // 
+            this.BtnReverseTunnel.Location = new System.Drawing.Point(1025, 55);
+            this.BtnReverseTunnel.Margin = new System.Windows.Forms.Padding(2);
+            this.BtnReverseTunnel.Name = "BtnReverseTunnel";
+            this.BtnReverseTunnel.Size = new System.Drawing.Size(169, 28);
+            this.BtnReverseTunnel.TabIndex = 51;
+            this.BtnReverseTunnel.Text = "Run reverse";
+            this.BtnReverseTunnel.UseVisualStyleBackColor = true;
+            this.BtnReverseTunnel.Click += new System.EventHandler(this.BtnReverseTunnel_Click);
+            // 
+            // BtnSeismicStop
+            // 
+            this.BtnSeismicStop.Location = new System.Drawing.Point(153, 194);
+            this.BtnSeismicStop.Name = "BtnSeismicStop";
+            this.BtnSeismicStop.Size = new System.Drawing.Size(75, 31);
+            this.BtnSeismicStop.TabIndex = 1;
+            this.BtnSeismicStop.Text = "Stop";
+            this.BtnSeismicStop.UseVisualStyleBackColor = true;
+            this.BtnSeismicStop.Click += new System.EventHandler(this.BtnSeismicStop_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1752,6 +1790,7 @@
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1893,6 +1932,9 @@
         private System.Windows.Forms.Label Score3;
         private System.Windows.Forms.Label Score2;
         private System.Windows.Forms.Label Score1;
+        private System.Windows.Forms.Button BtnSeismic;
+        private System.Windows.Forms.Button BtnReverseTunnel;
+        private System.Windows.Forms.Button BtnSeismicStop;
     }
 }
 
