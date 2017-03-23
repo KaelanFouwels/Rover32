@@ -8,10 +8,10 @@ using rover_core.models;
 
 namespace rover_core.sensors
 {
-	public class Accelerometer
+	public static class Accelerometer
 	{
 
-		public double getTilt()
+		public static double getTilt()
 		{
 			var accelYVal = roverData.Instance.accelerationY;
 			var accelZVal = roverData.Instance.accelerationZ;
@@ -19,7 +19,7 @@ namespace rover_core.sensors
 			return Math.Atan2(accelYVal, accelZVal) * (360/(2 * Math.PI));
 		}
 
-		public double getPitch()
+		public static double getPitch()
 		{
 			var accelXVal = roverData.Instance.accelerationX;
 			var accelYVal = roverData.Instance.accelerationY;

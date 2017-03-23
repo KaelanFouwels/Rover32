@@ -26,10 +26,11 @@ namespace rover_core.models
 		public calibrationStatus magnetometerCalibration { get; set; } = calibrationStatus.uncalibrated;
 		public toggleStatus lighAnalysisStatus { get; set; } = toggleStatus.off;
         public sensorStatus lightSensor { get; internal set; } = sensorStatus.waiting;
-        public toggleStatus vortexSpin { get; internal set; } = toggleStatus.off;
+        public toggleStatus vortexSpin { get; set; } = toggleStatus.off;
         public toggleStatus EMFvalue { get; internal set; } = toggleStatus.off;
         public toggleStatus seismicRunning { get; set; } = toggleStatus.off;
-	}
+        public toggleStatus isEarthquake { get; set; } = toggleStatus.off;
+    }
 
 	public enum powerStatus
 	{

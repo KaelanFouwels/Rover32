@@ -11,8 +11,24 @@ namespace rover_core.routines
     {
         public static async void CalcRotation(Rover rover)
         {
+
             double prevAngle = roverData.Instance.magnetAngle;
             double currentAngle, initialBearing;
+            int i = 0;
+
+            rover.Movement.moveUp();
+
+            while (rover_core.sensors.Accelerometer.getTilt() < 10)
+            {
+
+            }
+
+            while (rover_core.sensors.Accelerometer.getTilt() > 7)
+            {
+
+            }
+
+            rover.Movement.moveStop();
 
             int rotations = 0;
             roverStatus.Instance.vortexSpin = toggleStatus.on;
@@ -20,24 +36,26 @@ namespace rover_core.routines
             initialBearing = roverData.Instance.magnetAngle;
 
 
-
-            for (int i = 0; i < 500; i++)
+            while(i < 1500 && roverStatus.Instance.vortexSpin == toggleStatus.on)
             {
-
                 currentAngle = roverData.Instance.magnetAngle;
                 if (currentAngle > 0 && prevAngle <= 0 || currentAngle < 0 && prevAngle >= 0)
                 {
                     rotations++;
                 }
 
-                roverData.Instance.rotations = rotations/2;
-                
+                roverData.Instance.rotations = rotations / 2;
+
                 await Task.Delay(20);
 
                 prevAngle = currentAngle;
+                i++;
             }
 
             roverStatus.Instance.vortexSpin = toggleStatus.off;
+
+            if (initialBearing > 0) { initialBearing = initialBearing - Math.PI; }
+            else { initialBearing = initialBearing + Math.PI; }
 
             rover.Movement.rotateBearing((float)initialBearing);
 

@@ -17,10 +17,8 @@ namespace rover_core
         Timer myRequestTimer2;
         public drivers.Leds Leds { get; private set; }
 		public drivers.Movement Movement { get; private set; }
-		public sensors.Accelerometer Accelerometer { get; private set; }
 		public drivers.Servo Servo { get; private set; }
-        System.IO.StreamWriter file = new System.IO.StreamWriter("C:\\Users\\Ben\\Documents\\RoverSeismic\\Seismic.txt");
-
+        System.IO.StreamWriter file;
         public Rover()
 		{
 			myClient = new TCPClient();
@@ -34,8 +32,7 @@ namespace rover_core
 			Servo.power1(false);
 			Servo.power2(false);
 
-			//Sensors
-			Accelerometer = new sensors.Accelerometer();
+			//Sensor
 			myClient.OnMessageReceived += new ClientBase.ClientMessageReceivedEvent(myClient_OnMessageReceived);
 
 			myRequestTimer = new Timer();
@@ -44,17 +41,23 @@ namespace rover_core
 			myRequestTimer.Start();
 
             myRequestTimer2 = new Timer();
-            myRequestTimer2.Interval = 25; //every x ms
+            myRequestTimer2.Interval = 100; //every x ms
             myRequestTimer2.Elapsed += new ElapsedEventHandler(myRequestTimer2_Tick);
             myRequestTimer2.Start();
 
           
         }
 
-        public void close()
+        public void closeFile()
         {
             file.Flush();
             file.Close();
+        }
+
+        public void openFile()
+        {
+            file = new System.IO.StreamWriter("C:\\Users\\Ben\\Desktop\\rover\\seismic.txt");
+
         }
 
 
@@ -90,6 +93,8 @@ namespace rover_core
         {
             if (roverStatus.Instance.seismicRunning == toggleStatus.on)
             {
+               //myClient.SendData(CommandID.GetAccelValue);
+                myClient.SendData(CommandID.CMDACCCACHE);
                 myClient.SendData(CommandID.GetAccelValue);
             }
         }
@@ -112,6 +117,7 @@ namespace rover_core
                 //myClient.SendData(CommandID.GetMagnetValue);
                 myClient.SendData(CommandID.CMDMagAngle);
                 myClient.SendData(CommandID.CMDreademfs);
+                
                 //myClient.SendData(CommandID.CMDGyroPosition);
                 //myClient.SendData(CommandID.GetGyroValue);
                 //myClient.SendData(CommandID.CMDGetIsMovingForward);
@@ -263,17 +269,34 @@ namespace rover_core
 			{
 				int index = 0;
 				int value = 0;
+
+                int min = 9999999;
+                int max = -9999999;
+
+                long count = 0;
+                long counter = 0;
 				short messageLength = (short)(e.RawMessage[1]);
-				if (messageLength == 202)
-				{
-					roverData.Instance.acceleromterArray = new int[100];
+				if (messageLength == 206)
+                { 
 
 					for (int i = 0; i < 200; i += 2) {
 						index = i + 4;
 						value = (short)((uint)e.RawMessage[index + 1] | ((uint)e.RawMessage[index] << 8));
-						roverData.Instance.acceleromterArray[i / 2] = value;
-					}
-				}
+                        if (roverStatus.Instance.seismicRunning == toggleStatus.on && value != 0)
+                        {
+                            //if(value == -128)
+                            //{
+                            //    continue;
+                            //}
+                           
+                     
+                            file.WriteLine(value);
+                            
+                        }
+                    }
+                
+
+                }
 			}
 
             if (e.RawMessage[3] == (byte)CommandID.CMDreademfs)

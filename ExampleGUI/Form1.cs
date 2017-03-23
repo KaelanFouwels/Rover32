@@ -92,8 +92,8 @@ namespace Comms
 				reading_accelX.Text = roverData.Instance.accelerationX.ToString();
 				reading_accelY.Text = roverData.Instance.accelerationY.ToString();
 				reading_accelZ.Text = roverData.Instance.accelerationZ.ToString();
-				reading_tilt.Text = rover.Accelerometer.getTilt().ToString();
-				reading_pitch.Text = rover.Accelerometer.getPitch().ToString();
+				reading_tilt.Text = rover_core.sensors.Accelerometer.getTilt().ToString();
+				reading_pitch.Text = rover_core.sensors.Accelerometer.getPitch().ToString();
 			}
 
 			if (roverStatus.Instance.leds == sensorStatus.ok)
@@ -141,6 +141,20 @@ namespace Comms
             if(roverStatus.Instance.EMFvalue == toggleStatus.on)
             {
                 reading_emfs.Text = roverData.Instance.EMFs.ToString();
+            }
+
+            if(roverStatus.Instance.isEarthquake == toggleStatus.on)
+            {
+                eqd.Show();
+            }
+            else
+            {
+                eqd.Hide();
+            }
+
+            if(roverData.Instance.earthquakeDuration != 0)
+            {
+                eqduration.Text = "Duration: " + roverData.Instance.earthquakeDuration + " ms";
             }
 
 			
@@ -204,11 +218,17 @@ namespace Comms
             
 				case Keys.Up:
 					robotIsMoving = true;
-					rover.Movement.moveUp();
+                    rover.Movement.moveUp();
 					e.Handled = true;
 					break;
 
-				case Keys.Down:
+                case Keys.P:
+                    robotIsMoving = true;
+                    rover.Movement.move(25,25);
+                    e.Handled = true;
+                    break;
+
+                case Keys.Down:
 					robotIsMoving = true;
 					rover.Movement.moveDown();
 					e.Handled = true;
@@ -680,6 +700,7 @@ namespace Comms
 
         private void button6_Click(object sender, EventArgs e)
         {
+            rover.openFile();
             roverStatus.Instance.seismicRunning = toggleStatus.on;
 
 
@@ -697,7 +718,27 @@ namespace Comms
         private void BtnSeismicStop_Click(object sender, EventArgs e)
         {
             roverStatus.Instance.seismicRunning = toggleStatus.off;
-            rover.close();
+            rover.closeFile();
+        }
+
+        private void groupBox6_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private async void btnDetect_Click(object sender, EventArgs e)
+        {
+            await Task.Run(() => SeismicRoutine.Run(rover));
+        }
+
+        private void label46_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnForceStopVortex_Click(object sender, EventArgs e)
+        {
+            roverStatus.Instance.vortexSpin = toggleStatus.off;
         }
     }
 }

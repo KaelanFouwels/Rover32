@@ -74,6 +74,7 @@
     <Compile Include="routines\Drawing.cs" />
     <Compile Include="routines\LightTunnel.cs" />
     <Compile Include="routines\MoveDegrees.cs" />
+    <Compile Include="routines\SeismicRoutine.cs" />
     <Compile Include="routines\SpacialVortex.cs" />
     <Compile Include="routines\vortex.cs" />
     <Compile Include="rover.cs" />

@@ -64,6 +64,7 @@ namespace rover_core.models
         public double milliMtoClick { get; internal set; } = 0.913037002;
         public int rotations { get; set; } = 0;
         public double EMFs { get; set; } = 0;
+        public int earthquakeDuration { get; set; } = 0;
 
 
     }
