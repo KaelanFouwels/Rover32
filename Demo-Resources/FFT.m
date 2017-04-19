@@ -1,9 +1,7 @@
-path = '/Volumes/rover/seismic10.txt';
-%path = '/Volumes/rover/seismic15.txt';
-%path = '/Volumes/rover/seismic.txt';
+path = '/Volumes/rover/seismic.txt';
 
 set(gcf,'currentchar',' ')
-%while get(gcf,'currentchar')==' '
+while get(gcf,'currentchar')==' '
 
     try
         fileID = fopen(path,'r');
@@ -54,4 +52,4 @@ set(gcf,'currentchar',' ')
     end
         pause(1)
 
-%end
+end
