@@ -1,6 +1,6 @@
 # PIC32 Rover
 
-Entry for the UoR Cybenertics challenge 2017
+Entry for the UoR Cybernetics challenge 2017
 
 - PIC32: rover code
 - WPF: remote host
