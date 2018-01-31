@@ -6,4 +6,4 @@ Entry for the UoR Cybenertics challenge 2017
 - WPF: remote host
 
 - Solution ported to mplabx
-- Requires XC32 1.32/32, or manual linking to plib
+- Requires XC32 1.32/32, or manual linking to plib to build
