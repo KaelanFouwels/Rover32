@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace rover_core.routines
+{
+    public static class LightTunnel
+    {
+        public static async Task<int> DoThing()
+        {
+            return 1;
+        }
+    }
+}
