@@ -631,3 +631,4 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+/PIC32/WIFIROVER2016Gx/WIFIROVER2016G/TCPIP/demo/WiFiRover2016G.X/nbproject/private/
